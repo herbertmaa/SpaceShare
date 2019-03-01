@@ -34,11 +34,9 @@
       /* for 1500px and 1200px*/
       @media screen and (min-width: 1200px) and (max-width: 1500px) {
 
-        * { font-size: 1.0rem; }
-
           body{
               
-              background-color:darkgrey;
+              background-color:darkgray;
               margin:0;
               padding:0;
           }
@@ -52,7 +50,6 @@
               flex-wrap:wrap;
 
           }
-          
           
           #menu_right{
 
@@ -79,6 +76,7 @@
               width:100%;
 
           }
+          
           .menu{
               
               display:flex;
@@ -100,8 +98,49 @@
               height:100%;
               align-items:center;
 
-      
           }
           
-        
-      }
+          
+          #search_area form{
+              
+              margin:0 auto;
+          }
+          #search_area h1{
+              
+              height:85px;
+              padding:5%;
+              margin:0;
+              width:20%;
+          }
+          
+          #search_top{
+              
+              padding:8.0pt;
+              
+          }
+          
+          #search_bottom{
+              
+              padding:8.0pt;
+          }
+          #search_area fieldset{
+              
+              height:145px;
+              border:none;
+          }
+          
+          #search_area fieldset input{
+              
+              width:200pt;
+              height:25pt;
+              font-size:16pt;
+          }
+
+          
+          #suggested_listings{
+              
+              height:200pt;
+              background-color:white;
+          }
+        }
+          
