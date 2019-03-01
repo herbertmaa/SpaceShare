@@ -1,0 +1,68 @@
+        body{
+            
+            background-color:#FFFFFF;
+        }
+
+        #menu_bar{
+            
+            
+        }
+        ul{
+            
+            
+            list-style:none;
+            display:flex;
+            margin:0;
+            padding:0;
+            justify-content: space-evenly;
+            width:60%;
+        }
+
+        h1{
+            
+            font-size:12pt;
+            font-weight:100;
+            display:inline;
+            width:auto;
+            white-space: nowrap;
+        }
+        
+        
+      /* for 700px and 200px*/
+      @media screen and (min-width: 200px) and (max-width: 700px) {
+
+        * { font-size: 0.8rem; }
+
+          body{
+
+            background-color:red;
+          }
+
+      }
+        
+        
+      /* for 1200px and 700px */
+      @media screen and (min-width: 700px) and (max-width: 1200px) {
+
+        * { font-size: 0.9rem; }
+          body{
+              
+              
+              background-color:green;
+          }
+
+      }
+        
+        
+        
+      /* for 1500px and 1200px*/
+      @media screen and (min-width: 1200px) and (max-width: 1500px) {
+
+        * { font-size: 1.0rem; }
+
+          body{
+              
+              
+              background-color:blue;
+          }
+      }
