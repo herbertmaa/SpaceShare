@@ -2,10 +2,9 @@
 <html lang="en">
   <head>
  
-      
-      
     <script src="https://www.gstatic.com/firebasejs/5.8.4/firebase.js"></script>
-      <script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script>
     // Initialize Firebase
     var config = {
     apiKey: "AIzaSyCE2lSLszDUyZEyY--btpdoYs7Ln6PHAXY",
@@ -16,29 +15,79 @@
     messagingSenderId: "555750963802"
     };
     firebase.initializeApp(config);
-          
+    function createPost(listingName, width, height) {
+            // Get a key for a new Post.
+            let newPostKey = firebase.database().ref().push().key;
+            console.log(newPostKey);
+        
+            var postData = {
+                Name: listingName,
+                key: newPostKey,
+                Width: width,
+                Height: height
+                
+            };
+        
+            var updates = {};
+            updates['Listings/' + newPostKey] = postData;
+            firebase.database().ref().update(updates);
+        
+        }
+    
+        
+    $(function(){
+        const config = {
+        apiKey: "AIzaSyCE2lSLszDUyZEyY--btpdoYs7Ln6PHAXY",
+        authDomain: "spaceshare-b68f7.firebaseapp.com",
+        databaseURL: "https://spaceshare-b68f7.firebaseio.com",
+        projectId: "spaceshare-b68f7",
+        storageBucket: "",
+        messagingSenderId: "555750963802"
+    };
+    if (!firebase.apps.length) {
+        firebase.initializeApp(config);
+    }
+   /** firebase.initializeApp(config); **/
+    $(".js-form").on('submit', event => {
+        event.preventDefault();
+        const name = $('#js-lsname').val();
+        const width = $('#js-width').val();
+        const height = $('#js-height').val();
+        console.log(name, width, height);
+        /** firebase.database().ref('posting').push({
+            name,
+        }); **/
+        createPost(name,width,height);
+    })
+    });
           
 </script>
     <title>SpaceShare</title>
     <meta charset="utf-8">
   </head>
   <body>
-    
       
-      <form action="./submit.html" method="post">
-    <fieldset>
-        <legend>Post Test </legend>
-        <input type="text" id="name" required="required"
-          placeholder="Listing Name">
-        <input min="18" max="65" type="number" id="number"  step="2" placeholder="Width"/>
-        
-        <input min="18" max="65" type="number" id="number"  step="2" placeholder="Height"/>
-
-        <br/><br/>
-        <input id="submit" type="submit"/>
-        <input id="reset" name="reset" value="Reset" type="reset"/>
-    </fieldset>
-</form>        <footer> SpaceShare &copy;</footer>
+      <div class="container">
+          <form class = "js-form">
+              <div class = "form-group">
+                <label for="js-lsname">Listing Name</label>
+                <input type ="text" id="js-lsname" class="form-control"/> 
+             </div>
+              
+              <div class = "form-group">
+                <label for="js-width">Width</label>
+                <input type ="number" id="js-width" class="form-control"/> 
+             </div>
+              
+              <div class = "form-group">
+                <label for="js-height">Height</label>
+                <input type="number" id="js-height" class="form-control"/> 
+             </div>
+              <button id="js-submit" class="btn">Submit</button>
+          </form>
+      </div>
+    
+<footer> SpaceShare &copy;</footer>
 
     </body>
 
