@@ -10,41 +10,39 @@
     var config = {
     apiKey: "AIzaSyCE2lSLszDUyZEyY--btpdoYs7Ln6PHAXY",
     authDomain: "spaceshare-b68f7.firebaseapp.com",
-    databaseURL: "https://spaceshare-b68f7.firebaseio.com",
+    databaseURL: "https://spaceshare-b68f7cd.firebaseio.com",
     projectId: "spaceshare-b68f7",
     storageBucket: "",
     messagingSenderId: "555750963802"
     };
     firebase.initializeApp(config);
-          
+          // Reference message 
+        var postRef = firebase.database().ref('postings');
           
 </script>
     <title>SpaceShare</title>
     <meta charset="utf-8">
   </head>
   <body>
-    
-      
-      <form action="./submit.html" method="post">
-    <fieldset>
-        <legend>Post Test </legend>
-        <input type="text" id="name" required="required"
-          placeholder="Search Listing Name">
+    <form id = "search-form">
+      <input type="text" placeholder="Search" id= "search-input">
+      <input type="submit" placeholder="Submit">
+    </form>
+    </form>
+  </body>
 
+      <script>
+          document.getElementById('search-form').addEventListener('submit', submitForm);
+          function submitForm(e) {
+              e.preventDefault();
 
-        <br/><br/>
-        <input id="submit" type="submit"/>
-        <input id="reset" name="reset" value="Reset" type="reset"/>
-    </fieldset>
-</form>       
-      
-      <h1> Testing if we have retrieved something from FireBase </h1>
-      <p class = "result"> Hello World </p>
-      
-      
-      
-      <footer> SpaceShare &copy;</footer>
-
+              // Gets the value entered in different inputs
+              var searchInput = getInputVal('search-input');
+          }
+          function getInputVal(id) {
+              return document.getElementById(id).value;
+          }
+      </script>
     </body>
 
 </html>
