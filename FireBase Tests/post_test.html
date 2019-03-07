@@ -4,6 +4,7 @@
  
     <script src="https://www.gstatic.com/firebasejs/5.8.4/firebase.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+      
     <script>
     // Initialize Firebase
     var config = {
@@ -15,6 +16,12 @@
     messagingSenderId: "555750963802"
     };
     firebase.initializeApp(config);
+        
+        
+        
+    /*
+        A function that creates a post in FireBase
+    */
     function createPost(listingName, width, height) {
             // Get a key for a new Post.
             let newPostKey = firebase.database().ref().push().key;
@@ -34,19 +41,14 @@
         
         }
     
+    
         
-    $(function(){
-        const config = {
-        apiKey: "AIzaSyCE2lSLszDUyZEyY--btpdoYs7Ln6PHAXY",
-        authDomain: "spaceshare-b68f7.firebaseapp.com",
-        databaseURL: "https://spaceshare-b68f7.firebaseio.com",
-        projectId: "spaceshare-b68f7",
-        storageBucket: "",
-        messagingSenderId: "555750963802"
-    };
-    if (!firebase.apps.length) {
-        firebase.initializeApp(config);
-    }
+    /*
+        A jQuery function that grabs information from a form and assigns it to constants
+        and then calls the createPosts function 
+    */
+    $(function postForm(){
+
    /** firebase.initializeApp(config); **/
     $(".js-form").on('submit', event => {
         event.preventDefault();
@@ -54,9 +56,6 @@
         const width = $('#js-width').val();
         const height = $('#js-height').val();
         console.log(name, width, height);
-        /** firebase.database().ref('posting').push({
-            name,
-        }); **/
         createPost(name,width,height);
     })
     });
