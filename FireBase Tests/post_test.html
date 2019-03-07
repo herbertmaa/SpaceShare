@@ -22,7 +22,7 @@
     /*
         A function that creates a post in FireBase
     */
-    function createPost(listingName, width, height) {
+    function searchPost(listingName, width, height) {
             // Get a key for a new Post.
             let newPostKey = firebase.database().ref().push().key;
             console.log(newPostKey);
