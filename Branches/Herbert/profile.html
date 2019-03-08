@@ -72,6 +72,8 @@
     <!-- Main Content -->
 
 
+
+    <!-- Firebase login container -->
     <div class="container">
 
         <div class="form-row " id="user_login">
@@ -93,58 +95,106 @@
         <div class="row top-buffer">
         </div>
 
-        <div class="mb-4">
 
 
-            <h1 class="h3 mb-3 font-weight-normal"> <i class="fab fa-studiovinari fa-2x"></i> </h1>
-            <h1 class="h3 mb-3 font-weight-normal">Share your space with friends.</h1>
 
+
+        <div class="container">
+            <!-- change this later , border is dark for testing -->
+            <div class="row">
+
+                <div class="col-6 border mdl-card mdl-color--white mr-5">
+                    <fieldset>
+
+                        <form>
+                            <div class="row justify-content-start">
+                                <div class="form-group col-md-7">
+                                    Profile Picture <input type="file" id="avatar" accept="image/png, image/jpeg">
+                                </div>
+                            </div>
+
+                            <div class="row justify-content-start">
+                                <div class="form-group col-md-7">
+                                    <input type="text" class="form-control" id="full_name" placeholder="Your Current Name">
+                                </div>
+                            </div>
+
+                            <div class="row justify-content-start">
+                                <div class="form-group col-md-7">
+                                    <textarea class="form-control" form="usrform">A description about yourself in 200 words or less</textarea>
+                                </div>
+                            </div>
+
+                            <div class="row justify-content-start">
+                                <div class="form-group col-md-7">
+                                    <input type="text" class="form-control" id="phone_number" placeholder="Phone No.">
+                                </div>
+                            </div>
+
+                            <div class="row justify-content-start">
+                                <div class="form-group col-md-7">
+                                    <input type="text" class="form-control" id="your_address" placeholder="Enter your address">
+                                </div>
+                            </div>
+
+
+                            <div class="row justify-content-start">
+                                <div class="form-group col-md-7">
+                                    <input type="email" class="form-control" id="your_email" placeholder="Where should we send emails?">
+                                </div>
+                            </div>
+
+                            <div class="row justify-content-start">
+                                <div class="form-group col-12">
+                                    <button type="submit" class="btn btn-primary">Update Profile</button>
+                                </div>
+                            </div>
+                        </form>
+
+
+                    </fieldset>
+                </div>
+
+
+
+
+                <div class="col-4 border mdl-card mdl-color--white">
+
+
+                    <div class="row">
+
+                        <div class="col-6">
+                            <div class="card-title">Checklist</div>
+                        </div>
+
+                        <div class="col-6">
+                            <button class="mdl-js-ripple-effect mdl-button mdl-js-button mdl-color-text--black">CLOSE</button> 
+                        </div>
+
+                    </div>
+
+                    <div class="card-sub-title">
+                        Having a complete profile will increase your chance of getting requests or your requests being accepted.
+                        <br>
+                    </div>
+
+                    <div class="card-sub-title">
+                        <b>Mandatory</b>
+                    </div>
+
+                    <div class="vTtl"> <i class="fas fa-check name_check"></i> Name </div>
+
+                    <div class="vTtl"> <i class="fas fa-check email_check"></i> Email </div>
+
+                    <div class="vTtl"> <i class="fas fa-check phone_check"></i> Phone </div>
+
+                    <div class="vTtl"> <i class="fas fa-check address_check"></i> Address </div>
+
+
+                </div>
+
+            </div>
         </div>
-
-        <form>
-
-            <div class="form-row">
-
-                <div class="form-group col-md-6">
-                    <input type="text" class="form-control" id="search_address" placeholder="Where are you from?">
-                </div>
-
-                <div class="form-group col-md-6">
-                    <input type="text" class="form-control" id="search_city" placeholder="Vancouver, B.C.">
-                </div>
-
-
-
-            </div>
-
-
-
-            <div class="form-row">
-
-                <div class="form-group col-md-3">
-
-                    <input type="date" class="form-control" id="search_from">
-
-                </div>
-
-                <div class="form-group col-md-3">
-
-                    <input type="date" class="form-control" id="search_to">
-
-                </div>
-
-                <div class="form-group col-md-3">
-
-                    <button type="submit" class="btn btn-primary">Submit</button>
-                </div>
-            </div>
-
-
-        </form>
-
-
-
-
 
 
 
