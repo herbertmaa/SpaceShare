@@ -18,36 +18,40 @@
 
 .top-buffer {
 
-    /** this bufer is needed to add spacing from the navbar and the content **/
+    /** this buffer is needed to add spacing from the navbar and the content **/
     margin-top: 40px;
     margin-bottom: 40px;
 }
 
 
-#main {
+main {
 
     /** pushes the main container to the left  (left as 0 for now) **/
 }
 
 
-.login_form {
 
+#lean_overlay {
+    position: fixed;
+    z-index: 100;
+    top: 0px;
+    left: 0px;
+    height: 100%;
+    width: 100%;
+    background: #000;
     display: none;
-    /* this only shows up when a button is clicked */
-
 }
 
-.login_form {
 
-    z-index: 1;
+#user_login {
+
+    display:inline;
     position: absolute;
     margin-left: auto;
     margin-right: auto;
     left: 0;
     right: 0;
-}
-.op-click{
-    
-opacity: 0.2;
+    display:none;
+    width:300px;
 
 }
