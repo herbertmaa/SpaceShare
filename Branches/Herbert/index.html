@@ -22,6 +22,23 @@
 
     <!-- Place your stylesheet here-->
     <link href="index.css" rel="stylesheet" type="text/css">
+
+
+
+    <!-- Firebase -->
+
+    <script src="https://www.gstatic.com/firebasejs/5.8.4/firebase.js"></script>
+
+
+    <!-- Firebase login UI -->
+    <script src="https://cdn.firebase.com/libs/firebaseui/3.5.2/firebaseui.js"></script>
+
+
+    <!-- Firebase css -->
+    <link type="text/css" rel="stylesheet" href="https://cdn.firebase.com/libs/firebaseui/3.5.2/firebaseui.css" />
+
+    <!-- Load jQuery -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 </head>
 
 <body>
@@ -45,7 +62,7 @@
                     <a class="nav-link" href="#">Sign up</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Login</a>
+                    <a class="nav-link" href="#" id="login_form">Login</a>
                 </li>
             </ul>
         </div>
@@ -53,70 +70,167 @@
 
 
     <!-- Main Content -->
-    <main role="main" class="container" id="main">
 
 
-        <div class="container">
+    <div class="container">
 
-            <div class="row top-buffer">
-            </div>
+        <div class="form-row login_form">
 
-            <div class="mb-4">
+            <div class="col-12">
 
-
-                <h1 class="h3 mb-3 font-weight-normal"> <i class="fab fa-studiovinari fa-2x"></i> </h1>
-                <h1 class="h3 mb-3 font-weight-normal">Share your space with friends.</h1>
+                <div id="firebaseui-auth-container"></div>
 
             </div>
 
-            <form>
+            <div class="col-12">
 
-                <div class="form-row">
+                <div id="loader">Loading...</div>
 
-                    <div class="form-group col-md-6">
-                        <input type="text" class="form-control" id="search_address " placeholder="Where are you from?">
-                    </div>
-
-                    <div class="form-group col-md-6">
-                        <input type="text" class="form-control" id="search_city" placeholder="Vancouver, B.C.">
-                    </div>
-
-                </div>
-
-
-                <div class="form-row">
-
-                    <div class="form-group col-md-3">
-
-                        <input type="date" class="form-control" id="search_from">
-
-                    </div>
-
-                    <div class="form-group col-md-3">
-
-                        <input type="date" class="form-control" id="search_to">
-
-                    </div>
-
-                    <div class="form-group col-md-3">
-
-                        <button type="submit" class="btn btn-primary">Submit</button>
-                    </div>
-                </div>
-
-
-            </form>
-
+            </div>
 
         </div>
 
 
+    </div>
+    <main role="main" class="container" id="main">
+
+        <div class="row top-buffer">
+        </div>
+
+        <div class="mb-4">
+
+
+            <h1 class="h3 mb-3 font-weight-normal"> <i class="fab fa-studiovinari fa-2x"></i> </h1>
+            <h1 class="h3 mb-3 font-weight-normal">Share your space with friends.</h1>
+
+        </div>
+
+        <form>
+
+            <div class="form-row">
+
+                <div class="form-group col-md-6">
+                    <input type="text" class="form-control" id="search_address " placeholder="Where are you from?">
+                </div>
+
+                <div class="form-group col-md-6">
+                    <input type="text" class="form-control" id="search_city" placeholder="Vancouver, B.C.">
+                </div>
+
+
+
+            </div>
+
+
+
+            <div class="form-row">
+
+                <div class="form-group col-md-3">
+
+                    <input type="date" class="form-control" id="search_from">
+
+                </div>
+
+                <div class="form-group col-md-3">
+
+                    <input type="date" class="form-control" id="search_to">
+
+                </div>
+
+                <div class="form-group col-md-3">
+
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                </div>
+            </div>
+
+
+        </form>
+
+
+
+
+
+
+
+
+
+
     </main>
     <!-- Placed at the end of the document so the pages load faster -->
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 
+
+    <script>
+        $(document).ready(function() {
+
+            // Initialize Firebase
+            var config = {
+                apiKey: "AIzaSyCE2lSLszDUyZEyY--btpdoYs7Ln6PHAXY",
+                authDomain: "spaceshare-b68f7.firebaseapp.com",
+                databaseURL: "https://spaceshare-b68f7.firebaseio.com",
+                projectId: "spaceshare-b68f7",
+                storageBucket: "",
+                messagingSenderId: "555750963802"
+            };
+
+
+            firebase.initializeApp(config);
+
+            // Initialize the FirebaseUI Widget using Firebase.
+            var ui = new firebaseui.auth.AuthUI(firebase.auth());
+
+            //Firebase default configuration
+            var uiConfig = {
+                callbacks: {
+                    signInSuccessWithAuthResult: function(authResult, redirectUrl) {
+                        // User successfully signed in.
+                        // Return type determines whether we continue the redirect automatically
+                        // or whether we leave that to developer to handle.
+                        return true;
+                    },
+                    uiShown: function() {
+                        // The widget is rendered.
+                        // Hide the loader.
+                        document.getElementById('loader').style.display = 'none';
+                    }
+                },
+                // Will use popup for IDP Providers sign-in flow instead of the default, redirect.
+                signInFlow: 'popup',
+                signInSuccessUrl: 'main.html',
+                signInOptions: [
+                    // Leave the lines as is for the providers you want to offer your users.
+                    firebase.auth.GoogleAuthProvider.PROVIDER_ID,
+                    firebase.auth.FacebookAuthProvider.PROVIDER_ID,
+                    firebase.auth.TwitterAuthProvider.PROVIDER_ID,
+                    firebase.auth.GithubAuthProvider.PROVIDER_ID,
+                    firebase.auth.EmailAuthProvider.PROVIDER_ID,
+                    firebase.auth.PhoneAuthProvider.PROVIDER_ID
+                ],
+                // Terms of service url.
+                tosUrl: 'apple.html',
+                // Privacy policy url.
+                privacyPolicyUrl: 'apple.html'
+
+
+
+
+            };
+
+
+
+            // Load the login container
+            ui.start('#firebaseui-auth-container', uiConfig); // load our login
+
+
+            $("#login_form").click(function() {
+                console.log("hello world");
+                $(".login_form").show();
+                $("nav, main").addClass("op-click");
+            });
+
+        })
+    </script>
 </body>
 
 </html>

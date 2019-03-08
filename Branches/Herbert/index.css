@@ -28,3 +28,26 @@
 
     /** pushes the main container to the left  (left as 0 for now) **/
 }
+
+
+.login_form {
+
+    display: none;
+    /* this only shows up when a button is clicked */
+
+}
+
+.login_form {
+
+    z-index: 1;
+    position: absolute;
+    margin-left: auto;
+    margin-right: auto;
+    left: 0;
+    right: 0;
+}
+.op-click{
+    
+opacity: 0.2;
+
+}
