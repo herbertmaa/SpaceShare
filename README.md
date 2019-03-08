@@ -1,2 +1,4 @@
 # COMP1930---SpaceShare
-“A practice repo to learning version control”.  
+
+
+A web application that helps people share their extra storage space. 
