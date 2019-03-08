@@ -18,40 +18,38 @@
 
 .top-buffer {
 
-    /** this buffer is needed to add spacing from the navbar and the content **/
-    margin-top: 40px;
-    margin-bottom: 40px;
+    /** this bufer is needed to add spacing from the navbar and the content **/
+    margin-top: 60px;
+    margin-bottom: 60px;
 }
 
 
-main {
+#main {
 
     /** pushes the main container to the left  (left as 0 for now) **/
 }
 
 
 
-#lean_overlay {
-    position: fixed;
-    z-index: 100;
-    top: 0px;
-    left: 0px;
-    height: 100%;
-    width: 100%;
-    background: #000;
-    display: none;
+#howitworks{
+
+
+    margin-top: 75px;
+
 }
 
 
-#user_login {
+#ready{
 
-    display:inline;
-    position: absolute;
-    margin-left: auto;
-    margin-right: auto;
-    left: 0;
-    right: 0;
-    display:none;
-    width:300px;
+    margin-top: 75px;
 
+}
+
+
+.login_form{
+    
+    
+    margin: 0 auto;
+    position:absolute;
+    background-color:red;
 }
