@@ -15,12 +15,13 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 
 
+
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
 
 
     <!-- Place your stylesheet here-->
-    <link href="index.css" rel="stylesheet" type="text/css">
+    <link href="postListing.css" rel="stylesheet" type="text/css">
 
 
 
@@ -38,14 +39,16 @@
 
     <!-- Load jQuery -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    
+    
 </head>
 
 <body>
 
 
     <!--Navigation bar -->
-    <nav class="navbar navbar-expand-lg navbar-light bg-light" style="height:85px;">
-        <a class="navbar-brand" href="index.html">SpaceShare</a>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" href="postListing.html">SpaceShare</a>
         <button class="navbar-toggler" type="button">
             <span class="navbar-toggler-icon"></span>
         </button>
@@ -96,20 +99,52 @@
 
 
             <h1 class="h3 mb-3 font-weight-normal"> <i class="fab fa-studiovinari fa-2x"></i> </h1>
-            <h1 class="h3 mb-3 font-weight-normal">Share your space with friends.</h1>
+            <h1 class="h3 mb-3 font-weight-normal">List Your Space</h1>
 
         </div>
 
-        <form>
+        <form class = "js-form">
 
             <div class="form-row">
 
-                
                 <div class="form-group col-md-6">
-                    <input type="text" class="form-control" id="autocomplete" placeholder=" Where are you from?" onFocus="geolocate()">
+                    <label for="make_address">Address: </label>
+                    <input type="text" class="form-control" id="make_address" placeholder="Where are you from?">
+                </div>
+
+                <div class="form-group col-md-6">
+                    <label for="make_city">City: </label>
+                    <input type="text" class="form-control" id="make_city" placeholder="Vancouver, B.C.">
                 </div>
 
 
+
+            </div>
+            
+            <!-- Idea: for dimensions, create a label called dimensions
+                    and use placeholder text for length width height
+            -->
+            <div class="form-row">
+                <label for="dimension">&nbsp;Dimensions: </label>
+            </div>
+            
+            <div class="form-row">
+                
+                <div class="form-group col-md-3" id="dimension">
+                    
+                    <input type="number" class="form-control" id="make_length" placeholder="length">
+
+                </div>
+
+                <div class="form-group col-md-3">
+                    <input type="number" class="form-control" id="make_width" placeholder="width">
+
+                </div>
+                
+                <div class="form-group col-md-3">
+                    <input type="number" class="form-control" id="make_height" placeholder="height">
+
+                </div>
 
             </div>
 
@@ -118,21 +153,26 @@
             <div class="form-row">
 
                 <div class="form-group col-md-3">
-
+                    
+                    <label for="search_from">Available From: </label>
                     <input type="date" class="form-control" id="search_from">
 
                 </div>
 
                 <div class="form-group col-md-3">
-
+                    
+                    <label for="search_to">Available To: </label>
                     <input type="date" class="form-control" id="search_to">
 
                 </div>
 
-                <div class="form-group col-md-3">
+            </div>
+            
+            <div class="form-row">
+            <div class="form-group col-md-3">
 
-                    <button type="submit" class="btn btn-primary">Submit</button>
-                </div>
+                    <button type="submit" id="js-submit" class="btn btn-primary">Submit</button>
+            </div>
             </div>
 
 
@@ -140,22 +180,9 @@
 
 
 
-        
-        
-        <!-- Hidden from the user, this will be updated (leave for now for testing purposes) --> 
-        
-        <!-- Use of Google Places API to sanitize data -->
 
 
-        <table id="address">
-            <tr>
-                <td class="slimField"><input class="field" id="street_number" /></td>
-                <td class="wideField" colspan="2"><input class="field" id="route" /></td>
-                <td class="wideField" colspan="3"><input class="field" id="locality" /></td>
-                <td class="slimField"><input  class="field" id="administrative_area_level_1" /></td>
-            </tr>
 
-        </table>
 
 
 
@@ -164,8 +191,8 @@
     <!-- Placed at the end of the document so the pages load faster -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-    <script type="text/javascript" src="jquery.leanModal.min.js"></script>
 
+    <script type="text/javascript" src="jquery.leanModal.min.js"></script>
 
     <script>
         $(document).ready(function() {
@@ -182,6 +209,53 @@
 
 
             firebase.initializeApp(config);
+            
+            
+        /*
+        A function that creates a post in FireBase
+        */
+    function createPost(lsaddress, city, length, width, height) {
+            // Get a key for a new Post.
+            let newPostKey = firebase.database().ref().push().key;
+            console.log(newPostKey);
+        
+            var postData = {
+                Address: lsaddress,
+                key: newPostKey,
+                City: city,
+                Length: length,
+                Width: width,
+                Height: height
+            };
+        
+            var updates = {};
+            updates['ListingsTest/' + newPostKey] = postData;
+            firebase.database().ref().update(updates);
+        
+        }
+    
+    
+        
+    /*
+        A jQuery function that grabs information from a form and assigns it to constants
+        and then calls the createPosts function 
+    */
+    $(function postForm(){
+
+   /** firebase.initializeApp(config); **/
+    $(".js-form").on('submit', event => {
+        event.preventDefault();
+        const address = $('#make_address').val();
+        const city = $('#make_city').val();
+        const length = $('#make_length').val();
+        const width = $('#make_width').val();
+        const height = $('#make_height').val();
+        console.log(address, city, length, width, height);
+        createPost(address, city, length, width, height);
+    })
+    });
+        
+            
 
             // Initialize the FirebaseUI Widget using Firebase.
             var ui = new firebaseui.auth.AuthUI(firebase.auth());
@@ -203,20 +277,20 @@
                 },
                 // Will use popup for IDP Providers sign-in flow instead of the default, redirect.
                 signInFlow: 'popup',
-                signInSuccessUrl: 'index.html',
+                signInSuccessUrl: 'main.html',
                 signInOptions: [
                     // Leave the lines as is for the providers you want to offer your users.
                     firebase.auth.GoogleAuthProvider.PROVIDER_ID,
                     firebase.auth.FacebookAuthProvider.PROVIDER_ID,
-                    //firebase.auth.TwitterAuthProvider.PROVIDER_ID,
-                    //firebase.auth.GithubAuthProvider.PROVIDER_ID,
+                    firebase.auth.TwitterAuthProvider.PROVIDER_ID,
+                    firebase.auth.GithubAuthProvider.PROVIDER_ID,
                     firebase.auth.EmailAuthProvider.PROVIDER_ID,
-                    //firebase.auth.PhoneAuthProvider.PROVIDER_ID
+                    firebase.auth.PhoneAuthProvider.PROVIDER_ID
                 ],
                 // Terms of service url.
-                tosUrl: 'index.html',
+                tosUrl: 'apple.html',
                 // Privacy policy url.
-                privacyPolicyUrl: 'index.html'
+                privacyPolicyUrl: 'apple.html'
 
 
 
@@ -231,104 +305,16 @@
 
             $(".modal_trigger").leanModal();
 
-            // This tells us if the user has logged in. 
-            firebase.auth().onAuthStateChanged(function(user) {
-                if (user) {
-                    //user is logged in
-                    console.log("user is logged in");
 
-                } else {
-                    //user is not logged in
 
-                }
-            });
+
+
+
 
 
 
         });
     </script>
-
-
-
-
-    <script>
-        // This sample uses the Autocomplete widget to help the user select a
-        // place, then it retrieves the address components associated with that
-        // place, and then it populates the form fields with those details.
-        // This sample requires the Places library. Include the libraries=places
-        // parameter when you first load the API. For example:
-        // <script
-        // src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&libraries=places">
-
-        var placeSearch, autocomplete;
-
-
-        var componentForm = {
-            street_number: 'short_name',
-            route: 'long_name',
-            locality: 'long_name',
-            administrative_area_level_1: 'short_name',
-
-        };
-
-        function initAutocomplete() {
-            // Create the autocomplete object, restricting the search predictions to
-            // geographical location types.
-            autocomplete = new google.maps.places.Autocomplete(
-                document.getElementById('autocomplete'), {
-                    types: ['geocode']
-                });
-
-
-            // Avoid paying for data that you don't need by restricting the set of
-            // place fields that are returned to just the address components.
-            //autocomplete.setFields('address_components');
-
-            // When the user selects an address from the drop-down, populate the
-            // address fields in the form.
-            autocomplete.addListener('place_changed', fillInAddress);
-        }
-
-        function fillInAddress() {
-            // Get the place details from the autocomplete object.
-            var place = autocomplete.getPlace();
-
-            for (var component in componentForm) {
-                document.getElementById(component).value = '';
-                document.getElementById(component).disabled = false;
-            }
-
-            // Get each component of the address from the place details,
-            // and then fill-in the corresponding field on the form.
-            for (var i = 0; i < place.address_components.length; i++) {
-                var addressType = place.address_components[i].types[0];
-                if (componentForm[addressType]) {
-                    var val = place.address_components[i][componentForm[addressType]];
-                    document.getElementById(addressType).value = val;
-                }
-            }
-        }
-
-
-        function geolocate() {
-            if (navigator.geolocation) {
-                navigator.geolocation.getCurrentPosition(function(position) {
-                    var geolocation = {
-                        lat: position.coords.latitude,
-                        lng: position.coords.longitude
-                    };
-                    var circle = new google.maps.Circle({
-                        center: geolocation,
-                        radius: position.coords.accuracy
-                    });
-                    autocomplete.setBounds(circle.getBounds());
-                });
-            }
-        }
-    </script>
-
-
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDVs8DbkrG8d9ZUUCw9zrv2uZ-RL9sLbCQ&libraries=places&callback=initAutocomplete" async defer></script>
 </body>
 
 </html>
