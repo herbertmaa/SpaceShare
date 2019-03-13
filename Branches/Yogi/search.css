@@ -8,6 +8,7 @@
 
 .nav-item {
 
+
     /** padding for the navigation items **/
     padding-left: 20px;
     padding-right: 20px;
@@ -21,14 +22,39 @@
     margin-top: 40px;
     margin-bottom: 40px;
 }
-
-
-main {
-
-    /** pushes the main container to the left  (left as 0 for now) **/
+#exampleInputSearch1 {
+    float: left;
+    width: 30vw;
 }
 
+#exampleInputSearch1::placeholder {
+    position: relative;
+    left: 30px;
+}
 
+.cards-container {
+    width: 55vw !important;
+    display: flex !important;
+    flex-flow: column nowrap !important;
+}
+.listing {
+    margin: 20px;
+    height: 20%;
+
+}
+.listing img {
+    width: 20vw;
+    height: 20vh;
+}
+.listing-content {
+    width: 
+i {
+    width: 20px;
+    height: 20px;
+    position: relative;
+    top: 6px;
+    right: 29.5vw;
+}
 
 #lean_overlay {
     position: fixed;
@@ -41,9 +67,7 @@ main {
     display: none;
 }
 
-
 #user_login {
-
     display:inline;
     position: absolute;
     margin-left: auto;
@@ -51,6 +75,6 @@ main {
     left: 0;
     right: 0;
     display:none;
-    width:300px;
+    width: 300px;
 
 }
