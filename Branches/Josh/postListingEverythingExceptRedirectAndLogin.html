@@ -227,7 +227,22 @@
             function createPost(lsaddress, city, province, length, width, height) {
                 // Get a key for a new Post.
                 let newPostKey = firebase.database().ref().push().key;
+                /** let userID = firebase.auth().currentUser.uid; **/
                 console.log(newPostKey);
+                
+                var user = firebase.auth().currentUser;
+                var name, email, photoUrl, uid, emailVerified;
+
+                if (user != null) {
+                    name = user.displayName;
+                    email = user.email;
+                    photoUrl = user.photoURL;
+                    emailVerified = user.emailVerified;
+                    uid = user.uid;   // The user's ID, unique to the Firebase project. Do NOT use
+                                     // this value to authenticate with your backend server, if
+                                     // you have one. Use User.getToken() instead.
+                }
+                console.log(uid);
 
                 var postData = {
                     Address: lsaddress,
@@ -236,7 +251,8 @@
                     Province: province,
                     Length: length,
                     Width: width,
-                    Height: height
+                    Height: height,
+                    Account: uid
                 };
 
                 var updates = {};
@@ -289,7 +305,7 @@
                 },
                 // Will use popup for IDP Providers sign-in flow instead of the default, redirect.
                 signInFlow: 'popup',
-                signInSuccessUrl: 'main.html',
+                signInSuccessUrl: 'postListingEverythingExceptRedirectAndLogin.html',
                 signInOptions: [
                     // Leave the lines as is for the providers you want to offer your users.
                     firebase.auth.GoogleAuthProvider.PROVIDER_ID,
@@ -317,16 +333,22 @@
 
             $(".modal_trigger").leanModal();
 
+            // This tells us if the user has logged in. 
+            firebase.auth().onAuthStateChanged(function(user) {
+                if (user) {
+                    //user is logged in
+                    console.log("user is logged in");
 
+                } else {
+                    //user is not logged in
 
-
-
+                }
+            });
+            
 
 
         });
     </script>
-
-
 
     <script>
         // This sample uses the Autocomplete widget to help the user select a
