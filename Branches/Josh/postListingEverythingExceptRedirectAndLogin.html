@@ -242,8 +242,8 @@
                                      // this value to authenticate with your backend server, if
                                      // you have one. Use User.getToken() instead.
                 }
+                
                 console.log(uid);
-
                 var postData = {
                     Address: lsaddress,
                     key: newPostKey,
@@ -258,7 +258,6 @@
                 var updates = {};
                 updates['ListingsTest/' + newPostKey] = postData;
                 firebase.database().ref().update(updates);
-
             }
 
 
@@ -308,12 +307,12 @@
                 signInSuccessUrl: 'postListingEverythingExceptRedirectAndLogin.html',
                 signInOptions: [
                     // Leave the lines as is for the providers you want to offer your users.
-                    firebase.auth.GoogleAuthProvider.PROVIDER_ID,
-                    firebase.auth.FacebookAuthProvider.PROVIDER_ID,
-                    firebase.auth.TwitterAuthProvider.PROVIDER_ID,
-                    firebase.auth.GithubAuthProvider.PROVIDER_ID,
+                   // firebase.auth.GoogleAuthProvider.PROVIDER_ID,
+                   // firebase.auth.FacebookAuthProvider.PROVIDER_ID,
+                   // firebase.auth.TwitterAuthProvider.PROVIDER_ID,
+                   // firebase.auth.GithubAuthProvider.PROVIDER_ID,
                     firebase.auth.EmailAuthProvider.PROVIDER_ID,
-                    firebase.auth.PhoneAuthProvider.PROVIDER_ID
+                    // firebase.auth.PhoneAuthProvider.PROVIDER_ID
                 ],
                 // Terms of service url.
                 tosUrl: 'apple.html',
@@ -332,19 +331,6 @@
 
 
             $(".modal_trigger").leanModal();
-
-            // This tells us if the user has logged in. 
-            firebase.auth().onAuthStateChanged(function(user) {
-                if (user) {
-                    //user is logged in
-                    console.log("user is logged in");
-
-                } else {
-                    //user is not logged in
-
-                }
-            });
-            
 
 
         });
