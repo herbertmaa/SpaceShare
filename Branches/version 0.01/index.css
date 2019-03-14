@@ -25,12 +25,10 @@
 
 
 main {
+
     /** pushes the main container to the left  (left as 0 for now) **/
 }
 
-#address {
-    visibility: hidden;
-}
 
 
 #lean_overlay {
