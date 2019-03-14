@@ -72,6 +72,9 @@
                 <li class="nav-item" id="myprofile2">
                     <a id ="myprofile" class="nav-link" href="profile.html">My Profile</a>
                 </li>
+                <li class="nav-item" id="logout2">
+                    <a id ="logout" class="nav-link" onclick="logout()">Logout</a>
+                </li>
             </ul>
         </div>
     </nav>
@@ -209,6 +212,16 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
     <script type="text/javascript" src="jquery.leanModal.min.js"></script>
 
+    <script>
+        function logout(){
+            console.log("got here");
+            firebase.auth().signOut().then(function() {
+            // Sign-out successful.
+            }).catch(function(error) {
+            // An error happened.
+            });
+            }
+    </script>
 
     <script>
         $(document).ready(function() {
@@ -359,6 +372,14 @@
                     $("#myprofile2").hide();
                     $("#mylistings").hide();
                     $("#mylistings2").hide();
+                    $("#logout").hide();
+                    $("#logout2").hide();
+                    $("#signup").show();
+                    $("#signup2").show();
+                    $("#login").show();
+                    $("#login2").show();
+                    
+                        
                     var navb = document.getElementsByClassName("navbar-nav");
                     navb[0].style.visibility = "visible";
                 }
