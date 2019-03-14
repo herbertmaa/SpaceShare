@@ -229,6 +229,20 @@
                 let newPostKey = firebase.database().ref().push().key;
                 console.log(newPostKey);
 
+                var user = firebase.auth().currentUser;
+                var name, email, photoUrl, uid, emailVerified;
+
+                if (user != null) {
+                    name = user.displayName;
+                    email = user.email;
+                    photoUrl = user.photoURL;
+                    emailVerified = user.emailVerified;
+                    uid = user.uid;   // The user's ID, unique to the Firebase project. Do NOT use
+                                     // this value to authenticate with your backend server, if
+                                     // you have one. Use User.getToken() instead.
+                }
+                
+                console.log(uid);
                 var postData = {
                     Address: lsaddress,
                     key: newPostKey,
@@ -236,7 +250,8 @@
                     Province: province,
                     Length: length,
                     Width: width,
-                    Height: height
+                    Height: height,
+                    Account: uid
                 };
 
                 var updates = {};
@@ -255,6 +270,8 @@
 
                 /** firebase.initializeApp(config); **/
                 $(".js-form").on('submit', event => {
+                    var user = firebase.auth().currentUser;
+                    if (user != null) {
                     event.preventDefault();
                     const address = $('#street_number').val().concat(" ",$('#route').val());
                     const city = $('#locality').val();
@@ -264,6 +281,7 @@
                     const height = $('#make_height').val();
                     console.log(address, city, province, length, width, height);
                     createPost(address, city, province, length, width, height);
+                    }
                 })
             });
 
@@ -289,15 +307,15 @@
                 },
                 // Will use popup for IDP Providers sign-in flow instead of the default, redirect.
                 signInFlow: 'popup',
-                signInSuccessUrl: 'main.html',
+                signInSuccessUrl: 'postListingEverythingExceptRedirectAndLogin.html',
                 signInOptions: [
                     // Leave the lines as is for the providers you want to offer your users.
-                    firebase.auth.GoogleAuthProvider.PROVIDER_ID,
-                    firebase.auth.FacebookAuthProvider.PROVIDER_ID,
-                    firebase.auth.TwitterAuthProvider.PROVIDER_ID,
-                    firebase.auth.GithubAuthProvider.PROVIDER_ID,
-                    firebase.auth.EmailAuthProvider.PROVIDER_ID,
-                    firebase.auth.PhoneAuthProvider.PROVIDER_ID
+                   // firebase.auth.GoogleAuthProvider.PROVIDER_ID,
+                   // firebase.auth.FacebookAuthProvider.PROVIDER_ID,
+                   // firebase.auth.TwitterAuthProvider.PROVIDER_ID,
+                   // firebase.auth.GithubAuthProvider.PROVIDER_ID,
+                   firebase.auth.EmailAuthProvider.PROVIDER_ID,
+                   // firebase.auth.PhoneAuthProvider.PROVIDER_ID
                 ],
                 // Terms of service url.
                 tosUrl: 'apple.html',
@@ -316,10 +334,18 @@
 
 
             $(".modal_trigger").leanModal();
+            
+            // This tells us if the user has logged in. 
+            firebase.auth().onAuthStateChanged(function(user) {
+                if (user) {
+                    //user is logged in
+                    console.log("user is logged in");
 
+                } else {
+                    console.log("not logged in");
 
-
-
+                }
+            });
 
 
 
