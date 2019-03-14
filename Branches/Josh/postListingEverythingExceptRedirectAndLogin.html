@@ -243,6 +243,7 @@
                                      // you have one. Use User.getToken() instead.
                 }
                 
+                // throws errors if you're not logged in
                 console.log(uid);
                 var postData = {
                     Address: lsaddress,
@@ -331,6 +332,19 @@
 
 
             $(".modal_trigger").leanModal();
+            
+            // This tells us if the user has logged in. 
+            firebase.auth().onAuthStateChanged(function(user) {
+                if (user) {
+                    //user is logged in
+                    console.log("user is logged in");
+
+                } else {
+                    console.log("not logged in");
+
+                }
+            });
+
 
 
         });
