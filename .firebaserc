@@ -1,6 +1,7 @@
 {
   "projects": {
     "Staging": "spaceshare-b68f7",
-    "default": "spaceshare-b68f7"
+    "default": "spaceshare-b68f7",
+    "yogi_branch": "spaceshare-b68f7"
   }
 }
