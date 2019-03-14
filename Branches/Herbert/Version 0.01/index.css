@@ -43,6 +43,21 @@ main {
 }
 
 
+#content_edit{
+    
+    display:inline;
+    position: absolute;
+    margin-left: auto;
+    margin-right: auto;
+    left: 0;
+    right: 0;
+    display:none;
+    width:100%;
+    z-index: 150;
+    background-color:white;
+    
+}
+
 #user_login {
 
     display:inline;
