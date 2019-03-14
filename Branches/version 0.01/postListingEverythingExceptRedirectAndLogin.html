@@ -267,6 +267,8 @@
                 and then calls the createPosts function 
             */
             $(function postForm() {
+                
+                // If not logged in pressing submit on form just clears it.
 
                 /** firebase.initializeApp(config); **/
                 $(".js-form").on('submit', event => {
