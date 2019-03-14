@@ -271,6 +271,8 @@
 
                 /** firebase.initializeApp(config); **/
                 $(".js-form").on('submit', event => {
+                    var user = firebase.auth().currentUser;
+                    if (user != null) {
                     event.preventDefault();
                     const address = $('#street_number').val().concat(" ",$('#route').val());
                     const city = $('#locality').val();
@@ -280,6 +282,7 @@
                     const height = $('#make_height').val();
                     console.log(address, city, province, length, width, height);
                     createPost(address, city, province, length, width, height);
+                    }
                 })
             });
 
