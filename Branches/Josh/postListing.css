@@ -32,6 +32,9 @@ main {
     visibility: hidden;
 }
 
+.navbar-nav {
+    visibility: hidden;
+}
 
 #lean_overlay {
     position: fixed;

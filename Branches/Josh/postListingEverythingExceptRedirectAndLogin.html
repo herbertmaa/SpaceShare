@@ -349,17 +349,14 @@
                     console.log("user is logged in");
                     $("#signup").hide();
                     $("#login").hide();
-                   // $("#login").css("display","none");
-                   // $("#signup").css("display","none");
-                   // var sig = document.getElementById("signup");
-                    //sig.style.display = "none";
-                //    var log = document.getElementById("login");
-                  //  log.style.display = "none";
+                    var navb = document.getElementsByClassName("navbar-nav");
+                    navb[0].style.visibility = "visible";
                     } else {
                     console.log("not logged in");
                     $("#myprofile").hide();
                     $("#mylistings").hide();
-
+                    var navb = document.getElementsByClassName("navbar-nav");
+                    navb[0].style.visibility = "visible";
                 }
             });
 
