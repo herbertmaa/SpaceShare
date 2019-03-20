@@ -4,6 +4,8 @@
     background-color: #F8F8F8;
     border-color: #E7E7E7;
 }
+
+
 .nav-item {
 
 
@@ -12,6 +14,8 @@
     padding-right: 20px;
 
 }
+
+
 .top-buffer {
 
     /** this buffer is needed to add spacing from the navbar and the content **/
@@ -22,6 +26,7 @@
     float: left;
     width: 30vw;
 }
+
 #autocomplete::placeholder {
     position: relative;
     left: 30px;
@@ -33,6 +38,7 @@ i {
     top: 6px;
     right: 29.5vw;
 }
+
 #lean_overlay {
     position: fixed;
     z-index: 100;
@@ -43,6 +49,7 @@ i {
     background: #000;
     display: none;
 }
+
 #user_login {
     display:inline;
     position: absolute;
@@ -51,6 +58,8 @@ i {
     left: 0;
     right: 0;
     display:none;
+    width: 300px;
+
 }
 #cards-container {
     width: 55vw !important;
@@ -63,6 +72,7 @@ i {
     width: 40vw;
     display: flex;
     border: 1px solid black;
+
 }
 .listing img {
     width: 40%;
@@ -71,11 +81,11 @@ i {
 .listing-content {
     width: 60%;
     height: 100%;
+    line-height: 90%;
     text-align: center;
     display: flex;
     flex-flow: column nowrap;
     justify-content: center;
-    line-height: 90%;
 }
 #address {
     align-self: flex-start;
