@@ -1,0 +1,16 @@
+{
+  "name": "yogi",
+  "version": "1.0.0",
+  "description": "Connecting with firebase",
+  "main": "algoliasearch.js",
+  "scripts": {
+    "test": "alg"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "algoliasearch": "^3.32.1",
+    "dotenv": "^7.0.0",
+    "firebase": "^5.9.0"
+  }
+}
