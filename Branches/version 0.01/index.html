@@ -6,7 +6,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
     <meta name="author" content="">
-    <script src="https://cdn.jsdelivr.net/algoliasearch/3/algoliasearch.min.js"></script>
     <title>Share space with your friends | SpaceShare</title>
 
     <!--Template based on URL below-->
@@ -183,51 +182,6 @@
 
 
             firebase.initializeApp(config);
-            
-            
-        /*
-        A function that creates a post in FireBase
-        */
-    function createPost(lsaddress, city, length, width, height) {
-            // Get a key for a new Post.
-            let newPostKey = firebase.database().ref().push().key;
-            console.log(newPostKey);
-        
-            var postData = {
-                Address: lsaddress,
-                key: newPostKey,
-                City: city,
-                Length: length,
-                Width: width,
-                Height: height
-            };
-        
-            var updates = {};
-            updates['ListingsTest/' + newPostKey] = postData;
-            firebase.database().ref().update(updates);
-        
-        }
-    
-    
-        
-    /*
-        A jQuery function that grabs information from a form and assigns it to constants
-        and then calls the createPosts function 
-    */
-    $(function postForm(){
-
-   /** firebase.initializeApp(config); **/
-    $(".js-form").on('submit', event => {
-        event.preventDefault();
-        const address = $('#make_address').val();
-        const city = $('#make_city').val();
-        const length = $('#make_length').val();
-        const width = $('#make_width').val();
-        const height = $('#make_height').val();
-        console.log(address, city, length, width, height);
-        createPost(address, city, length, width, height);
-    })
-    });
 
             // Initialize the FirebaseUI Widget using Firebase.
             var ui = new firebaseui.auth.AuthUI(firebase.auth());

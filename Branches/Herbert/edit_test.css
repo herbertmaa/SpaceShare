@@ -1,0 +1,74 @@
+.navbar-default {
+
+    /** background color of our navbar **/
+    background-color: #F8F8F8;
+    border-color: #E7E7E7;
+}
+
+
+.nav-item {
+
+
+    /** padding for the navigation items **/
+    padding-left: 20px;
+    padding-right: 20px;
+
+}
+
+
+.top-buffer {
+
+    /** this buffer is needed to add spacing from the navbar and the content **/
+    margin-top: 40px;
+    margin-bottom: 40px;
+}
+
+
+main {
+
+    /** pushes the main container to the left  (left as 0 for now) **/
+}
+
+
+
+#lean_overlay {
+    position: fixed;
+    z-index: 100;
+    top: 0px;
+    left: 0px;
+    height: 100%;
+    width: 100%;
+    background: #000;
+    display: none;
+}
+
+
+#content_edit {
+
+    display: none;
+    background-color: white;
+
+}
+
+#user_login {
+
+    display: inline;
+    position: absolute;
+    margin-left: auto;
+    margin-right: auto;
+    left: 0;
+    right: 0;
+    display: none;
+    width: 300px;
+
+}
+
+.pac-container {
+    background-color: #FFF;
+    z-index: 1001;
+    position: fixed;
+    display: inline-block;
+    float: left;
+}
+
+

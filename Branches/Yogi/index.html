@@ -31,6 +31,9 @@
 
     <!-- Load jQuery -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+    <!-- load Algolia-->
+    <script src="https://cdn.jsdelivr.net/algoliasearch/3/algoliasearch.min.js"></script>
 </head>
 <body>
 
@@ -87,7 +90,7 @@
 
 
     </div>
-    <main role="main" class="container">
+    <main  class="container">
 
         <div class="row top-buffer">
         </div>
@@ -131,7 +134,7 @@
 
                 <div class="form-group col-md-3">
 
-                    <button type="submit" class="btn btn-primary">Submit</a></button>
+                    <button type="submit" class="btn btn-primary">Submit</button>
                 </div>
             </div>
 
@@ -147,15 +150,15 @@
         <!-- Use of Google Places API to sanitize data -->
 
 
-        <table id="address">
-            <tr>
-                <td class="slimField"><input class="field" id="street_number" /></td>
-                <td class="wideField" colspan="2"><input class="field" id="route" /></td>
-                <td class="wideField" colspan="3"><input class="field" id="locality" /></td>
-                <td class="slimField"><input  class="field" id="administrative_area_level_1" /></td>
-            </tr>
+        
+            
+                <input class="field" id="street_number" />
+                <input class="field" id="route" />
+                <input class="field" id="locality" />
+                <input  class="field" id="administrative_area_level_1" />
+            
 
-        </table>
+
 
 
 
@@ -273,17 +276,11 @@
             });
         });
     </script>
-    <script src = "googleAutocomplete.js"></script>
+    <script src ="googleAutoComplete.js"></script>
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDVs8DbkrG8d9ZUUCw9zrv2uZ-RL9sLbCQ&libraries=places&callback=initAutocomplete" async defer></script>
+    <script src="index.js"></script> 
+    
 
-    <script>
-        $('.btn').on('click', function() {
-            if ($('.form-control').val !== 'null') {
-                window.location.assign("/search.html")
-        }
-        })
-        
-    </script>
 </body>
 
 </html>
