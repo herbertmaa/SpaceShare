@@ -15,13 +15,12 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 
 
-
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
 
 
     <!-- Place your stylesheet here-->
-    <link href="postListing.css" rel="stylesheet" type="text/css">
+    <link href="index.css" rel="stylesheet" type="text/css">
 
 
 
@@ -39,8 +38,6 @@
 
     <!-- Load jQuery -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-
-
 </head>
 
 <body>
@@ -55,7 +52,7 @@
         <div class="collapse navbar-collapse justify-content-end">
             <ul class="navbar-nav">
                 <li class="nav-item  active">
-                    <a class="nav-link" href="#">Become a Sharer <span class="sr-only">(current)</span></a>
+                    <a class="nav-link" href="postListingEverythingExceptRedirect.html">Become a Sharer <span class="sr-only">(current)</span></a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="faq.html">Help</a>
@@ -108,49 +105,20 @@
 
 
             <h1 class="h3 mb-3 font-weight-normal"> <i class="fab fa-studiovinari fa-2x"></i> </h1>
-            <h1 class="h3 mb-3 font-weight-normal">List Your Space</h1>
+            <h1 class="h3 mb-3 font-weight-normal">Share your space with friends.</h1>
 
         </div>
 
-        <form class="js-form">
+        <form>
 
             <div class="form-row">
 
+                
                 <div class="form-group col-md-6">
-                    <label for="make_address">Address: </label>
-                    <input type="text" class="form-control" id="autocomplete" placeholder=" Where are you from?" onFocus="geolocate()" required>
+                    <input type="text" class="form-control" id="autocomplete" placeholder=" Where are you from?" onFocus="geolocate()">
                 </div>
 
 
-
-
-
-            </div>
-
-            <!-- Idea: for dimensions, create a label called dimensions
-                    and use placeholder text for length width height
-            -->
-            <div class="form-row">
-                <label for="dimension">&nbsp;Dimensions: </label>
-            </div>
-
-            <div class="form-row">
-
-                <div class="form-group col-md-3" id="dimension">
-
-                    <input type="number" class="form-control" id="make_length" placeholder="length" required>
-
-                </div>
-
-                <div class="form-group col-md-3">
-                    <input type="number" class="form-control" id="make_width" placeholder="width" required>
-
-                </div>
-
-                <div class="form-group col-md-3">
-                    <input type="number" class="form-control" id="make_height" placeholder="height" required>
-
-                </div>
 
             </div>
 
@@ -160,24 +128,19 @@
 
                 <div class="form-group col-md-3">
 
-                    <label for="search_from">Available From: </label>
                     <input type="date" class="form-control" id="search_from">
 
                 </div>
 
                 <div class="form-group col-md-3">
 
-                    <label for="search_to">Available To: </label>
                     <input type="date" class="form-control" id="search_to">
 
                 </div>
 
-            </div>
-
-            <div class="form-row">
                 <div class="form-group col-md-3">
 
-                    <button type="submit" id="js-submit" class="btn btn-primary">Submit</button>
+                    <button type="submit" class="btn btn-primary">Submit</button>
                 </div>
             </div>
 
@@ -186,11 +149,10 @@
 
 
 
-
-
-
-        <!-- Hidden from the user, this will be updated (leave for now for testing purposes) -->
-
+        
+        
+        <!-- Hidden from the user, this will be updated (leave for now for testing purposes) --> 
+        
         <!-- Use of Google Places API to sanitize data -->
 
 
@@ -199,10 +161,11 @@
                 <td class="slimField"><input class="field" id="street_number" /></td>
                 <td class="wideField" colspan="2"><input class="field" id="route" /></td>
                 <td class="wideField" colspan="3"><input class="field" id="locality" /></td>
-                <td class="slimField"><input class="field" id="administrative_area_level_1" /></td>
+                <td class="slimField"><input  class="field" id="administrative_area_level_1" /></td>
             </tr>
 
         </table>
+
 
 
 
@@ -211,6 +174,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
     <script type="text/javascript" src="jquery.leanModal.min.js"></script>
+
 
     <script>
         function logout(){
@@ -222,7 +186,7 @@
             });
             }
     </script>
-
+    
     <script>
         $(document).ready(function() {
 
@@ -238,74 +202,6 @@
 
 
             firebase.initializeApp(config);
-
-
-            /*
-            A function that creates a post in FireBase
-            */
-            function createPost(lsaddress, city, province, length, width, height) {
-                // Get a key for a new Post.
-                let newPostKey = firebase.database().ref().push().key;
-                /** let userID = firebase.auth().currentUser.uid; **/
-                console.log(newPostKey);
-                
-                var user = firebase.auth().currentUser;
-                var name, email, photoUrl, uid, emailVerified;
-
-                if (user != null) {
-                    name = user.displayName;
-                    email = user.email;
-                    photoUrl = user.photoURL;
-                    emailVerified = user.emailVerified;
-                    uid = user.uid;   // The user's ID, unique to the Firebase project. Do NOT use
-                                     // this value to authenticate with your backend server, if
-                                     // you have one. Use User.getToken() instead.
-                }
-                
-                // throws errors if you're not logged in
-                console.log(uid);
-                var postData = {
-                    Address: lsaddress,
-                    key: newPostKey,
-                    City: city,
-                    Province: province,
-                    Length: length,
-                    Width: width,
-                    Height: height,
-                    Account: uid
-                };
-
-                var updates = {};
-                updates['ListingsTest/' + newPostKey] = postData;
-                firebase.database().ref().update(updates);
-            }
-
-
-
-            /*
-                A jQuery function that grabs information from a form and assigns it to constants
-                and then calls the createPosts function 
-            */
-            $(function postForm() {
-
-                /** firebase.initializeApp(config); **/
-                $(".js-form").on('submit', event => {
-                    var user = firebase.auth().currentUser;
-                    if (user != null) {
-                    event.preventDefault();
-                    const address = $('#street_number').val().concat(" ",$('#route').val());
-                    const city = $('#locality').val();
-                    const province = $('#administrative_area_level_1').val();
-                    const length = $('#make_length').val();
-                    const width = $('#make_width').val();
-                    const height = $('#make_height').val();
-                    console.log(address, city, province, length, width, height);
-                    createPost(address, city, province, length, width, height);
-                    }
-                })
-            });
-
-
 
             // Initialize the FirebaseUI Widget using Firebase.
             var ui = new firebaseui.auth.AuthUI(firebase.auth());
@@ -327,20 +223,20 @@
                 },
                 // Will use popup for IDP Providers sign-in flow instead of the default, redirect.
                 signInFlow: 'popup',
-                signInSuccessUrl: 'postListingEverythingExceptRedirect.html',
+                signInSuccessUrl: 'index.html',
                 signInOptions: [
                     // Leave the lines as is for the providers you want to offer your users.
-                   // firebase.auth.GoogleAuthProvider.PROVIDER_ID,
-                   // firebase.auth.FacebookAuthProvider.PROVIDER_ID,
-                   // firebase.auth.TwitterAuthProvider.PROVIDER_ID,
-                   // firebase.auth.GithubAuthProvider.PROVIDER_ID,
+                    //firebase.auth.GoogleAuthProvider.PROVIDER_ID,
+                    //firebase.auth.FacebookAuthProvider.PROVIDER_ID,
+                    //firebase.auth.TwitterAuthProvider.PROVIDER_ID,
+                    //firebase.auth.GithubAuthProvider.PROVIDER_ID,
                     firebase.auth.EmailAuthProvider.PROVIDER_ID,
-                    // firebase.auth.PhoneAuthProvider.PROVIDER_ID
+                    //firebase.auth.PhoneAuthProvider.PROVIDER_ID
                 ],
                 // Terms of service url.
-                tosUrl: 'apple.html',
+                tosUrl: 'index.html',
                 // Privacy policy url.
-                privacyPolicyUrl: 'apple.html'
+                privacyPolicyUrl: 'index.html'
 
 
 
@@ -354,7 +250,7 @@
 
 
             $(".modal_trigger").leanModal();
-            
+
             // This tells us if the user has logged in. 
             firebase.auth().onAuthStateChanged(function(user) {
                 if (user) {
@@ -389,6 +285,9 @@
 
         });
     </script>
+
+
+
 
     <script>
         // This sample uses the Autocomplete widget to help the user select a
@@ -467,9 +366,7 @@
     </script>
 
 
-
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDVs8DbkrG8d9ZUUCw9zrv2uZ-RL9sLbCQ&libraries=places&callback=initAutocomplete" async defer></script>
-
 </body>
 
 </html>
