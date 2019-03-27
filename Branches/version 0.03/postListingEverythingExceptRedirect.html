@@ -220,6 +220,7 @@
             }).catch(function(error) {
             // An error happened.
             });
+            location.href = "succlogout.html"
             }
     </script>
 
@@ -301,7 +302,10 @@
                     const height = $('#make_height').val();
                     console.log(address, city, province, length, width, height);
                     createPost(address, city, province, length, width, height);
+                    // window.location.replace("succpost.html");
                     }
+                    // window.location.replace("succpost.html");
+                    // location.href = "succpost.html";
                 })
             });
 
