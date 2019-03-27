@@ -8,6 +8,7 @@
 
 .nav-item {
 
+
     /** padding for the navigation items **/
     padding-left: 20px;
     padding-right: 20px;
@@ -28,7 +29,13 @@ main {
     /** pushes the main container to the left  (left as 0 for now) **/
 }
 
+#address {
+    visibility: hidden;
+}
 
+.navbar-nav {
+    visibility: hidden;
+}
 
 #lean_overlay {
     position: fixed;
