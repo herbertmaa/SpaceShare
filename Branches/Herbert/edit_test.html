@@ -41,6 +41,11 @@
 
 <body>
 
+    <div id='loading_overlay'>
+
+        <div class="mdl-spinner mdl-js-spinner is-active " style="width: 5rem; height: 5rem;"></div>
+    </div>
+
 
     <!--Navigation bar -->
     <nav class="navbar navbar-expand-lg navbar-light bg-light" style="height:85px;">
@@ -57,36 +62,46 @@
                     <a class="nav-link" href="faq.html">Help</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" rel="leanModal" href="#user_login"> Sign up</a>
+                    <a class="nav-link" data-toggle="modal" href="#user_login"> Sign up</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" rel="leanModal" href="#user_login">Login</a>
+                    <a class="nav-link" data-toggle="modal" href="#user_login">Login</a>
                 </li>
             </ul>
         </div>
     </nav>
 
 
+
+
+
     <!-- Main Content -->
 
 
-    <div class="container">
+    <div class="container hidden">
 
-        <div class="form-row " id="user_login">
+        <div class="modal fade" id="user_login" tabindex="-1" role="dialog">
 
-            <div class="col-12">
+            <div class="modal-dialog modal-dialog-centered modal-sm" role="document">
 
-                <div id="firebaseui-auth-container"></div>
+                <div class="modal-content" style>
 
-                <div id="loader">Loading...</div>
+                    <div class="modal-body">
+                        <div id="firebaseui-auth-container"></div>
+
+                        <div id="loader">Loading...</div>
+                    </div>
+
+                </div>
+
+
 
             </div>
-
         </div>
 
 
     </div>
-    <main role="main" class="container">
+    <main role="main" class="container hidden">
 
         <div class="row top-buffer">
         </div>
@@ -117,103 +132,148 @@
 
 
         <!-- The edit content card -->
-        <div id="content_edit" class="w-50 card container">
+        <div class="modal fade" id="content_edit" tabindex="-1" role="dialog">
 
-            <div class="row justify-content-end">
-                <button class="mdl-button mdl-js-button mdl-js-ripple-effect modal_close"> X </button>
+            <div class="modal-dialog modal-dialog-centered" role="document">
 
+                <div class="modal-content">
+
+
+                    <div class="modal-body">
+                        <div class="container">
+
+
+
+                            <div class="row justify-content-end">
+
+                                <div class="col-3">
+                                    <button type="button" class="mdl-button mdl-js-button mdl-button--raised" style="margin-left: 30%;" data-dismiss="modal">X</button>
+
+                                </div>
+                            </div>
+                            <form id="message-form" action='#'>
+
+                                <div class="row justify-content-center">
+                                    <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label" style="width: 75%;">
+                                        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label" style="width: 100%;">
+                                            <input class="mdl-textfield__input" type="text" id="autocomplete" onFocus="geolocate()">
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row justify-content-center">
+                                    <div class="col-4">
+                                        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                                            <input class="mdl-textfield__input" type="text" pattern="-?[0-9]*(\.[0-9]+)?" id="width">
+                                            <label class="mdl-textfield__label" for="width">Width</label>
+                                            <span class="mdl-textfield__error">Input is not a number!</span>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-4">
+                                        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                                            <input class="mdl-textfield__input" type="text" pattern="-?[0-9]*(\.[0-9]+)?" id="height">
+                                            <label class="mdl-textfield__label" for="height">Height</label>
+                                            <span class="mdl-textfield__error">Input is not a number!</span>
+                                        </div>
+                                    </div>
+                                </div>
+
+
+                                <div class="row">
+
+                                    <div class="col-12">
+                                        <button type="button" class="btn btn-primary btn-block" data-dismiss="modal">Update</button>
+
+                                    </div>
+                                </div>
+
+                            </form>
+
+                        </div>
+
+
+
+                    </div>
+                </div>
             </div>
-
-            <form id="message-form" action='#'>
-
-                <div class="row justify-content-center">
-                    <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label" style="width: 75%;">
-                        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label" style="width: 100%;">
-                            <input class="mdl-textfield__input" type="text" id="autocomplete" onFocus="geolocate()">
-                        </div>
-                    </div>
-                </div>
-
-                <div class="row justify-content-center">
-                    <div class="col-4">
-                        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-                            <input class="mdl-textfield__input" type="text" pattern="-?[0-9]*(\.[0-9]+)?" id="width">
-                            <label class="mdl-textfield__label" for="width">Width</label>
-                            <span class="mdl-textfield__error">Input is not a number!</span>
-                        </div>
-                    </div>
-
-                    <div class="col-4">
-                        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-                            <input class="mdl-textfield__input" type="text" pattern="-?[0-9]*(\.[0-9]+)?" id="height">
-                            <label class="mdl-textfield__label" for="height">Height</label>
-                            <span class="mdl-textfield__error">Input is not a number!</span>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="row">
-                    <div class="col">
-                        <br>
-                    </div>
-
-                </div>
-
-                <div class="row justify-content-center">
-                    <div class="col-8">
-                        <button id="update-edit" class="mdl-button mdl-js-button mdl-js-ripple-effect modal_close" style="width:100%;">UPDATE </button>
-                    </div>
-
-                </div>
-
-                <div class="row">
-
-                    <div class="col">
-
-
-                        <br>
-
-                    </div>
-
-                </div>
-
-
-            </form>
-
-
-
         </div>
 
 
+        <!-- The confirm delete button -->
+
+        <div class="modal fade" id="confirm_delete" tabindex="-1" role="dialog">
+
+            <div class="modal-dialog modal-dialog-centered" role="document">
 
 
-        <!-- Hidden from the user, this will be updated (leave for now for testing purposes) -->
-
-        <!-- Use of Google Places API to sanitize data -->
+                <div class="modal-content">
 
 
-        <table id="address">
-            <tr>
-                <td class="slimField"><input class="field" id="street_number" /></td>
-                <td class="wideField" colspan="2"><input class="field" id="route" /></td>
-                <td class="wideField" colspan="3"><input class="field" id="locality" /></td>
-                <td class="slimField"><input class="field" id="administrative_area_level_1" /></td>
-            </tr>
+                    <div class="modal-header">
 
-        </table>
+                        <h5 class="modal-title"> Are you sure? </h5>
+                    </div>
 
 
+                    <div class="modal-body">
 
+
+                        <div class="container">
+
+                            <div class="row">
+
+                                <div class="col">
+                                    You are about to permanently delete a listing. Please confirm you wish to delete this listing by entering the word "DELETE" in the box below
+                                </div>
+                            </div>
+
+                            <form id=confirm_delete_form action="#">
+
+                                <div class="row justify-content-end">
+
+                                    <div class="col-12">
+
+                                        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label" id="type_delete_holder">
+                                            <input class="mdl-textfield__input" type="text" pattern="DELETE" id="type_delete">
+                                            <span class="mdl-textfield__error">Please enter "DELETE"</span>
+                                        </div>
+                                    </div>
+
+
+                                    <div class="row justify-content-end">
+
+
+
+                                        <div class="col-12 order-last" style="margin-top: 20px;">
+                                            <button type="button" class="btn btn-primary" data-dismiss="modal">Cancel</button>
+                                            <button type="button" class="btn btn-secondary" id="delete_confirm"> Delete </button>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+
+                        </div>
+                    </div>
+
+
+                </div>
+            </div>
+
+
+        </div>
 
     </main>
     <!-- Placed at the end of the document so the pages load faster -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-    <script type="text/javascript" src="jquery.leanModal.min.js"></script>
 
     <script>
         $(document).ready(function() {
 
+            var keytoDelete;
+            var userID;
             var loggedIn = false;
             // Initialize Firebase
             var config = {
@@ -279,8 +339,11 @@
                 if (user) {
                     //user is logged in
                     loggedIn = true;
-                    const userID = firebase.auth().currentUser.uid;
-                    generateMyListings(userID, addLeanModals);
+                    userID = firebase.auth().currentUser.uid;
+                    generateMyListings(userID);
+                    $('#loading_overlay').css("display", "none");
+                    $('.container').removeClass('hidden');
+
 
 
                 } else {
@@ -296,16 +359,61 @@
 
 
 
+            $('#update-edit').on('click', () => {
+
+                var elements = document.getElementById("message-form").elements;
+
+                // There are only 3 elements within this specific form
+                updateListing(elements[0].value, elements[1].value, elements[2].value, userID);
+            });
+
+            $('#content').on('click', 'button', function() {
 
 
+                var classNames = $(this).attr("class").toString().split(' ');
 
-            /** This function generates existing listings that a user created,
-            if no listings exist it will create a message letting the user know to create some listings 
-            Return type = 1 if it found listings and Return Type = 0 if No listings were found 
-            **/
+                $.each(classNames, function(i, className) {
 
-            function generateMyListings(myUserID, callback) {
+                    if ((className).startsWith("-L")) {
+                        keytoDelete = className;
+                        console.log(keytoDelete);
+                        // Not sure how scalable this is but currently all our listing keys start with -L
+                    }
+                });
 
+
+            });
+
+            $('.modal-content').on('click', '#delete_confirm', function() {
+
+                var regex = new RegExp("DELETE");
+
+
+                if ($('#type_delete').val().match(regex)) {
+
+                    $('#confirm_delete').modal('toggle')
+                    $('#confirm_delete_form').trigger('reset');
+                    if (keytoDelete != undefined) {
+
+                        var query = firebase.database().ref('/ListingsTest');
+                        query.child(keytoDelete).remove();
+                        console.log("deleted");
+                    }
+
+                } else {
+
+                    $('#type_delete_holder ').addClass("is-invalid");
+
+                }
+                console.log(this); //this refers to the element this event handler is binded to 
+            });
+
+            function generateMyListings(myUserID) {
+
+                /** This function generates existing listings that a user created,
+                if no listings exist it will create a message letting the user know to create some listings 
+                Return type = 1 if it found listings and Return Type = 0 if No listings were found 
+                **/
                 var foundListings = 0;
                 var query = firebase.database().ref('/ListingsTest');
 
@@ -313,20 +421,23 @@
                     snapshot.forEach(function(childSnapshot) {
 
                         if (childSnapshot.child('Account').val() == myUserID) {
-
-                            let tempContainer = $("<div id = '" + childSnapshot.child('key').val()+ "' </div>");
-                            let tempRow1 = $('<div class = "row"> </div>')
+                            console.log(childSnapshot.child('key').val());
+                            let tempContainer = $("<div class = 'edit-container'> </div>");
+                            let tempRow1 = $('<div class = "row "> </div>')
                             let tempDiv = $('<div class= "col-6"> </div>');
                             let tempRow2 = $('<div class = "row"> </div>');
-                            let tempDiv3 = $('<div class = "col-4"> </div>');
-                            let tempDiv4 = $('<div class = "col-4"> </div>');
-                            let tempButton = $("<div class = 'col-4'> <a href= '#content_edit' class='mdl-button mdl-js-button mdl-button--raised' rel='leanModal'  data-upgraded = ',MaterialButton'>EDIT</a></div>");
+                            let tempDiv3 = $('<div class = "col-3"> </div>');
+                            let tempDiv4 = $('<div class = "col-3"> </div>');
+                            let tempButton = $("<div class = 'edit-button'> <button type= 'button' class='mdl-button mdl-js-button mdl-button--raised " + childSnapshot.child('key').val() + "' data-toggle = 'modal' data-target = '#content_edit'>EDIT</a></div>");
+
+                            let tempButton2 = $("<div class = 'delete-button " + childSnapshot.child('key').val() + "'><button type = 'button' class='mdl-button mdl-js-button mdl-button--raised " + childSnapshot.child('key').val() + "' data-toggle='modal' data-target='#confirm_delete'>DELETE</a></div>");
+
 
                             tempDiv.text('Address: ' + childSnapshot.child('Address').val() + ', ' + childSnapshot.child('City').val());
                             tempDiv3.text('Width: ' + childSnapshot.child('Width').val());
                             tempDiv4.text('Height: ' + childSnapshot.child('Height').val());
 
-                            tempRow2.append(tempDiv3).append(tempDiv4).append(tempButton);
+                            tempRow2.append(tempDiv3).append(tempDiv4).append(tempButton).append(tempButton2);
                             tempRow1.append(tempDiv);
                             tempContainer.append(tempRow1).append(tempRow2);
                             $('#content').append(tempContainer);
@@ -351,7 +462,6 @@
 
                         let tempDiv = $('<div> Your Existing Listings </div>');
                         $('#first_row').append(tempDiv);
-                        callback();
                         return 1;
                     }
 
@@ -361,8 +471,7 @@
 
             }
 
-
-            function addLeanModals() {
+            /**function addLeanModals() {
 
 
                 $("a[rel*=leanModal]").leanModal({
@@ -370,6 +479,21 @@
                     overlay: 0.4,
                     closeButton: ".modal_close"
                 });
+
+            }**/
+
+            function updateListing(address, width, height, key) {
+
+                if (key === undefined) {
+                    console.log("No user is logged in");
+                } else {
+                    console.log(address);
+                    console.log(width);
+                    console.log(height);
+                    console.log(key);
+
+                }
+
             }
 
 
@@ -414,10 +538,10 @@
 
             // When the user selects an address from the drop-down, populate the
             // address fields in the form.
-            autocomplete.addListener('place_changed', fillInAddress);
+            //autocomplete.addListener('place_changed', fillinAddress);
         }
 
-        function fillInAddress() {
+        /**function fillInAddress() {
             // Get the place details from the autocomplete object.
             var place = autocomplete.getPlace();
 
@@ -435,7 +559,7 @@
                     document.getElementById(addressType).value = val;
                 }
             }
-        }
+        }**/
 
 
         function geolocate() {
