@@ -16,7 +16,7 @@ $(document).ready(function() {
     console.log(firebase);
 
     var db = firebase.database();
-    var query = db.ref('/ListingsTest/').orderByChild('City').equalTo('Burnaby');
+    var query = db.ref('/ListingsTest/').orderByChild('City').equalTo(localStorage.getItem('City'));
    // var keys = db.ref('/ListingsTest/' + userUID);
 
 
