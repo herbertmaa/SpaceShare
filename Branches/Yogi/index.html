@@ -14,28 +14,34 @@
     <!-- Bootstrap core CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 
+
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
 
+
     <!-- Place your stylesheet here-->
-    <link href="index.css" rel="stylesheet">
+    <link href="index.css" rel="stylesheet" type="text/css">
+
+
 
     <!-- Firebase -->
+
     <script src="https://www.gstatic.com/firebasejs/5.8.4/firebase.js"></script>
+
 
     <!-- Firebase login UI -->
     <script src="https://cdn.firebase.com/libs/firebaseui/3.5.2/firebaseui.js"></script>
+
 
     <!-- Firebase css -->
     <link type="text/css" rel="stylesheet" href="https://cdn.firebase.com/libs/firebaseui/3.5.2/firebaseui.css" />
 
     <!-- Load jQuery -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-
-    <!-- load Algolia-->
-    <script src="https://cdn.jsdelivr.net/algoliasearch/3/algoliasearch.min.js"></script>
 </head>
+
 <body>
+
 
     <!--Navigation bar -->
     <nav class="navbar navbar-expand-lg navbar-light bg-light" style="height:85px;">
@@ -90,7 +96,7 @@
 
 
     </div>
-    <main  class="container">
+    <main role="main" class="container">
 
         <div class="row top-buffer">
         </div>
@@ -134,7 +140,7 @@
 
                 <div class="form-group col-md-3">
 
-                    <button type="submit" class="btn btn-primary">Submit</button>
+                    <input type="button" class="btn btn-primary" id = "submit" value="Submit" />
                 </div>
             </div>
 
@@ -150,15 +156,15 @@
         <!-- Use of Google Places API to sanitize data -->
 
 
-        
-            
-                <input class="field" id="street_number" />
-                <input class="field" id="route" />
-                <input class="field" id="locality" />
-                <input  class="field" id="administrative_area_level_1" />
-            
+        <table id="address">
+            <tr>
+                <td class="slimField"><input class="field" id="street_number" /></td>
+                <td class="wideField" colspan="2"><input class="field" id="route" /></td>
+                <td class="wideField" colspan="3"><input class="field" id="locality" /></td>
+                <td class="slimField"><input  class="field" id="administrative_area_level_1" /></td>
+            </tr>
 
-
+        </table>
 
 
 
@@ -167,7 +173,7 @@
     <!-- Placed at the end of the document so the pages load faster -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-    <script type="text/javascript" src="jquery.leanModal.min.js"></script>
+    
 
 
     <script>
@@ -178,109 +184,16 @@
             }).catch(function(error) {
             // An error happened.
             });
+            location.href = "succlogout.html"
             }
     </script>
     
-    <script>
-        $(document).ready(function() {
-
-            // Initialize Firebase
-            var config = {
-                apiKey: "AIzaSyCE2lSLszDUyZEyY--btpdoYs7Ln6PHAXY",
-                authDomain: "spaceshare-b68f7.firebaseapp.com",
-                databaseURL: "https://spaceshare-b68f7.firebaseio.com",
-                projectId: "spaceshare-b68f7",
-                storageBucket: "",
-                messagingSenderId: "555750963802"
-            };
+    <script src = 'firebase.js'></script>
+    <script src = 'autoComplete.js'></script>
+    <script src = 'searchInit.js'></script>
 
 
-            firebase.initializeApp(config);
-
-            // Initialize the FirebaseUI Widget using Firebase.
-            var ui = new firebaseui.auth.AuthUI(firebase.auth());
-
-            //Firebase default configuration
-            var uiConfig = {
-                callbacks: {
-                    signInSuccessWithAuthResult: function(authResult, redirectUrl) {
-                        // User successfully signed in.
-                        // Return type determines whether we continue the redirect automatically
-                        // or whether we leave that to developer to handle.
-                        return true;
-                    },
-                    uiShown: function() {
-                        // The widget is rendered.
-                        // Hide the loader.
-                        document.getElementById('loader').style.display = 'none';
-                    }
-                },
-                // Will use popup for IDP Providers sign-in flow instead of the default, redirect.
-                signInFlow: 'popup',
-                signInSuccessUrl: 'index.html',
-                signInOptions: [
-                    // Leave the lines as is for the providers you want to offer your users.
-                    //firebase.auth.GoogleAuthProvider.PROVIDER_ID,
-                    //firebase.auth.FacebookAuthProvider.PROVIDER_ID,
-                    //firebase.auth.TwitterAuthProvider.PROVIDER_ID,
-                    //firebase.auth.GithubAuthProvider.PROVIDER_ID,
-                    firebase.auth.EmailAuthProvider.PROVIDER_ID,
-                    //firebase.auth.PhoneAuthProvider.PROVIDER_ID
-                ],
-                // Terms of service url.
-                tosUrl: 'index.html',
-                // Privacy policy url.
-                privacyPolicyUrl: 'index.html'
-
-
-
-
-            };
-
-
-
-            // Load the login container
-            ui.start('#firebaseui-auth-container', uiConfig); // load our login
-
-
-            $(".modal_trigger").leanModal();
-
-            // This tells us if the user has logged in. 
-            firebase.auth().onAuthStateChanged(function(user) {
-                if (user) {
-                    //user is logged in
-                    console.log("user is logged in");
-                    $("#signup").hide();
-                    $("#signup2").hide();
-                    $("#login").hide();
-                    $("#login2").hide();
-                    var navb = document.getElementsByClassName("navbar-nav");
-                    navb[0].style.visibility = "visible";
-                    } else {
-                    console.log("not logged in");
-                    $("#myprofile").hide();
-                    $("#myprofile2").hide();
-                    $("#mylistings").hide();
-                    $("#mylistings2").hide();
-                    $("#logout").hide();
-                    $("#logout2").hide();
-                    $("#signup").show();
-                    $("#signup2").show();
-                    $("#login").show();
-                    $("#login2").show();
-                    
-                        
-                    var navb = document.getElementsByClassName("navbar-nav");
-                    navb[0].style.visibility = "visible";
-                }
-            });
-        });
-    </script>
-    <script src ="googleAutoComplete.js"></script>
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDVs8DbkrG8d9ZUUCw9zrv2uZ-RL9sLbCQ&libraries=places&callback=initAutocomplete" async defer></script>
-    <script src="index.js"></script> 
-    
-
 </body>
 
 </html>

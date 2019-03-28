@@ -19,14 +19,13 @@ $(document).ready(function() {
     var query = db.ref('/ListingsTest/');
    // var keys = db.ref('/ListingsTest/' + userUID);
 
-    console.log(query);
 
     query.on('value', snapshot => {
         console.log(snapshot.val());
     });
     /* Iterates through the ListingsTest object and then creates as many divs 
     as there are listings*/
-    query.on('value', function(snapshot) {
+    /*query.on('value', function(snapshot) {
         snapshot.forEach(function (childSnapshot) {
             var cityInput = childSnapshot.val().City;
             var addressInput = childSnapshot.val().Address;
@@ -65,6 +64,8 @@ $(document).ready(function() {
 
             listingContent.append(province, city, address, length, width, height);
     });
+    
 });
+*/
 });
 
