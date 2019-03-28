@@ -16,16 +16,13 @@ $(document).ready(function() {
     console.log(firebase);
 
     var db = firebase.database();
-    var query = db.ref('/ListingsTest/');
+    var query = db.ref('/ListingsTest/').orderByChild('City').equalTo('Burnaby');
    // var keys = db.ref('/ListingsTest/' + userUID);
 
 
-    query.on('value', snapshot => {
-        console.log(snapshot.val());
-    });
     /* Iterates through the ListingsTest object and then creates as many divs 
     as there are listings*/
-    /*query.on('value', function(snapshot) {
+    query.on('value', function(snapshot) {
         snapshot.forEach(function (childSnapshot) {
             var cityInput = childSnapshot.val().City;
             var addressInput = childSnapshot.val().Address;
@@ -66,6 +63,5 @@ $(document).ready(function() {
     });
     
 });
-*/
 });
 

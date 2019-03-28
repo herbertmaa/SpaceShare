@@ -1,6 +1,8 @@
+var city = $('#locality').val();
+var country = $('#administrative_area_level_1').val();
 $('#submit').on('click', event => {
-    console.log($('#administrative_area_level_1').val());
-    console.log($('#locality').val());
+    console.log(country);
+    console.log(city);
     if (!(($('#administrative_area_level_1').val() === "") && ($('#locality').val() === "")))  {
         document.location.href = '/Users/yogeshverma/Dropbox/COMP1930/Git/SpaceShare/Branches/Yogi/search.html';
     } else {
