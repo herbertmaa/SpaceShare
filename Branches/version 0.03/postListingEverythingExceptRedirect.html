@@ -349,9 +349,11 @@
                     const height = $('#make_height').val();
                     console.log(address, city, province, length, width, height);
                     createPost(address, city, province, length, width, height);
+                    handleComplete();
+                    }
                     // redirect();
                     // window.location.replace("succpost.html");
-                    }
+                    // }
                     /**
                     if (user == null){
                         event.preventDefault();
@@ -364,6 +366,15 @@
                     // location.href = "succpost.html";
                 })
             });
+            
+            function handleComplete(){
+                window.setTimeout(function(){
+
+                // Move to a new location or you can do something else
+                window.location.href = "succpost.html";
+
+                }, 500);
+            };
             
             function redirect() {
                 window.location.replace("succpost.html");
