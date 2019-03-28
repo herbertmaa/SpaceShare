@@ -19,7 +19,7 @@
 
 
     <!-- Place your stylesheet here-->
-    <link href="edit_test.css" rel="stylesheet" type="text/css">
+    <link href="mylistings.css" rel="stylesheet" type="text/css">
 
 
 
@@ -306,6 +306,10 @@
                         document.getElementById('loader').style.display = 'none';
                     }
                 },
+
+
+                credentialHelper: firebaseui.auth.CredentialHelper.NONE,
+
                 // Will use popup for IDP Providers sign-in flow instead of the default, redirect.
                 signInFlow: 'popup',
                 signInSuccessUrl: 'index.html',
@@ -343,7 +347,7 @@
                     generateMyListings(userID);
                     $('#loading_overlay').css("display", "none");
                     $('.container').removeClass('hidden');
-                    firebase.auth.Auth.Persistence.LOCAL	
+
 
 
                 } else {

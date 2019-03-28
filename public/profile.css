@@ -29,13 +29,7 @@ main {
     /** pushes the main container to the left  (left as 0 for now) **/
 }
 
-#address {
-    visibility: hidden;
-}
 
-.navbar-nav {
-    visibility: hidden;
-}
 
 #lean_overlay {
     position: fixed;
@@ -51,13 +45,43 @@ main {
 
 #user_login {
 
-    display:inline;
+    display: inline;
     position: absolute;
     margin-left: auto;
     margin-right: auto;
     left: 0;
     right: 0;
-    display:none;
-    width:300px;
+    display: none;
+    width: 300px;
 
+}
+
+
+.prfl-user-icon {
+
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    display: inline-block;
+    position: relative;
+    float: left;
+    background-color: #F8F8F8;
+    top: 0px;
+    background-size: cover;
+    background-image: url(./img/silhouette.jpg);
+    margin-bottom: 25px;
+    background-position: center;
+}
+
+
+.opt-btn {
+    color: #1A1A1A;
+    border: 1px solid #EBEBEB;
+    padding: 3px 5px;
+    width: 150px;
+    border-radius: 3px;
+    font-size: .9em;
+    text-align: center;
+    cursor: pointer;
+    display: inline-block;
 }

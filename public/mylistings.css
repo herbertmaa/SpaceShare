@@ -29,35 +29,41 @@ main {
     /** pushes the main container to the left  (left as 0 for now) **/
 }
 
-#address {
-    visibility: hidden;
-}
 
-.navbar-nav {
-    visibility: hidden;
-}
 
-#lean_overlay {
-    position: fixed;
-    z-index: 100;
-    top: 0px;
-    left: 0px;
-    height: 100%;
-    width: 100%;
-    background: #000;
-    display: none;
+
+.pac-container {
+    z-index: 1500;
+
 }
 
 
-#user_login {
 
-    display:inline;
+#loading_overlay{
+
+    width: 100px;
+    height: 100px;
     position: absolute;
-    margin-left: auto;
-    margin-right: auto;
+    top: 0;
+    bottom: 0;
     left: 0;
     right: 0;
-    display:none;
-    width:300px;
+    margin: auto;
+    transition: all 0.5s ease;
 
 }
+
+.hidden {
+
+    visibility: hidden;
+    opacity: 0;
+    transition: all 0.5s ease;
+
+}
+
+.firebaseui-container{
+    
+    box-shadow:none !important;
+    
+}
+

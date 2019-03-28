@@ -58,19 +58,19 @@
                     <a class="nav-link" href="faq.html">Help</a>
                 </li>
                 <li class="nav-item" id="signup2">
-                    <a id="signup" class="nav-link modal_trigger" href="#user_login"> Sign up</a>
+                    <a id ="signup" class="nav-link modal_trigger" href="#user_login"> Sign up</a>
                 </li>
                 <li class="nav-item" id="login2">
-                    <a id="login" class="nav-link modal_trigger" href="#user_login">Login</a>
+                    <a id ="login" class="nav-link modal_trigger" href="#user_login">Login</a>
                 </li>
                 <li class="nav-item" id="mylistings2">
-                    <a id="mylistings" class="nav-link" href="mylistings.html">My Listings</a>
+                    <a id ="mylistings" class="nav-link" href="mylistings.html">My Listings</a>
                 </li>
                 <li class="nav-item" id="myprofile2">
-                    <a id="myprofile" class="nav-link" href="profile.html">My Profile</a>
+                    <a id ="myprofile" class="nav-link" href="profile.html">My Profile</a>
                 </li>
                 <li class="nav-item" id="logout2">
-                    <a id="logout" class="nav-link" onclick="logout()">Logout</a>
+                    <a id ="logout" class="nav-link" onclick="logout()">Logout</a>
                 </li>
             </ul>
         </div>
@@ -105,7 +105,7 @@
 
 
             <h1 class="h3 mb-3 font-weight-normal"> <i class="fab fa-studiovinari fa-2x"></i> </h1>
-            <h1 class="h3 mb-3 font-weight-normal">Share your space with friends.</h1>
+            <h1 class="h3 mb-3 font-weight-normal">Listing Posted!</h1>
 
         </div>
 
@@ -113,7 +113,7 @@
 
             <div class="form-row">
 
-
+                
                 <div class="form-group col-md-6">
                     <input type="text" class="form-control" id="autocomplete" placeholder=" Where are you from?" onFocus="geolocate()">
                 </div>
@@ -149,10 +149,10 @@
 
 
 
-
-
-        <!-- Hidden from the user, this will be updated (leave for now for testing purposes) -->
-
+        
+        
+        <!-- Hidden from the user, this will be updated (leave for now for testing purposes) --> 
+        
         <!-- Use of Google Places API to sanitize data -->
 
 
@@ -161,7 +161,7 @@
                 <td class="slimField"><input class="field" id="street_number" /></td>
                 <td class="wideField" colspan="2"><input class="field" id="route" /></td>
                 <td class="wideField" colspan="3"><input class="field" id="locality" /></td>
-                <td class="slimField"><input class="field" id="administrative_area_level_1" /></td>
+                <td class="slimField"><input  class="field" id="administrative_area_level_1" /></td>
             </tr>
 
         </table>
@@ -177,18 +177,17 @@
 
 
     <script>
-        function logout() {
+        function logout(){
             console.log("got here");
             firebase.auth().signOut().then(function() {
-                // Sign-out successful.
+            // Sign-out successful.
             }).catch(function(error) {
-                // An error happened.
+            // An error happened.
             });
             location.href = "succlogout.html"
-        }
-
+            }
     </script>
-
+    
     <script>
         $(document).ready(function() {
 
@@ -223,10 +222,6 @@
                         document.getElementById('loader').style.display = 'none';
                     }
                 },
-
-
-                credentialHelper: firebaseui.auth.CredentialHelper.NONE,
-
                 // Will use popup for IDP Providers sign-in flow instead of the default, redirect.
                 signInFlow: 'popup',
                 signInSuccessUrl: 'index.html',
@@ -268,7 +263,7 @@
                     $("#login2").hide();
                     var navb = document.getElementsByClassName("navbar-nav");
                     navb[0].style.visibility = "visible";
-                } else {
+                    } else {
                     console.log("not logged in");
                     $("#myprofile").hide();
                     $("#myprofile2").hide();
@@ -280,8 +275,8 @@
                     $("#signup2").show();
                     $("#login").show();
                     $("#login2").show();
-
-
+                    
+                        
                     var navb = document.getElementsByClassName("navbar-nav");
                     navb[0].style.visibility = "visible";
                 }
@@ -290,7 +285,6 @@
 
 
         });
-
     </script>
 
 
@@ -370,7 +364,6 @@
                 });
             }
         }
-
     </script>
 
 
