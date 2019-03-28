@@ -60,12 +60,28 @@
                 <li class="nav-item">
                     <a class="nav-link" href="faq.html">Help</a>
                 </li>
+                <!-- 
                 <li class="nav-item" id="signup2">
                     <a id ="signup" class="nav-link modal_trigger" href="#user_login"> Sign up</a>
                 </li>
-                <li class="nav-item" id="login2">
+                
+               <li class="nav-item" id="login2">
                     <a id ="login" class="nav-link modal_trigger" href="#user_login">Login</a>
                 </li>
+            -->
+                
+                
+                <li class="nav-item" id="signup2">
+                    <a class="nav-link" data-toggle="modal" href="#user_login" id="signup"> Sign up</a>
+                </li>
+                <li class="nav-item" id="login2">
+                    <a class="nav-link" id="login" data-toggle="modal" href="#user_login">Login</a>
+                </li>
+                <!--
+                <li class="nav-item" id="login2">
+                    <a id="login" class="nav-link" data-toggle="modal" href="#user_login"> Login</a>
+                </li>
+-->
                 <li class="nav-item" id="mylistings2">
                     <a id ="mylistings" class="nav-link" href="mylistings.html">My Listings</a>
                 </li>
@@ -83,7 +99,7 @@
     <!-- Main Content -->
 
 
-    <div class="container">
+    <!-- <div class="container">
 
         <div class="form-row " id="user_login">
 
@@ -99,6 +115,31 @@
 
 
     </div>
+    -->
+    
+    
+    
+
+        <div class="modal fade" id="user_login" tabindex="-1" role="dialog">
+
+            <div class="modal-dialog modal-dialog-centered modal-sm" role="document">
+
+                <div class="modal-content" style>
+
+                    <div class="modal-body">
+                        <div id="firebaseui-auth-container"></div>
+
+                        <div id="loader">Loading...</div>
+                    </div>
+
+                </div>
+
+
+
+            </div>
+        </div>
+    
+    
     <main role="main" class="container">
 
         <div class="row top-buffer">
@@ -204,13 +245,11 @@
 
         </table>
 
-
-
     </main>
     <!-- Placed at the end of the document so the pages load faster -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-    <script type="text/javascript" src="jquery.leanModal.min.js"></script>
+    <!-- <script type="text/javascript" src="jquery.leanModal.min.js"></script> -->
 
     <script>
         function logout(){
@@ -279,6 +318,7 @@
                 var updates = {};
                 updates['ListingsTest/' + newPostKey] = postData;
                 firebase.database().ref().update(updates);
+                
             }
 
 
@@ -287,11 +327,18 @@
                 A jQuery function that grabs information from a form and assigns it to constants
                 and then calls the createPosts function 
             */
+            
             $(function postForm() {
 
                 /** firebase.initializeApp(config); **/
                 $(".js-form").on('submit', event => {
                     var user = firebase.auth().currentUser;
+                    if (user == null){
+                        event.preventDefault();
+                        $('#user_login').modal('toggle');
+                        // window.alert("Please login");
+                        // location.href("#user_login"); 
+                    }
                     if (user != null) {
                     event.preventDefault();
                     const address = $('#street_number').val().concat(" ",$('#route').val());
@@ -302,12 +349,26 @@
                     const height = $('#make_height').val();
                     console.log(address, city, province, length, width, height);
                     createPost(address, city, province, length, width, height);
+                    // redirect();
                     // window.location.replace("succpost.html");
                     }
+                    /**
+                    if (user == null){
+                        event.preventDefault();
+                        $('#user_login').modal('toggle')
+                        // window.alert("Please login");
+                        // location.href("#user_login"); 
+                    }
+                    **/
                     // window.location.replace("succpost.html");
                     // location.href = "succpost.html";
                 })
             });
+            
+            function redirect() {
+                window.location.replace("succpost.html");
+                return false;
+            }
 
 
 
@@ -357,7 +418,7 @@
             ui.start('#firebaseui-auth-container', uiConfig); // load our login
 
 
-            $(".modal_trigger").leanModal();
+            // $(".modal_trigger").leanModal();
             
             // This tells us if the user has logged in. 
             firebase.auth().onAuthStateChanged(function(user) {
