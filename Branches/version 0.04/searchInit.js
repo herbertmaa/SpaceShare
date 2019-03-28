@@ -6,7 +6,7 @@ $('#submit').on('click', event => {
     console.log(country);
     console.log(city);
    if (!(($('#administrative_area_level_1').val() === "") && ($('#locality').val() === "")))  {
-        document.location.href = '/Users/yogeshverma/Dropbox/COMP1930/Git/SpaceShare/Branches/Yogi/search.html';
+        document.location.href = '/Users/yogeshverma/Dropbox/COMP1930/Git/SpaceShare/Branches/version 0.04/search.html';
     } else {
         window.alert("Enter a valid city or country");
     }
