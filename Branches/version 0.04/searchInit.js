@@ -1,10 +1,12 @@
 
 $('#submit').on('click', event => {
-  var city = $('#locality').val();
-  var country = $('#administrative_area_level_1').val();
-  localStorage.setItem('City', $('#locality').val());
-    console.log(country);
-    console.log(city);
+  var address = $('#autocomplete').val();
+    
+    address = address.replace(/,/g,"");
+    var addressArray = address.split(" ");
+    console.log(addressArray);
+    localStorage.setItem('City', addressArray[3]);
+  localStorage.setItem('Address', address);
    if (!(($('#administrative_area_level_1').val() === "") && ($('#locality').val() === "")))  {
         document.location.href = "search.html";
     } else {
@@ -12,3 +14,6 @@ $('#submit').on('click', event => {
     }
     
 });
+
+
+
