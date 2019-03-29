@@ -71,12 +71,7 @@
         </div>
     </nav>
 
-
-
-
-
     <!-- Main Content -->
-
 
     <div class="container hidden">
 
@@ -106,16 +101,11 @@
         <div class="row top-buffer">
         </div>
 
-
-
         <div class="container" id="content">
 
 
 
         </div>
-
-
-
 
         <!-- Padding between the header and the content -->
         <div class="row">
@@ -128,8 +118,6 @@
             </div>
 
         </div>
-
-
 
         <!-- The edit content card -->
         <div class="modal fade" id="content_edit" tabindex="-1" role="dialog">
@@ -177,13 +165,22 @@
                                             <span class="mdl-textfield__error">Input is not a number!</span>
                                         </div>
                                     </div>
+
+
+                                    <div class="col-4">
+                                        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                                            <input class="mdl-textfield__input" type="text" pattern="-?[0-9]*(\.[0-9]+)?" id="length">
+                                            <label class="mdl-textfield__label" for="height">Length</label>
+                                            <span class="mdl-textfield__error">Input is not a number!</span>
+                                        </div>
+                                    </div>
                                 </div>
 
 
                                 <div class="row">
 
                                     <div class="col-12">
-                                        <button type="button" class="btn btn-primary btn-block" data-dismiss="modal">Update</button>
+                                        <button type="button" id="update-edit" class="btn btn-primary btn-block" data-dismiss="modal">Update</button>
 
                                     </div>
                                 </div>
@@ -264,7 +261,13 @@
 
         </div>
 
+
+
     </main>
+
+
+
+
     <!-- Placed at the end of the document so the pages load faster -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
@@ -272,7 +275,7 @@
     <script>
         $(document).ready(function() {
 
-            var keytoDelete;
+            var keyToChange;
             var userID;
             var loggedIn = false;
             // Initialize Firebase
@@ -284,7 +287,6 @@
                 storageBucket: "",
                 messagingSenderId: "555750963802"
             };
-
 
             firebase.initializeApp(config);
 
@@ -361,26 +363,29 @@
             });
 
 
-
-
             $('#update-edit').on('click', () => {
 
                 var elements = document.getElementById("message-form").elements;
 
-                // There are only 3 elements within this specific form
-                updateListing(elements[0].value, elements[1].value, elements[2].value, userID);
+                var address = elements[0].value;
+                var addressArray = address.split(",");
+
+
+                updateListing(addressArray[0], addressArray[1], addressArray[2], elements[1].value, elements[2].value, elements[3].value, keyToChange);
+
+
             });
+
 
             $('#content').on('click', 'button', function() {
 
-
+                console.log("content called");
                 var classNames = $(this).attr("class").toString().split(' ');
 
                 $.each(classNames, function(i, className) {
 
                     if ((className).startsWith("-L")) {
-                        keytoDelete = className;
-                        console.log(keytoDelete);
+                        keyToChange = className;
                         // Not sure how scalable this is but currently all our listing keys start with -L
                     }
                 });
@@ -397,10 +402,10 @@
 
                     $('#confirm_delete').modal('toggle')
                     $('#confirm_delete_form').trigger('reset');
-                    if (keytoDelete != undefined) {
+                    if (keyToChange != undefined) {
 
                         var query = firebase.database().ref('/ListingsTest');
-                        query.child(keytoDelete).remove();
+                        query.child(keyToChange).remove();
                         console.log("deleted");
                     }
 
@@ -409,7 +414,6 @@
                     $('#type_delete_holder ').addClass("is-invalid");
 
                 }
-                console.log(this); //this refers to the element this event handler is binded to 
             });
 
             function generateMyListings(myUserID) {
@@ -475,32 +479,28 @@
 
             }
 
-            /**function addLeanModals() {
+            function updateListing(address, city, province, width, height, length, myKey) {
 
 
-                $("a[rel*=leanModal]").leanModal({
-                    top: 200,
-                    overlay: 0.4,
-                    closeButton: ".modal_close"
-                });
 
-            }**/
 
-            function updateListing(address, width, height, key) {
+                if (myKey != undefined) {
 
-                if (key === undefined) {
-                    console.log("No user is logged in");
+                    var query = firebase.database().ref('/ListingsTest/' + myKey);
+
+
+                    query.child('Address').set(address);
+                    query.child('City').set(city);
+                    query.child('Province').set(province);
+                    query.child('Width').set(width);
+                    query.child('Height').set(height);
+                    query.child('Length').set(length);
+
+
                 } else {
-                    console.log(address);
-                    console.log(width);
-                    console.log(height);
-                    console.log(key);
-
+                    console.log("Error finding key");
                 }
-
             }
-
-
         });
 
     </script>

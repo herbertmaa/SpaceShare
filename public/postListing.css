@@ -36,6 +36,7 @@ main {
     visibility: hidden;
 }
 
+/**
 #lean_overlay {
     position: fixed;
     z-index: 100;
@@ -46,8 +47,23 @@ main {
     background: #000;
     display: none;
 }
+**/
 
+.hidden {
 
+    visibility: hidden;
+    opacity: 0;
+    transition: all 0.5s ease;
+
+}
+
+.firebaseui-container{
+    
+    box-shadow:none !important;
+    
+}
+
+/**
 #user_login {
 
     display:inline;
@@ -60,3 +76,4 @@ main {
     width:300px;
 
 }
+**/

@@ -69,8 +69,8 @@
                     <a id ="login" class="nav-link modal_trigger" href="#user_login">Login</a>
                 </li>
             -->
-                
-                
+
+
                 <li class="nav-item" id="signup2">
                     <a class="nav-link" data-toggle="modal" href="#user_login" id="signup"> Sign up</a>
                 </li>
@@ -83,13 +83,13 @@
                 </li>
 -->
                 <li class="nav-item" id="mylistings2">
-                    <a id ="mylistings" class="nav-link" href="mylistings.html">My Listings</a>
+                    <a id="mylistings" class="nav-link" href="mylistings.html">My Listings</a>
                 </li>
                 <li class="nav-item" id="myprofile2">
-                    <a id ="myprofile" class="nav-link" href="profile.html">My Profile</a>
+                    <a id="myprofile" class="nav-link" href="profile.html">My Profile</a>
                 </li>
                 <li class="nav-item" id="logout2">
-                    <a id ="logout" class="nav-link" onclick="logout()">Logout</a>
+                    <a id="logout" class="nav-link" onclick="logout()">Logout</a>
                 </li>
             </ul>
         </div>
@@ -116,30 +116,30 @@
 
     </div>
     -->
-    
-    
-    
 
-        <div class="modal fade" id="user_login" tabindex="-1" role="dialog">
 
-            <div class="modal-dialog modal-dialog-centered modal-sm" role="document">
 
-                <div class="modal-content" style>
 
-                    <div class="modal-body">
-                        <div id="firebaseui-auth-container"></div>
+    <div class="modal fade" id="user_login" tabindex="-1" role="dialog">
 
-                        <div id="loader">Loading...</div>
-                    </div>
+        <div class="modal-dialog modal-dialog-centered modal-sm" role="document">
 
+            <div class="modal-content" style>
+
+                <div class="modal-body">
+                    <div id="firebaseui-auth-container"></div>
+
+                    <div id="loader">Loading...</div>
                 </div>
 
-
-
             </div>
+
+
+
         </div>
-    
-    
+    </div>
+
+
     <main role="main" class="container">
 
         <div class="row top-buffer">
@@ -252,15 +252,16 @@
     <!-- <script type="text/javascript" src="jquery.leanModal.min.js"></script> -->
 
     <script>
-        function logout(){
+        function logout() {
             console.log("got here");
             firebase.auth().signOut().then(function() {
-            // Sign-out successful.
+                // Sign-out successful.
             }).catch(function(error) {
-            // An error happened.
+                // An error happened.
             });
             location.href = "succlogout.html"
-            }
+        }
+
     </script>
 
     <script>
@@ -288,7 +289,7 @@
                 let newPostKey = firebase.database().ref().push().key;
                 /** let userID = firebase.auth().currentUser.uid; **/
                 console.log(newPostKey);
-                
+
                 var user = firebase.auth().currentUser;
                 var name, email, photoUrl, uid, emailVerified;
 
@@ -297,11 +298,11 @@
                     email = user.email;
                     photoUrl = user.photoURL;
                     emailVerified = user.emailVerified;
-                    uid = user.uid;   // The user's ID, unique to the Firebase project. Do NOT use
-                                     // this value to authenticate with your backend server, if
-                                     // you have one. Use User.getToken() instead.
+                    uid = user.uid; // The user's ID, unique to the Firebase project. Do NOT use
+                    // this value to authenticate with your backend server, if
+                    // you have one. Use User.getToken() instead.
                 }
-                
+
                 // throws errors if you're not logged in
                 console.log(uid);
                 var postData = {
@@ -318,7 +319,7 @@
                 var updates = {};
                 updates['ListingsTest/' + newPostKey] = postData;
                 firebase.database().ref().update(updates);
-                
+
             }
 
 
@@ -327,29 +328,29 @@
                 A jQuery function that grabs information from a form and assigns it to constants
                 and then calls the createPosts function 
             */
-            
+
             $(function postForm() {
 
                 /** firebase.initializeApp(config); **/
                 $(".js-form").on('submit', event => {
                     var user = firebase.auth().currentUser;
-                    if (user == null){
+                    if (user == null) {
                         event.preventDefault();
                         $('#user_login').modal('toggle');
                         // window.alert("Please login");
                         // location.href("#user_login"); 
                     }
                     if (user != null) {
-                    event.preventDefault();
-                    const address = $('#street_number').val().concat(" ",$('#route').val());
-                    const city = $('#locality').val();
-                    const province = $('#administrative_area_level_1').val();
-                    const length = $('#make_length').val();
-                    const width = $('#make_width').val();
-                    const height = $('#make_height').val();
-                    console.log(address, city, province, length, width, height);
-                    createPost(address, city, province, length, width, height);
-                    handleComplete();
+                        event.preventDefault();
+                        const address = $('#street_number').val().concat(" ", $('#route').val());
+                        const city = $('#locality').val();
+                        const province = $('#administrative_area_level_1').val();
+                        const length = $('#make_length').val();
+                        const width = $('#make_width').val();
+                        const height = $('#make_height').val();
+                        console.log(address, city, province, length, width, height);
+                        createPost(address, city, province, length, width, height);
+                        handleComplete();
                     }
                     // redirect();
                     // window.location.replace("succpost.html");
@@ -366,16 +367,16 @@
                     // location.href = "succpost.html";
                 })
             });
-            
-            function handleComplete(){
-                window.setTimeout(function(){
 
-                // Move to a new location or you can do something else
-                window.location.href = "succpost.html";
+            function handleComplete() {
+                window.setTimeout(function() {
+
+                    // Move to a new location or you can do something else
+                    window.location.href = "succpost.html";
 
                 }, 500);
             };
-            
+
             function redirect() {
                 window.location.replace("succpost.html");
                 return false;
@@ -401,15 +402,19 @@
                         document.getElementById('loader').style.display = 'none';
                     }
                 },
+
+
+                credentialHelper: firebaseui.auth.CredentialHelper.NONE,
+
                 // Will use popup for IDP Providers sign-in flow instead of the default, redirect.
                 signInFlow: 'popup',
                 signInSuccessUrl: 'postListingEverythingExceptRedirect.html',
                 signInOptions: [
                     // Leave the lines as is for the providers you want to offer your users.
-                   // firebase.auth.GoogleAuthProvider.PROVIDER_ID,
-                   // firebase.auth.FacebookAuthProvider.PROVIDER_ID,
-                   // firebase.auth.TwitterAuthProvider.PROVIDER_ID,
-                   // firebase.auth.GithubAuthProvider.PROVIDER_ID,
+                    // firebase.auth.GoogleAuthProvider.PROVIDER_ID,
+                    // firebase.auth.FacebookAuthProvider.PROVIDER_ID,
+                    // firebase.auth.TwitterAuthProvider.PROVIDER_ID,
+                    // firebase.auth.GithubAuthProvider.PROVIDER_ID,
                     firebase.auth.EmailAuthProvider.PROVIDER_ID,
                     // firebase.auth.PhoneAuthProvider.PROVIDER_ID
                 ],
@@ -430,7 +435,7 @@
 
 
             // $(".modal_trigger").leanModal();
-            
+
             // This tells us if the user has logged in. 
             firebase.auth().onAuthStateChanged(function(user) {
                 if (user) {
@@ -442,7 +447,7 @@
                     $("#login2").hide();
                     var navb = document.getElementsByClassName("navbar-nav");
                     navb[0].style.visibility = "visible";
-                    } else {
+                } else {
                     console.log("not logged in");
                     $("#myprofile").hide();
                     $("#myprofile2").hide();
@@ -454,8 +459,8 @@
                     $("#signup2").show();
                     $("#login").show();
                     $("#login2").show();
-                    
-                        
+
+
                     var navb = document.getElementsByClassName("navbar-nav");
                     navb[0].style.visibility = "visible";
                 }
@@ -464,6 +469,7 @@
 
 
         });
+
     </script>
 
     <script>
@@ -540,6 +546,7 @@
                 });
             }
         }
+
     </script>
 
 

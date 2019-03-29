@@ -60,3 +60,15 @@ main {
     width:300px;
 
 }
+
+.ftr-btm-sec{
+    
+    
+    border-top:1px solid #dce0e0;
+}
+
+
+a:hover{
+    
+    text-decoration: none;
+}

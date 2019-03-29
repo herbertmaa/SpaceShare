@@ -58,19 +58,19 @@
                     <a class="nav-link" href="faq.html">Help</a>
                 </li>
                 <li class="nav-item" id="signup2">
-                    <a id ="signup" class="nav-link modal_trigger" href="#user_login"> Sign up</a>
+                    <a id="signup" class="nav-link modal_trigger" href="#user_login"> Sign up</a>
                 </li>
                 <li class="nav-item" id="login2">
-                    <a id ="login" class="nav-link modal_trigger" href="#user_login">Login</a>
+                    <a id="login" class="nav-link modal_trigger" href="#user_login">Login</a>
                 </li>
                 <li class="nav-item" id="mylistings2">
-                    <a id ="mylistings" class="nav-link" href="mylistings.html">My Listings</a>
+                    <a id="mylistings" class="nav-link" href="mylistings.html">My Listings</a>
                 </li>
                 <li class="nav-item" id="myprofile2">
-                    <a id ="myprofile" class="nav-link" href="profile.html">My Profile</a>
+                    <a id="myprofile" class="nav-link" href="profile.html">My Profile</a>
                 </li>
                 <li class="nav-item" id="logout2">
-                    <a id ="logout" class="nav-link" onclick="logout()">Logout</a>
+                    <a id="logout" class="nav-link" onclick="logout()">Logout</a>
                 </li>
             </ul>
         </div>
@@ -113,7 +113,7 @@
 
             <div class="form-row">
 
-                
+
                 <div class="form-group col-md-6">
                     <input type="text" class="form-control" id="autocomplete" placeholder=" Where are you from?" onFocus="geolocate()">
                 </div>
@@ -140,7 +140,7 @@
 
                 <div class="form-group col-md-3">
 
-                    <input type="button" class="btn btn-primary" id = "submit" value="Submit" />
+                    <input type="button" class="btn btn-primary" id="submit" value="Submit" />
                 </div>
             </div>
 
@@ -149,10 +149,10 @@
 
 
 
-        
-        
-        <!-- Hidden from the user, this will be updated (leave for now for testing purposes) --> 
-        
+
+
+        <!-- Hidden from the user, this will be updated (leave for now for testing purposes) -->
+
         <!-- Use of Google Places API to sanitize data -->
 
 
@@ -161,7 +161,7 @@
                 <td class="slimField"><input class="field" id="street_number" /></td>
                 <td class="wideField" colspan="2"><input class="field" id="route" /></td>
                 <td class="wideField" colspan="3"><input class="field" id="locality" /></td>
-                <td class="slimField"><input  class="field" id="administrative_area_level_1" /></td>
+                <td class="slimField"><input class="field" id="administrative_area_level_1" /></td>
             </tr>
 
         </table>
@@ -169,31 +169,61 @@
 
 
 
+
+
     </main>
+
+    <!-- Footer -->
+
+    <footer class="page-footer font-small blue">
+
+        <!-- Footer Links -->
+
+        <div class="container">
+
+            <div class="row align-items-center">
+
+                <div class="col-4 align-self-start p-2 m-2">© 2019 Copyright: SpaceShare</div>
+
+                <div class="col-7 align-self-end p-2 m-2">
+                    <a class="fab fa-instagram social-footer fa-2x" href="https://www.instagram.com/spaceshare/"></a>
+                    <a class="fab fa-linkedin social-footer fa-2x" href="https://www.linkedin.com/company/10825863"></a>
+                    <a class="fab fa-facebook social-footer fa-2x" href="https://www.facebook.com/spaceshare"></a>
+                    <a class="fab fa-twitter social-footer fa-2x" href="https://twitter.com/spaceshare"></a>
+                </div>
+            </div>
+        </div>
+
+
+    </footer>
     <!-- Placed at the end of the document so the pages load faster -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-    
+
 
 
     <script>
-        function logout(){
+        function logout() {
             console.log("got here");
             firebase.auth().signOut().then(function() {
-            // Sign-out successful.
+                // Sign-out successful.
             }).catch(function(error) {
-            // An error happened.
+                // An error happened.
             });
             location.href = "succlogout.html"
-            }
+        }
+
     </script>
-    
-    <script src = 'firebase.js'></script>
-    <script src = 'autoComplete.js'></script>
-    <script src = 'searchInit.js'></script>
+
+    <script src='firebase.js'></script>
+    <script src='autoComplete.js'></script>
+    <script src='searchInit.js'></script>
 
 
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDVs8DbkrG8d9ZUUCw9zrv2uZ-RL9sLbCQ&libraries=places&callback=initAutocomplete" async defer></script>
+
+
+
 </body>
 
 </html>
