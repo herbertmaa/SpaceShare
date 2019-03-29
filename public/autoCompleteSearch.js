@@ -20,6 +20,7 @@ var options = {
 function initMap() {
     map = new google.maps.Map(document.getElementById('map'), {
         center: {
+            
             lat: -34.397,
             lng: 150.644
         },
@@ -124,14 +125,14 @@ function geolocate() {
 function initialize() {
     
     initMap();
-    initAutocomplete();
+    geocode();
+    //initAutocomplete();
 }
 function geocode() {
 
     //location should be this person's address 
     // call this function after the address has been filled in
     var address = localStorage.getItem('Address');
-    
     address = address.replace(/,/g, "");
     var addressArray = address.split(" ");
     var key = 'AIzaSyDVs8DbkrG8d9ZUUCw9zrv2uZ-RL9sLbCQ'
