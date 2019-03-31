@@ -31,35 +31,25 @@ $(document).ready(function() {
             var widthInput = childSnapshot.val().Width;
             var provinceInput = childSnapshot.val().Province;
 
-            var listing = $("<div class = \"listing\"></div>")
+           /*  var listing = $('<div id = "listing" class = "container"></div>')
             $("#cards-container").append(listing);
 
             var img = $("<img src = \"e91a3dcf-c15a-441a-b369-996922364cdc-profile_image-300x300.png\" alt = \"black-image\"></img>")
             listing.append(img)
 
-            var listingContent = $("<div class = \"listing-content\"></div>")
+            var listingContent = $('<div id = "listing-content" class = "container"></div>')
             listingContent.appendTo(listing);
             
-            var province = $("<p class = \"province\"></p>");
-            province.text("Province: " + provinceInput);
+            var province = $("<p class = \"total-address\"></p>");
+            province.html(addressInput + " &#8226; " +  cityInput + "\n" + provinceInput);
 
-            var city = $("<p class = \"city\"></p>");
-            city.text("City: " + cityInput);
+            var dimensions = $('<p class = "dimensions"></p>')
+            dimensions.text("Dimensions: " + lengthInput + " x " + widthInput + " x " + heightInput);
 
-            
-            var address = $("<p class = \"address\"></p>");
-            address.text("Address: " + addressInput);
-
-            var length = $("<p class = \"length\"></p>");
-            length.text("Length: " + lengthInput);
-
-            var height = $("<p class = \"height\"></p>");
-            height.text("Height: " + heightInput);
-
-            var width = $("<p class = \"width\"></p>");
-            width.text("Width: " + widthInput);
-
-            listingContent.append(province, city, address, length, width, height);
+            listingContent.append(province, dimensions);
+            */
+           $('<div class="card"><img class="card-img-top" src="" alt="Card image cap"><div class="card-body"><h5 class="card-title">' +   addressInput + '<br>' +   cityInput + '<br>'  + provinceInput + '</h5><p class="card-text">' + "Dimensions: " + lengthInput + ' x ' +  widthInput + ' x ' +  heightInput + '</p><a href="#" class="btn btn-primary">Request</a></div></div>').appendTo('#cards-container');
+           $('.card-img-top').attr('src', 'e91a3dcf-c15a-441a-b369-996922364cdc-profile_image-300x300.png');
     });
     
 });
