@@ -65,14 +65,22 @@ ui.start('#firebaseui-auth-container', uiConfig); // load our login
 // This tells us if the user has logged in. 
 firebase.auth().onAuthStateChanged(function (user) {
     if (user) {
-        //user is logged in
-        console.log("user is logged in");
+        
+        //User is logged in
+        
+        
+        //Update the navigation bar so there are affordances regarding the login status of the user
+        
         $("#signup").hide();
         $("#signup2").hide();
         $("#login").hide();
         $("#login2").hide();
         var navb = document.getElementsByClassName("navbar-nav");
         navb[0].style.visibility = "visible";
+        
+        //Renames
+        
+        $("#main-greeting").text("Welcome back, " + user.displayName);
     } else {
         console.log("not logged in");
         $("#myprofile").hide();
