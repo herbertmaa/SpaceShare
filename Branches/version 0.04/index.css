@@ -47,3 +47,26 @@ a:hover {
     box-shadow: none !important;
 
 }
+
+#address {
+    visibility: hidden;
+}
+
+main {
+    margin: 0 !important;
+    /** pushes the main container to the left  (left as 0 for now) **/
+    background-image: url("img/erda-estremera-581452-unsplash.jpg");
+    background-size: cover;
+    overflow: hidden;
+    height: 100vh;
+    width: 100vw !important;
+    background-size: cover;
+    display: table;
+    background-attachment: fixed;
+}
+
+.container {
+     padding-left: 40px;
+     margin :0;
+     max-width: none;
+}
