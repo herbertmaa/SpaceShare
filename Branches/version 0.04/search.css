@@ -62,11 +62,12 @@ i {
     height: 25vh;
     width: 40vw;
     display: flex;
-    border: 1px solid black;
+    border: 1px solid #eddedd;
 }
 .listing img {
     width: 40%;
     height: 100%;
+    padding: 10px;
 }
 .listing-content {
     width: 60%;
