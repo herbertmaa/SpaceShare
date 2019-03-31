@@ -24,58 +24,26 @@
 }
 
 
-main {
-
-    /** pushes the main container to the left  (left as 0 for now) **/
-}
-
-#address {
-}
-
 .navbar-nav {
     visibility: hidden;
 }
 
-#lean_overlay {
-    position: fixed;
-    z-index: 100;
-    top: 0px;
-    left: 0px;
-    height: 100%;
-    width: 100%;
-    background: #000;
-    display: none;
-}
 
 
-#user_login {
+a:hover {
 
-    display:inline;
-    position: absolute;
-    margin-left: auto;
-    margin-right: auto;
-    left: 0;
-    right: 0;
-    display:none;
-    width:300px;
-
-}
-
-.ftr-btm-sec{
-    
-    
-    border-top:1px solid #dce0e0;
-}
-
-
-a:hover{
-    
     text-decoration: none;
 }
 
 
-.link-spacing{
-    
+.link-spacing {
+
     padding-left: 2%;
     padding-right: 2%;
+}
+
+.firebaseui-container {
+
+    box-shadow: none !important;
+
 }
