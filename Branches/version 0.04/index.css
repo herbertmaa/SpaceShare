@@ -72,3 +72,10 @@ a:hover{
     
     text-decoration: none;
 }
+
+
+.link-spacing{
+    
+    padding-left: 2%;
+    padding-right: 2%;
+}

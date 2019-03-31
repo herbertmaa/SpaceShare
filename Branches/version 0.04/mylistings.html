@@ -112,7 +112,6 @@
 
             <div class="col">
 
-
                 <br>
 
             </div>
@@ -129,8 +128,6 @@
 
                     <div class="modal-body">
                         <div class="container">
-
-
 
                             <div class="row justify-content-end">
 
@@ -196,26 +193,18 @@
             </div>
         </div>
 
-
         <!-- The confirm delete button -->
 
         <div class="modal fade" id="confirm_delete" tabindex="-1" role="dialog">
 
             <div class="modal-dialog modal-dialog-centered" role="document">
-
-
                 <div class="modal-content">
 
-
                     <div class="modal-header">
-
                         <h5 class="modal-title"> Are you sure? </h5>
                     </div>
 
-
                     <div class="modal-body">
-
-
                         <div class="container">
 
                             <div class="row">
@@ -224,11 +213,8 @@
                                     You are about to permanently delete a listing. Please confirm you wish to delete this listing by entering the word "DELETE" in the box below
                                 </div>
                             </div>
-
                             <form id=confirm_delete_form action="#">
-
                                 <div class="row justify-content-end">
-
                                     <div class="col-12">
 
                                         <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label" id="type_delete_holder">
@@ -236,11 +222,7 @@
                                             <span class="mdl-textfield__error">Please enter "DELETE"</span>
                                         </div>
                                     </div>
-
-
                                     <div class="row justify-content-end">
-
-
 
                                         <div class="col-12 order-last" style="margin-top: 20px;">
                                             <button type="button" class="btn btn-primary" data-dismiss="modal">Cancel</button>
@@ -365,13 +347,27 @@
 
             $('#update-edit').on('click', () => {
 
+                //all elements should be entered if a change needs to be made.
+
                 var elements = document.getElementById("message-form").elements;
+                var validInput = false;
 
-                var address = elements[0].value;
-                var addressArray = address.split(",");
+                for (var i = 0; elements.length > i; i++) {
+
+                    if (elements[i].length == 0) {
+
+                        invalidInput = true;
+                        break;
+                    }
+                }
 
 
-                updateListing(addressArray[0], addressArray[1], addressArray[2], elements[1].value, elements[2].value, elements[3].value, keyToChange);
+                if (validInput) {
+                    var address = elements[0].value;
+                    var addressArray = address.split(",");
+                    updateListing(addressArray[0], addressArray[1], addressArray[2], elements[1].value, elements[2].value, elements[3].value, keyToChange);
+                    location.reload();
+                }
 
 
             });
@@ -379,16 +375,14 @@
 
             $('#content').on('click', 'button', function() {
 
-                console.log("content called");
                 var classNames = $(this).attr("class").toString().split(' ');
-
                 $.each(classNames, function(i, className) {
-
                     if ((className).startsWith("-L")) {
                         keyToChange = className;
-                        // Not sure how scalable this is but currently all our listing keys start with -L
                     }
+
                 });
+
 
 
             });
@@ -424,10 +418,8 @@
                 **/
                 var foundListings = 0;
                 var query = firebase.database().ref('/ListingsTest');
-
                 query.on('value', function(snapshot) {
                     snapshot.forEach(function(childSnapshot) {
-
                         if (childSnapshot.child('Account').val() == myUserID) {
                             console.log(childSnapshot.child('key').val());
                             let tempContainer = $("<div class = 'edit-container'> </div>");
@@ -452,23 +444,21 @@
                             foundListings++;
                         } else {
 
-                        }
+                            //The listing does not belong to you. No information should be output to the user
 
+                        }
 
 
 
                     })
 
-
                     if (foundListings == 0) {
-
-
-                        let tempDiv = $('<div> Create a new listing! </div>')
-                        $('#first_row').append(tempDiv);
+                        var tempContainer = $("<div class = 'add-container container'> <div class = 'row'> <h4> You have no listings! :( <a href = 'postingListing'> Let's Add Something. </a><h4> </div></div>");
+                        $('main').append(tempContainer);
                         return 0;
                     } else {
 
-                        let tempDiv = $('<div> Your Existing Listings </div>');
+                        let tempDiv = $('<div> <h4> Your Existing Listings </h4></div>');
                         $('#first_row').append(tempDiv);
                         return 1;
                     }
@@ -517,8 +507,6 @@
         // src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&libraries=places">
 
         var placeSearch, autocomplete;
-
-
         var componentForm = {
             street_number: 'short_name',
             route: 'long_name',
