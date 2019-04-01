@@ -20,7 +20,7 @@
 
 
     <!-- Place your stylesheet here-->
-    <link href="index.css" rel="stylesheet" type="text/css">
+    <link href="./css/index.css" rel="stylesheet" type="text/css">
 
 
 
@@ -52,25 +52,25 @@
         <div class="collapse navbar-collapse justify-content-end">
             <ul class="navbar-nav">
                 <li class="nav-item  active">
-                    <a class="nav-link" href="postListingEverythingExceptRedirect.html">Become a Sharer <span class="sr-only">(current)</span></a>
+                    <a class="nav-link" href="postListing.html">Become a Sharer <span class="sr-only">(current)</span></a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="faq.html">Help</a>
                 </li>
                 <li class="nav-item" id="signup2">
-                    <a id ="signup" class="nav-link modal_trigger" href="#user_login"> Sign up</a>
+                    <a class="nav-link" data-toggle="modal" href="#user_login" id="signup"> Sign up</a>
                 </li>
                 <li class="nav-item" id="login2">
-                    <a id ="login" class="nav-link modal_trigger" href="#user_login">Login</a>
+                    <a class="nav-link" id="login" data-toggle="modal" href="#user_login">Login</a>
                 </li>
                 <li class="nav-item" id="mylistings2">
-                    <a id ="mylistings" class="nav-link" href="mylistings.html">My Listings</a>
+                    <a id="mylistings" class="nav-link" href="mylistings.html">My Listings</a>
                 </li>
                 <li class="nav-item" id="myprofile2">
-                    <a id ="myprofile" class="nav-link" href="profile.html">My Profile</a>
+                    <a id="myprofile" class="nav-link" href="profile.html">My Profile</a>
                 </li>
                 <li class="nav-item" id="logout2">
-                    <a id ="logout" class="nav-link" onclick="logout()">Logout</a>
+                    <a id="logout" class="nav-link" href = "#" onclick="logout()">Logout</a>
                 </li>
             </ul>
         </div>
@@ -80,49 +80,42 @@
     <!-- Main Content -->
 
 
-    <div class="container">
+    <div class="modal fade" id="user_login" tabindex="-1" role="dialog">
 
-        <div class="form-row " id="user_login">
+        <div class="modal-dialog modal-dialog-centered modal-sm" role="document">
 
-            <div class="col-12">
+            <div class="modal-content" style>
 
-                <div id="firebaseui-auth-container"></div>
+                <div class="modal-body">
+                    <div id="firebaseui-auth-container"></div>
 
-                <div id="loader">Loading...</div>
+                    <div id="loader">Loading...</div>
+                </div>
 
             </div>
 
+
         </div>
-
-
     </div>
+
     <main role="main" class="container">
 
         <div class="row top-buffer">
         </div>
-
         <div class="mb-4">
-
-
             <h1 class="h3 mb-3 font-weight-normal"> <i class="fab fa-studiovinari fa-2x"></i> </h1>
-            <h1 class="h3 mb-3 font-weight-normal">Share your space with friends.</h1>
+            <h1 class="h3 mb-3 font-weight-normal" id = "main-greeting">Share your space with friends.</h1>
 
         </div>
 
         <form>
-
             <div class="form-row">
 
-                
                 <div class="form-group col-md-6">
                     <input type="text" class="form-control" id="autocomplete" placeholder=" Where are you from?" onFocus="geolocate()">
                 </div>
 
-
-
             </div>
-
-
 
             <div class="form-row">
 
@@ -140,19 +133,15 @@
 
                 <div class="form-group col-md-3">
 
-                    <input type="button" class="btn btn-primary" id = "submit" value="Submit" />
+                    <input type="button" class="btn btn-primary" id="submit" value="Submit" />
                 </div>
             </div>
 
 
         </form>
 
+        <!-- Hidden from the user, this will be updated (leave for now for testing purposes) -->
 
-
-        
-        
-        <!-- Hidden from the user, this will be updated (leave for now for testing purposes) --> 
-        
         <!-- Use of Google Places API to sanitize data -->
 
 
@@ -161,7 +150,7 @@
                 <td class="slimField"><input class="field" id="street_number" /></td>
                 <td class="wideField" colspan="2"><input class="field" id="route" /></td>
                 <td class="wideField" colspan="3"><input class="field" id="locality" /></td>
-                <td class="slimField"><input  class="field" id="administrative_area_level_1" /></td>
+                <td class="slimField"><input class="field" id="administrative_area_level_1" /></td>
             </tr>
 
         </table>
@@ -170,30 +159,41 @@
 
 
     </main>
+
+    <!-- Footer -->
+
+
+
+
+
     <!-- Placed at the end of the document so the pages load faster -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-    
+
 
 
     <script>
-        function logout(){
+        function logout() {
             console.log("got here");
             firebase.auth().signOut().then(function() {
-            // Sign-out successful.
+                // Sign-out successful.
             }).catch(function(error) {
-            // An error happened.
+                // An error happened.
             });
             location.href = "succlogout.html"
-            }
+        }
+
     </script>
-    
-    <script src = 'firebase.js'></script>
-    <script src = 'autoComplete.js'></script>
-    <script src = 'searchInit.js'></script>
+
+    <script src='./js/firebase.js'></script>
+    <script src='./js/autoComplete.js'></script>
+    <script src='./js/searchInit.js'></script>
 
 
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDVs8DbkrG8d9ZUUCw9zrv2uZ-RL9sLbCQ&libraries=places&callback=initAutocomplete" async defer></script>
+
+
+
 </body>
 
 </html>

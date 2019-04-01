@@ -25,7 +25,6 @@ function initAutocomplete() {
             types: ['geocode']
         });
 
-
     // Avoid paying for data that you don't need by restricting the set of
     // place fields that are returned to just the address components.
     //autocomplete.setFields('address_components');
