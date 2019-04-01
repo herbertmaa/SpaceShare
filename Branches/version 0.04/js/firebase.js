@@ -64,6 +64,7 @@ firebase.auth().onAuthStateChanged(function (user) {
         $("#login2").hide();
         var navb = document.getElementsByClassName("navbar-nav");
         navb[0].style.visibility = "visible";
+        userID = firebase.auth().currentUser.uid;
 
         //Renames
         $("#main-greeting").text("Welcome back, " + user.displayName);
@@ -84,7 +85,6 @@ firebase.auth().onAuthStateChanged(function (user) {
         loggedIn = true;
         $('#loading_overlay').css("display", "none");
         $('.container').removeClass('hidden');
-        userID = firebase.auth().currentUser.uid;
     }
 });
 
