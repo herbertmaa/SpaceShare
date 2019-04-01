@@ -43,26 +43,20 @@ var uiConfig = {
             //firebase.auth.PhoneAuthProvider.PROVIDER_ID
         ],
     // Terms of service url.
-    tosUrl: 'index.html',
+    tosUrl: 'terms.html',
     // Privacy policy url.
-    privacyPolicyUrl: 'index.html'
+    privacyPolicyUrl: 'terms.html'
 
 };
 
-
-
 // Load the login container
 ui.start('#firebaseui-auth-container', uiConfig); // load our login
-
-
 
 // This tells us if the user has logged in. 
 firebase.auth().onAuthStateChanged(function (user) {
     if (user) {
 
         //User is logged in
-
-
         //Update the navigation bar so there are affordances regarding the login status of the user
         $("#signup").hide();
         $("#signup2").hide();
@@ -70,6 +64,7 @@ firebase.auth().onAuthStateChanged(function (user) {
         $("#login2").hide();
         var navb = document.getElementsByClassName("navbar-nav");
         navb[0].style.visibility = "visible";
+        userID = firebase.auth().currentUser.uid;
 
         //Renames
         $("#main-greeting").text("Welcome back, " + user.displayName);
@@ -90,6 +85,15 @@ firebase.auth().onAuthStateChanged(function (user) {
         loggedIn = true;
         $('#loading_overlay').css("display", "none");
         $('.container').removeClass('hidden');
-        userID = firebase.auth().currentUser.uid;
     }
 });
+
+
+function logout() {
+    firebase.auth().signOut().then(function () {
+        // Sign-out successful.
+    }).catch(function (error) {
+        // An error happened.
+    });
+    location.href = "succlogout.html"
+}

@@ -52,19 +52,6 @@ a:hover {
     visibility: hidden;
 }
 
-main {
-    margin: 0 !important;
-    /** pushes the main container to the left  (left as 0 for now) **/
-    /** when deploying to firebase change this to /image/background.jpg **/
-    background-image: url("https://images.unsplash.com/photo-1520038410233-7141be7e6f97?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1053&q=80"); 
-    background-size: cover;
-    overflow: hidden;
-    height: 100vh;
-    width: 100vw !important;
-    background-size: cover;
-    display: table;
-    background-attachment: fixed;
-}
 
 .container {
      padding-left: 40px;
