@@ -6,14 +6,14 @@ var config = {
     projectId: "spaceshare-b68f7",
     storageBucket: "",
     messagingSenderId: "555750963802"
+
 };
-
-
 firebase.initializeApp(config);
 
+var loggedIn = false;
+var userID = null;
 // Initialize the FirebaseUI Widget using Firebase.
 var ui = new firebaseui.auth.AuthUI(firebase.auth());
-
 //Firebase default configuration
 var uiConfig = {
     callbacks: {
@@ -29,10 +29,7 @@ var uiConfig = {
             document.getElementById('loader').style.display = 'none';
         }
     },
-
-
     credentialHelper: firebaseui.auth.CredentialHelper.NONE,
-
     // Will use popup for IDP Providers sign-in flow instead of the default, redirect.
     signInFlow: 'popup',
     signInSuccessUrl: 'index.html',
@@ -50,9 +47,6 @@ var uiConfig = {
     // Privacy policy url.
     privacyPolicyUrl: 'index.html'
 
-
-
-
 };
 
 
@@ -65,21 +59,19 @@ ui.start('#firebaseui-auth-container', uiConfig); // load our login
 // This tells us if the user has logged in. 
 firebase.auth().onAuthStateChanged(function (user) {
     if (user) {
-        
+
         //User is logged in
-        
-        
+
+
         //Update the navigation bar so there are affordances regarding the login status of the user
-        
         $("#signup").hide();
         $("#signup2").hide();
         $("#login").hide();
         $("#login2").hide();
         var navb = document.getElementsByClassName("navbar-nav");
         navb[0].style.visibility = "visible";
-        
+
         //Renames
-        
         $("#main-greeting").text("Welcome back, " + user.displayName);
     } else {
         console.log("not logged in");
@@ -93,9 +85,11 @@ firebase.auth().onAuthStateChanged(function (user) {
         $("#signup2").show();
         $("#login").show();
         $("#login2").show();
-
-
         var navb = document.getElementsByClassName("navbar-nav");
         navb[0].style.visibility = "visible";
+        loggedIn = true;
+        $('#loading_overlay').css("display", "none");
+        $('.container').removeClass('hidden');
+        userID = firebase.auth().currentUser.uid;
     }
 });

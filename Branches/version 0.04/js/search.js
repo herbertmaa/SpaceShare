@@ -34,7 +34,7 @@ $(document).ready(function() {
             var listing = $('<div class = "listing" "container"></div>')
             $("#cards-container").append(listing);
 
-            var img = $("<img src = \"e91a3dcf-c15a-441a-b369-996922364cdc-profile_image-300x300.png\" alt = \"black-image\"></img>")
+            var img = $("<img src = .\img\black.png\" alt = \"black-image\"></img>")
             listing.append(img)
 
             var listingContent = $('<div id = "listing-content" class = "container"></div>')

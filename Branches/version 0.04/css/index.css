@@ -1,0 +1,49 @@
+.navbar-default {
+
+    /** background color of our navbar **/
+    background-color: #F8F8F8;
+    border-color: #E7E7E7;
+}
+
+
+.nav-item {
+
+
+    /** padding for the navigation items **/
+    padding-left: 20px;
+    padding-right: 20px;
+
+}
+
+
+.top-buffer {
+
+    /** this buffer is needed to add spacing from the navbar and the content **/
+    margin-top: 40px;
+    margin-bottom: 40px;
+}
+
+
+.navbar-nav {
+    visibility: hidden;
+}
+
+
+
+a:hover {
+
+    text-decoration: none;
+}
+
+
+.link-spacing {
+
+    padding-left: 2%;
+    padding-right: 2%;
+}
+
+.firebaseui-container {
+
+    box-shadow: none !important;
+
+}
