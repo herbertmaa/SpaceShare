@@ -12,6 +12,8 @@ firebase.initializeApp(config);
 
 var loggedIn = false;
 var userID = null;
+
+
 // Initialize the FirebaseUI Widget using Firebase.
 var ui = new firebaseui.auth.AuthUI(firebase.auth());
 //Firebase default configuration
@@ -55,7 +57,6 @@ ui.start('#firebaseui-auth-container', uiConfig); // load our login
 // This tells us if the user has logged in. 
 firebase.auth().onAuthStateChanged(function (user) {
     if (user) {
-
         //User is logged in
         //Update the navigation bar so there are affordances regarding the login status of the user
         $("#signup").hide();
@@ -85,6 +86,7 @@ firebase.auth().onAuthStateChanged(function (user) {
         loggedIn = true;
         $('#loading_overlay').css("display", "none");
         $('.container').removeClass('hidden');
+        userID = null; // the User has logged out
     }
 });
 
