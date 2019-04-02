@@ -55,10 +55,10 @@
                     <a class="nav-link" href="faq.html">Help</a>
                 </li>
                 <li class="nav-item" id="signup2">
-                    <a id="signup" class="nav-link modal_trigger" href="#user_login"> Sign up</a>
+                    <a class="nav-link" data-toggle="modal" href="#user_login" id="signup"> Sign up</a>
                 </li>
                 <li class="nav-item" id="login2">
-                    <a id="login" class="nav-link modal_trigger" href="#user_login">Login</a>
+                    <a class="nav-link" id="login" data-toggle="modal" href="#user_login">Login</a>
                 </li>
                 <li class="nav-item" id="mylistings2">
                     <a id="mylistings" class="nav-link" href="mylistings.html">My Listings</a>
@@ -67,7 +67,7 @@
                     <a id="myprofile" class="nav-link" href="profile.html">My Profile</a>
                 </li>
                 <li class="nav-item" id="logout2">
-                    <a id="logout" class="nav-link" onclick="logout()">Logout</a>
+                    <a id="logout" class="nav-link" href="#" onclick="logout()">Logout</a>
                 </li>
             </ul>
         </div>
@@ -79,21 +79,22 @@
 
 
 
-    <div class="container">
+    <div class="modal fade" id="user_login" tabindex="-1" role="dialog">
 
-        <div class="form-row " id="user_login">
+        <div class="modal-dialog modal-dialog-centered modal-sm" role="document">
 
-            <div class="col-12">
+            <div class="modal-content" style>
 
-                <div id="firebaseui-auth-container"></div>
+                <div class="modal-body">
+                    <div id="firebaseui-auth-container"></div>
 
-                <div id="loader">Loading...</div>
+                    <div id="loader">Loading...</div>
+                </div>
 
             </div>
 
+
         </div>
-
-
     </div>
 
     <main role="main" class="container">
@@ -174,7 +175,7 @@
 
                         <div class="col-12">
 
-                            <button type="button" class="btn btn-primary" onclick="location.href='postListingEverythingExceptRedirectAndLogin.html'">Start Lending</button>
+                            <button type="button" class="btn btn-primary" onclick="location.href='postListing.html'">Start Lending</button>
 
                         </div>
 
@@ -191,125 +192,11 @@
     <!-- Placed at the end of the document so the pages load faster -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-    <script type="text/javascript" src="jquery.leanModal.min.js"></script>
 
-
-    <script>
-        function logout() {
-            console.log("got here");
-            firebase.auth().signOut().then(function() {
-                // Sign-out successful.
-            }).catch(function(error) {
-                // An error happened.
-            });
-            location.href = "succlogout.html"
-        }
-
-    </script>
-
-
-    <script>
-        $(document).ready(function() {
-
-            // Initialize Firebase
-            var config = {
-                apiKey: "AIzaSyCE2lSLszDUyZEyY--btpdoYs7Ln6PHAXY",
-                authDomain: "spaceshare-b68f7.firebaseapp.com",
-                databaseURL: "https://spaceshare-b68f7.firebaseio.com",
-                projectId: "spaceshare-b68f7",
-                storageBucket: "",
-                messagingSenderId: "555750963802"
-            };
-
-
-            firebase.initializeApp(config);
-
-            // Initialize the FirebaseUI Widget using Firebase.
-            var ui = new firebaseui.auth.AuthUI(firebase.auth());
-
-            //Firebase default configuration
-            var uiConfig = {
-                callbacks: {
-                    signInSuccessWithAuthResult: function(authResult, redirectUrl) {
-                        // User successfully signed in.
-                        // Return type determines whether we continue the redirect automatically
-                        // or whether we leave that to developer to handle.
-                        return true;
-                    },
-                    uiShown: function() {
-                        // The widget is rendered.
-                        // Hide the loader.
-                        document.getElementById('loader').style.display = 'none';
-                    }
-                },
-
-                credentialHelper: firebaseui.auth.CredentialHelper.NONE,
-
-                // Will use popup for IDP Providers sign-in flow instead of the default, redirect.
-                signInFlow: 'popup',
-                signInSuccessUrl: 'index.html',
-                signInOptions: [
-                    // Leave the lines as is for the providers you want to offer your users.
-                    //firebase.auth.GoogleAuthProvider.PROVIDER_ID,
-                    //firebase.auth.FacebookAuthProvider.PROVIDER_ID,
-                    //firebase.auth.TwitterAuthProvider.PROVIDER_ID,
-                    //firebase.auth.GithubAuthProvider.PROVIDER_ID,
-                    firebase.auth.EmailAuthProvider.PROVIDER_ID,
-                    //firebase.auth.PhoneAuthProvider.PROVIDER_ID
-                ],
-                // Terms of service url.
-                tosUrl: 'index.html',
-                // Privacy policy url.
-                privacyPolicyUrl: 'index.html'
+    <script src='./js/firebase.js'></script>
 
 
 
-
-            };
-
-
-
-            // Load the login container
-            ui.start('#firebaseui-auth-container', uiConfig); // load our login
-
-
-            $(".modal_trigger").leanModal();
-
-            // This tells us if the user has logged in. 
-            firebase.auth().onAuthStateChanged(function(user) {
-                if (user) {
-                    //user is logged in
-                    console.log("user is logged in");
-                    $("#signup").hide();
-                    $("#signup2").hide();
-                    $("#login").hide();
-                    $("#login2").hide();
-                    var navb = document.getElementsByClassName("navbar-nav");
-                    navb[0].style.visibility = "visible";
-                } else {
-                    console.log("not logged in");
-                    $("#myprofile").hide();
-                    $("#myprofile2").hide();
-                    $("#mylistings").hide();
-                    $("#mylistings2").hide();
-                    $("#logout").hide();
-                    $("#logout2").hide();
-                    $("#signup").show();
-                    $("#signup2").show();
-                    $("#login").show();
-                    $("#login2").show();
-
-                    var navb = document.getElementsByClassName("navbar-nav");
-                    navb[0].style.visibility = "visible";
-                }
-            });
-
-
-
-
-        });
-
-    </script>
 </body>
 
 </html>
