@@ -31,22 +31,9 @@ $(document).ready(function() {
             var widthInput = childSnapshot.val().Width;
             var provinceInput = childSnapshot.val().Province;
 
-            var listing = $('<div class = "listing" "container"></div>')
-            $("#cards-container").append(listing);
-
-            var img = $("<img src = .\img\black.png\" alt = \"black-image\"></img>")
-            listing.append(img)
-
-            var listingContent = $('<div id = "listing-content" class = "container"></div>')
-            listingContent.appendTo(listing);
-            
-            var province = $("<p class = \"total-address\"></p>");
-            province.html(addressInput + " &#8226; " +  cityInput + "\n" + provinceInput);
-
-            var dimensions = $('<p class = "dimensions"></p>')
-            dimensions.text("Dimensions: " + lengthInput + " x " + widthInput + " x " + heightInput);
-
-            listingContent.append(province, dimensions);
+           
+           $('<div class="card"><img class="card-img-top" src="" alt="Card image cap"><div class="card-body"><h5 class="card-title">' +   addressInput + '<br>' +   cityInput + '<br>'  + provinceInput + '</h5><p class="card-text">' + "Dimensions: " + lengthInput + ' x ' +  widthInput + ' x ' +  heightInput + '</p><a href="#" class="btn btn-primary">Request</a></div></div>').appendTo('#cards-container');
+           $('.card-img-top').attr('src', 'black.png');
     });
     
 });

@@ -121,10 +121,9 @@
 
 
                                         <div class="col-5">
-                                            <label for="image_button" class="opt-btn" id="image_label" style="margin-top:30px; margin-right: 25px;">Change Photo</label>
+                                           <!-- <label for="image_button" class="opt-btn" id="image_label" style="margin-top:30px; margin-right: 25px;">Change Photo</label>-->
 
-                                            <input type="file" id="image_button" accept="image/*" style="visibility:hidden;" onchange="uploadImage()">
-                                            <input type="file" id="image_button" accept="image/png, image/jpeg" style="visibility:hidden;">
+                                            <input type="file" id="image_button" accept="image/*"  onchange="uploadImage()">
 
                                         </div>
                                     </div>
@@ -237,7 +236,7 @@
                 authDomain: "spaceshare-b68f7.firebaseapp.com",
                 databaseURL: "https://spaceshare-b68f7.firebaseio.com",
                 projectId: "spaceshare-b68f7",
-                storageBucket: "",
+                storageBucket: "gs://spaceshare-b68f7.appspot.com",
                 messagingSenderId: "555750963802"
             };
 
@@ -305,22 +304,24 @@
             });
 
 
-        });
+        
         console.log(firebase);
         var storage = firebase.storage();
         var storageRef = storage.ref();
 
 
-       /* function uploadImage() {
-        var timeStamp = Number(new Date());
-        var imageStore = storage.ref(timeStamp.toString());
+      
+        var fileButton = document.getElementById('image_button');
+        fileButton.addEventListener('change', function(e) {
+            var user = firebase.auth().currentUser;
+            var file = e.target.files[0];
 
-        var fileData = $('#image_button').prop('files')[0];
-        imageStore.put(fileData);
-        }
-        */
+            var storageRef = firebase.storage().ref("/img/"  + user.name + file.name);
+            storageRef.put(file);
+        });
+    });
     </script>
-    <!--<script src="firebaseStorage.js"></script> -->
+   
 </body>
 
 </html>

@@ -38,7 +38,7 @@
         </button>
         <form>
                 <div class="form-group">
-                    <input type="text" class="form-control" id="autocomplete"  placeholder="Type to search">
+                    <input type="text" class="form-control" id="autocomplete"  placeholder="Where do you live" onFocus="geolocate()">
                     <a class = "search-btn" href = "#"></a>
                     <i class="fas fa-search"></i>
                 </div>
@@ -69,13 +69,13 @@
         
     </main>
     <footer>     
-        <p>3400 Willingdon Avenue</p> 
-        <p> &copy; SpaceShare</p>
+        <p> <span class="copyright"> &copy; SpaceShare Inc. All Rights Reserved </span>  <span class = "points">Privacy Policy</span> <span>|</span> <span class = "points">Terms of Use</span> <span>|</span> <span class = "points">Legal</span> <span class = "vert-bars">|</span> <span class = "points">Site Map</span></p>
         </footer>
     <!-- Placed at the end of the document so the pages load faster -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
     <script src = 'search.js'></script>
+    <script src="searchInit.js"></script>
     <script src='autoCompleteSearch.js'></script>
 
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDVs8DbkrG8d9ZUUCw9zrv2uZ-RL9sLbCQ&libraries=places&callback=initialize" async defer></script>
