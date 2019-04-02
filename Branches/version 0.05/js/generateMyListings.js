@@ -8,7 +8,6 @@
          query.on('value', function (snapshot) {
              snapshot.forEach(function (childSnapshot) {
                  if (childSnapshot.child('Account').val() == myUserID) {
-                     console.log(childSnapshot.child('key').val());
                      let tempContainer = $("<div class = 'edit-container'> </div>");
                      let tempRow1 = $('<div class = "row "> </div>')
                      let tempDiv = $('<div class= "col-6"> </div>');
@@ -17,8 +16,8 @@
                      let tempDiv4 = $('<div class = "col-3"> </div>');
                      let tempButton = $("<div class = 'edit-button'> <button type= 'button' class='mdl-button mdl-js-button mdl-button--raised " + childSnapshot.child('key').val() + "' data-toggle = 'modal' data-target = '#content_edit'>EDIT</a></div>");
 
-                     let tempButton2 = $("<div class = 'delete-button " + childSnapshot.child('key').val() + "'><button type = 'button' class='mdl-button mdl-js-button mdl-button--raised " + childSnapshot.child('key').val() + "' data toggle='modal' data-target='#confirm_delete'>DELETE</a></div>");
-                     
+                     let tempButton2 = $("<div class = 'delete-button " + childSnapshot.child('key').val() + "'><button type = 'button' class='mdl-button mdl-js-button mdl-button--raised " + childSnapshot.child('key').val() + "' data-toggle='modal' data-target='#confirm_delete'>DELETE</a></div>");
+
                      tempDiv.text('Address: ' + childSnapshot.child('Address').val() + ', ' + childSnapshot.child('City').val());
                      tempDiv3.text('Width: ' + childSnapshot.child('Width').val());
                      tempDiv4.text('Height: ' + childSnapshot.child('Height').val());
