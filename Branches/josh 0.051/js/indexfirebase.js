@@ -67,7 +67,7 @@ firebase.auth().onAuthStateChanged(function (user) {
         userID = firebase.auth().currentUser.uid;
         var maingreet = document.getElementById("main-greeting");
         //Renames
-        $("#main-greeting").text("Welcome back, " + user.displayName);
+        $("#main-greeting").text("Welcome back, " + user.displayName + ",");
         maingreet.style.visibility = "visible";
     } else {
         console.log("not logged in");
