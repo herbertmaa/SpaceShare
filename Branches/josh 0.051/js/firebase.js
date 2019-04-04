@@ -12,6 +12,8 @@ firebase.initializeApp(config);
 
 var loggedIn = false;
 var userID = null;
+
+
 // Initialize the FirebaseUI Widget using Firebase.
 var ui = new firebaseui.auth.AuthUI(firebase.auth());
 //Firebase default configuration
@@ -55,7 +57,6 @@ ui.start('#firebaseui-auth-container', uiConfig); // load our login
 // This tells us if the user has logged in. 
 firebase.auth().onAuthStateChanged(function (user) {
     if (user) {
-
         //User is logged in
         //Update the navigation bar so there are affordances regarding the login status of the user
         $("#signup").hide();
@@ -65,10 +66,9 @@ firebase.auth().onAuthStateChanged(function (user) {
         var navb = document.getElementsByClassName("navbar-nav");
         navb[0].style.visibility = "visible";
         userID = firebase.auth().currentUser.uid;
-        var maingreet = document.getElementById("main-greeting");
+
         //Renames
         $("#main-greeting").text("Welcome back, " + user.displayName);
-        maingreet.style.visibility = "visible";
     } else {
         console.log("not logged in");
         $("#myprofile").hide();
@@ -85,9 +85,8 @@ firebase.auth().onAuthStateChanged(function (user) {
         navb[0].style.visibility = "visible";
         loggedIn = true;
         $('#loading_overlay').css("display", "none");
-        var maingreet = document.getElementById("main-greeting")
-        maingreet.style.visibility = "visible";
         $('.container').removeClass('hidden');
+        userID = null; // the User has logged out
     }
 });
 
@@ -98,5 +97,134 @@ function logout() {
     }).catch(function (error) {
         // An error happened.
     });
-    location.href = "succlogout.html"
+    location.href = "index.html"
+}
+
+
+
+/*
+A function that creates a post in FireBase
+*/
+function createPost(lsaddress, city, province, length, width, height) {
+    // Get a key for a new Post.
+
+    let newPostKey = firebase.database().ref().push().key;
+    /** let userID = firebase.auth().currentUser.uid; **/
+    console.log(newPostKey);
+
+    var user = firebase.auth().currentUser;
+    var name, email, photoUrl, uid, emailVerified;
+
+    if (user != null) {
+        name = user.displayName;
+        email = user.email;
+        photoUrl = user.photoURL;
+        emailVerified = user.emailVerified;
+        uid = user.uid; // The user's ID, unique to the Firebase project. Do NOT use
+        // this value to authenticate with your backend server, if
+        // you have one. Use User.getToken() instead.
+    }
+
+    // throws errors if you're not logged in
+    console.log(uid);
+    var postData = {
+        Address: lsaddress,
+        key: newPostKey,
+        City: city,
+        Province: province,
+        Length: length,
+        Width: width,
+        Height: height,
+        Account: uid,
+        RentedOut: "NULL"
+    };
+
+    var updates = {};
+    updates['ListingsTest/' + newPostKey] = postData;
+    firebase.database().ref().update(updates);
+
+}
+
+
+/*
+             A jQuery function that grabs information from a form and assigns it to constants
+             and then calls the createPosts function 
+         */
+
+$(function postForm() {
+
+    /** firebase.initializeApp(config); **/
+    $(".js-form").on('submit', event => {
+        var user = firebase.auth().currentUser;
+        if (user == null) {
+            event.preventDefault();
+            $('#user_login').modal('toggle');
+            // window.alert("Please login");
+            // location.href("#user_login"); 
+        }
+        if (user != null) {
+            event.preventDefault();
+
+            var address = $('#autocomplete').val();
+            address = address.replace(/,/g, "");
+            var addressArray = address.split(" ");
+            var streetAddress;
+
+            for (var i = 0; (addressArray.length - 3) > i; i++) {
+                if ( i == 0) {
+                    
+                    // The first address component 
+                    
+                    streetAddress = addressArray[i];
+                
+                    }
+               
+                else{ 
+                    // Not the first address component
+                    var temp = (" ").concat(addressArray[i]);
+                    streetAddress = streetAddress.concat(temp);                  
+
+                }
+              
+            
+            }
+            
+            const city = addressArray[addressArray.length - 3];
+            const province = addressArray[addressArray.length - 2];
+            const length = $('#make_length').val();
+            const width = $('#make_width').val();
+            const height = $('#make_height').val();
+
+            console.log(streetAddress, city, province, length, width, height);
+            createPost(streetAddress, city, province, length, width, height);
+            handleComplete();
+        }
+        // redirect();
+        // window.location.replace("succpost.html");
+        // }
+        /**
+        if (user == null){
+            event.preventDefault();
+            $('#user_login').modal('toggle')
+            // window.alert("Please login");
+            // location.href("#user_login"); 
+        }
+        **/
+        // window.location.replace("succpost.html");
+        // location.href = "succpost.html";
+    })
+});
+
+function handleComplete() {
+    window.setTimeout(function () {
+
+        // Move to a new location or you can do something else
+        window.location.href = "succpost.html";
+
+    }, 500);
+};
+
+function redirect() {
+    window.location.replace("succpost.html");
+    return false;
 }
