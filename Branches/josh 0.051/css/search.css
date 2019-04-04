@@ -78,7 +78,7 @@ main {
     height: 400px;
 }
 .card-img-top {
-    /*height: 200px;*/
+    height: 200px;
     flex-grow: 0;
 }
 #address {
