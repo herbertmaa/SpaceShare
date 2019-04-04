@@ -68,7 +68,7 @@ firebase.auth().onAuthStateChanged(function (user) {
         userID = firebase.auth().currentUser.uid;
 
         //Renames
-        $("#main-greeting").text("Welcome back, " + user.displayName);
+        $("#main-greeting").text("Welcome back, " + user.displayName + ",");
     } else {
         console.log("not logged in");
         $("#myprofile").hide();
