@@ -124,7 +124,7 @@
                                         <div class="col-5">
                                             <label for="image_button" class="opt-btn" id="image_label" style="margin-top:30px; margin-right: 25px;">Change Photo</label>
 
-                                            <input type="file" id="image_button" accept="image/*" style="visibility:hidden;" >
+                                            <input type="file" id="image_button" accept="image/*" style="visibility:hidden;">
                                             <input type="file" id="image_button" accept="image/png, image/jpeg" style="visibility:hidden;">
 
                                         </div>
@@ -238,7 +238,7 @@
                 authDomain: "spaceshare-b68f7.firebaseapp.com",
                 databaseURL: "https://spaceshare-b68f7.firebaseio.com",
                 projectId: "spaceshare-b68f7",
-                storageBucket: "",
+                storageBucket: "gs://spaceshare-b68f7.appspot.com",
                 messagingSenderId: "555750963802"
             };
 
@@ -291,7 +291,6 @@
             ui.start('#firebaseui-auth-container', uiConfig); // load our login
 
 
-            $(".modal_trigger").leanModal();
 
             // This tells us if the user has logged in. 
             firebase.auth().onAuthStateChanged(function(user) {
@@ -303,14 +302,14 @@
                     //user is not logged in
 
                 }
-            });
-            console.log(firebase);
+
+                console.log(firebase);
             var storage = firebase.storage();
             var storageRef = storage.ref();
             console.log(storageRef);
 
         
-            var fileButton = document.getElementById('image_button');
+            var fileButton = document.getElementById('image_label');
             fileButton.addEventListener('change', function(e) {
                 var user = firebase.auth().currentUser;
                 var file = e.target.files[0];
@@ -330,9 +329,12 @@
                     }).catch(function(error) {
                     // Handle any errors
                     });
-
-
                 });
+            });
+
+           
+
+
         });
     </script>
 </body>
