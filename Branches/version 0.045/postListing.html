@@ -1,0 +1,518 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>Share space with your friends | SpaceShare</title>
+
+    <!--Template based on URL below-->
+    <link rel="canonical" href="https://getbootstrap.com/docs/4.3/examples/starter-template/">
+
+    <!-- Bootstrap core CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+
+
+    <!-- Place your stylesheet here-->
+    <link href="./css/postListing.css" rel="stylesheet" type="text/css">
+
+
+
+    <!-- Firebase -->
+
+    <script src="https://www.gstatic.com/firebasejs/5.8.4/firebase.js"></script>
+
+
+    <!-- Firebase login UI -->
+    <script src="https://cdn.firebase.com/libs/firebaseui/3.5.2/firebaseui.js"></script>
+
+
+    <!-- Firebase css -->
+    <link type="text/css" rel="stylesheet" href="https://cdn.firebase.com/libs/firebaseui/3.5.2/firebaseui.css" />
+
+    <!-- Load jQuery -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+</head>
+
+<body>
+
+
+    <!--Navigation bar -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-light" style="height:85px;">
+        <a class="navbar-brand" href="index.html">SpaceShare</a>
+        <button class="navbar-toggler" type="button">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse justify-content-end">
+            <ul class="navbar-nav">
+                <li class="nav-item  active">
+                    <a class="nav-link" href="#">Become a Sharer <span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="faq.html">Help</a>
+                </li>
+                <li class="nav-item" id="signup2">
+                    <a class="nav-link" data-toggle="modal" href="#user_login" id="signup"> Sign up</a>
+                </li>
+                <li class="nav-item" id="login2">
+                    <a class="nav-link" id="login" data-toggle="modal" href="#user_login">Login</a>
+                </li>
+                <li class="nav-item" id="mylistings2">
+                    <a id="mylistings" class="nav-link" href="mylistings.html">My Listings</a>
+                </li>
+                <li class="nav-item" id="myprofile2">
+                    <a id="myprofile" class="nav-link" href="profile.html">My Profile</a>
+                </li>
+                <li class="nav-item" id="logout2">
+                    <a id="logout" class="nav-link" href = "#" onclick="logout()">Logout</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+
+
+    <div class="modal fade" id="user_login" tabindex="-1" role="dialog">
+
+        <div class="modal-dialog modal-dialog-centered modal-sm" role="document">
+
+            <div class="modal-content" style>
+
+                <div class="modal-body">
+                    <div id="firebaseui-auth-container"></div>
+
+                    <div id="loader">Loading...</div>
+                </div>
+
+            </div>
+
+
+
+        </div>
+    </div>
+
+
+    <main role="main" class="container">
+
+        <div class="row top-buffer">
+        </div>
+
+        <div class="mb-4">
+
+
+            <h1 class="h3 mb-3 font-weight-normal"> <i class="fab fa-studiovinari fa-2x"></i> </h1>
+            <h1 class="h3 mb-3 font-weight-normal">List Your Space</h1>
+
+        </div>
+
+        <form class="js-form">
+
+            <div class="form-row">
+
+                <div class="form-group col-md-6">
+                    <label for="make_address">Address: </label>
+                    <input type="text" class="form-control" id="autocomplete" placeholder=" Where are you from?" onFocus="geolocate()" required>
+                </div>
+
+
+
+
+
+            </div>
+
+            <!-- Idea: for dimensions, create a label called dimensions
+                    and use placeholder text for length width height
+            -->
+            <div class="form-row">
+                <label for="dimension">&nbsp;Dimensions: </label>
+            </div>
+
+            <div class="form-row">
+
+                <div class="form-group col-md-3" id="dimension">
+
+                    <input type="number" class="form-control" id="make_length" placeholder="length" required>
+
+                </div>
+
+                <div class="form-group col-md-3">
+                    <input type="number" class="form-control" id="make_width" placeholder="width" required>
+
+                </div>
+
+                <div class="form-group col-md-3">
+                    <input type="number" class="form-control" id="make_height" placeholder="height" required>
+
+                </div>
+
+            </div>
+
+
+
+            <div class="form-row">
+
+                <div class="form-group col-md-3">
+
+                    <label for="search_from">Available From: </label>
+                    <input type="date" class="form-control" id="search_from">
+
+                </div>
+
+                <div class="form-group col-md-3">
+
+                    <label for="search_to">Available To: </label>
+                    <input type="date" class="form-control" id="search_to">
+
+                </div>
+
+            </div>
+
+            <div class="form-row">
+                <div class="form-group col-md-3">
+
+                    <button type="submit" id="js-submit" class="btn btn-primary">Submit</button>
+                </div>
+            </div>
+
+
+        </form>
+
+
+
+
+
+
+        <!-- Hidden from the user, this will be updated (leave for now for testing purposes) -->
+
+        <!-- Use of Google Places API to sanitize data -->
+
+
+        <table id="address">
+            <tr>
+                <td class="slimField"><input class="field" id="street_number" /></td>
+                <td class="wideField" colspan="2"><input class="field" id="route" /></td>
+                <td class="wideField" colspan="3"><input class="field" id="locality" /></td>
+                <td class="slimField"><input class="field" id="administrative_area_level_1" /></td>
+            </tr>
+
+        </table>
+
+    </main>
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    <!-- <script type="text/javascript" src="jquery.leanModal.min.js"></script> -->
+
+    <script>
+        function logout() {
+            console.log("got here");
+            firebase.auth().signOut().then(function() {
+                // Sign-out successful.
+            }).catch(function(error) {
+                // An error happened.
+            });
+            location.href = "succlogout.html"
+        }
+
+    </script>
+
+    <script>
+        $(document).ready(function() {
+
+            // Initialize Firebase
+            var config = {
+                apiKey: "AIzaSyCE2lSLszDUyZEyY--btpdoYs7Ln6PHAXY",
+                authDomain: "spaceshare-b68f7.firebaseapp.com",
+                databaseURL: "https://spaceshare-b68f7.firebaseio.com",
+                projectId: "spaceshare-b68f7",
+                storageBucket: "",
+                messagingSenderId: "555750963802"
+            };
+
+
+            firebase.initializeApp(config);
+
+
+            /*
+            A function that creates a post in FireBase
+            */
+            function createPost(lsaddress, city, province, length, width, height) {
+                // Get a key for a new Post.
+                let newPostKey = firebase.database().ref().push().key;
+                /** let userID = firebase.auth().currentUser.uid; **/
+                console.log(newPostKey);
+
+                var user = firebase.auth().currentUser;
+                var name, email, photoUrl, uid, emailVerified;
+
+                if (user != null) {
+                    name = user.displayName;
+                    email = user.email;
+                    photoUrl = user.photoURL;
+                    emailVerified = user.emailVerified;
+                    uid = user.uid; // The user's ID, unique to the Firebase project. Do NOT use
+                    // this value to authenticate with your backend server, if
+                    // you have one. Use User.getToken() instead.
+                }
+
+                // throws errors if you're not logged in
+                console.log(uid);
+                var postData = {
+                    Address: lsaddress,
+                    key: newPostKey,
+                    City: city,
+                    Province: province,
+                    Length: length,
+                    Width: width,
+                    Height: height,
+                    Account: uid
+                };
+
+                var updates = {};
+                updates['ListingsTest/' + newPostKey] = postData;
+                firebase.database().ref().update(updates);
+
+            }
+
+
+
+            /*
+                A jQuery function that grabs information from a form and assigns it to constants
+                and then calls the createPosts function 
+            */
+
+            $(function postForm() {
+
+                /** firebase.initializeApp(config); **/
+                $(".js-form").on('submit', event => {
+                    var user = firebase.auth().currentUser;
+                    if (user == null) {
+                        event.preventDefault();
+                        $('#user_login').modal('toggle');
+                        // window.alert("Please login");
+                        // location.href("#user_login"); 
+                    }
+                    if (user != null) {
+                        event.preventDefault();
+                        const address = $('#street_number').val().concat(" ", $('#route').val());
+                        const city = $('#locality').val();
+                        const province = $('#administrative_area_level_1').val();
+                        const length = $('#make_length').val();
+                        const width = $('#make_width').val();
+                        const height = $('#make_height').val();
+                        console.log(address, city, province, length, width, height);
+                        createPost(address, city, province, length, width, height);
+                        handleComplete();
+                    }
+                    // redirect();
+                    // window.location.replace("succpost.html");
+                    // }
+                    /**
+                    if (user == null){
+                        event.preventDefault();
+                        $('#user_login').modal('toggle')
+                        // window.alert("Please login");
+                        // location.href("#user_login"); 
+                    }
+                    **/
+                    // window.location.replace("succpost.html");
+                    // location.href = "succpost.html";
+                })
+            });
+
+            function handleComplete() {
+                window.setTimeout(function() {
+
+                    // Move to a new location or you can do something else
+                    window.location.href = "succpost.html";
+
+                }, 500);
+            };
+
+            function redirect() {
+                window.location.replace("succpost.html");
+                return false;
+            }
+
+
+
+            // Initialize the FirebaseUI Widget using Firebase.
+            var ui = new firebaseui.auth.AuthUI(firebase.auth());
+
+            //Firebase default configuration
+            var uiConfig = {
+                callbacks: {
+                    signInSuccessWithAuthResult: function(authResult, redirectUrl) {
+                        // User successfully signed in.
+                        // Return type determines whether we continue the redirect automatically
+                        // or whether we leave that to developer to handle.
+                        return true;
+                    },
+                    uiShown: function() {
+                        // The widget is rendered.
+                        // Hide the loader.
+                        document.getElementById('loader').style.display = 'none';
+                    }
+                },
+
+
+                credentialHelper: firebaseui.auth.CredentialHelper.NONE,
+
+                // Will use popup for IDP Providers sign-in flow instead of the default, redirect.
+                signInFlow: 'popup',
+                signInSuccessUrl: 'postListing.html',
+                signInOptions: [
+                    // Leave the lines as is for the providers you want to offer your users.
+                    // firebase.auth.GoogleAuthProvider.PROVIDER_ID,
+                    // firebase.auth.FacebookAuthProvider.PROVIDER_ID,
+                    // firebase.auth.TwitterAuthProvider.PROVIDER_ID,
+                    // firebase.auth.GithubAuthProvider.PROVIDER_ID,
+                    firebase.auth.EmailAuthProvider.PROVIDER_ID,
+                    // firebase.auth.PhoneAuthProvider.PROVIDER_ID
+                ],
+                // Terms of service url.
+                tosUrl: 'apple.html',
+                // Privacy policy url.
+                privacyPolicyUrl: 'apple.html'
+
+
+
+
+            };
+
+
+
+            // Load the login container
+            ui.start('#firebaseui-auth-container', uiConfig); // load our login
+
+
+            // $(".modal_trigger").leanModal();
+
+            // This tells us if the user has logged in. 
+            firebase.auth().onAuthStateChanged(function(user) {
+                if (user) {
+                    //user is logged in
+                    console.log("user is logged in");
+                    $("#signup").hide();
+                    $("#signup2").hide();
+                    $("#login").hide();
+                    $("#login2").hide();
+                    var navb = document.getElementsByClassName("navbar-nav");
+                    navb[0].style.visibility = "visible";
+                } else {
+                    console.log("not logged in");
+                    $("#myprofile").hide();
+                    $("#myprofile2").hide();
+                    $("#mylistings").hide();
+                    $("#mylistings2").hide();
+                    $("#logout").hide();
+                    $("#logout2").hide();
+                    $("#signup").show();
+                    $("#signup2").show();
+                    $("#login").show();
+                    $("#login2").show();
+
+
+                    var navb = document.getElementsByClassName("navbar-nav");
+                    navb[0].style.visibility = "visible";
+                }
+            });
+
+
+
+        });
+
+    </script>
+
+    <script>
+        // This sample uses the Autocomplete widget to help the user select a
+        // place, then it retrieves the address components associated with that
+        // place, and then it populates the form fields with those details.
+        // This sample requires the Places library. Include the libraries=places
+        // parameter when you first load the API. For example:
+        // <script
+        // src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&libraries=places">
+
+        var placeSearch, autocomplete;
+
+
+        var componentForm = {
+            street_number: 'short_name',
+            route: 'long_name',
+            locality: 'long_name',
+            administrative_area_level_1: 'short_name',
+
+        };
+
+        function initAutocomplete() {
+            // Create the autocomplete object, restricting the search predictions to
+            // geographical location types.
+            autocomplete = new google.maps.places.Autocomplete(
+                document.getElementById('autocomplete'), {
+                    types: ['geocode']
+                });
+
+
+            // Avoid paying for data that you don't need by restricting the set of
+            // place fields that are returned to just the address components.
+            //autocomplete.setFields('address_components');
+
+            // When the user selects an address from the drop-down, populate the
+            // address fields in the form.
+            autocomplete.addListener('place_changed', fillInAddress);
+        }
+
+        function fillInAddress() {
+            // Get the place details from the autocomplete object.
+            var place = autocomplete.getPlace();
+
+            for (var component in componentForm) {
+                document.getElementById(component).value = '';
+                document.getElementById(component).disabled = false;
+            }
+
+            // Get each component of the address from the place details,
+            // and then fill-in the corresponding field on the form.
+            for (var i = 0; i < place.address_components.length; i++) {
+                var addressType = place.address_components[i].types[0];
+                if (componentForm[addressType]) {
+                    var val = place.address_components[i][componentForm[addressType]];
+                    document.getElementById(addressType).value = val;
+                }
+            }
+        }
+
+
+        function geolocate() {
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(function(position) {
+                    var geolocation = {
+                        lat: position.coords.latitude,
+                        lng: position.coords.longitude
+                    };
+                    var circle = new google.maps.Circle({
+                        center: geolocation,
+                        radius: position.coords.accuracy
+                    });
+                    autocomplete.setBounds(circle.getBounds());
+                });
+            }
+        }
+
+    </script>
+
+
+
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDVs8DbkrG8d9ZUUCw9zrv2uZ-RL9sLbCQ&libraries=places&callback=initAutocomplete" async defer></script>
+
+</body>
+
+</html>

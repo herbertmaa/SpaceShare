@@ -20,7 +20,6 @@ var options = {
 function initMap() {
     map = new google.maps.Map(document.getElementById('map'), {
         center: {
-            
             lat: -34.397,
             lng: 150.644
         },
@@ -73,8 +72,6 @@ var componentForm = {
 function initAutocomplete() {
     // Create the autocomplete object, restricting the search predictions to
     // geographical location types.
-
-    console.log("hello world");
     autocomplete = new google.maps.places.Autocomplete(
         document.getElementById('autocomplete'), {
             options
@@ -127,27 +124,19 @@ function geolocate() {
 function initialize() {
     
     initMap();
-    geocode();
-    //initAutocomplete();
-}
-
-
-function initializeMapAutoComplete(){
-    initMap();
-    
-    geocode();
-   
     initAutocomplete();
 }
 function geocode() {
 
     //location should be this person's address 
     // call this function after the address has been filled in
+    var address = localStorage.getItem('Address');
     
-    var addressArray = localStorage.getItem('Address');
+    address = address.replace(/,/g, "");
+    var addressArray = address.split(" ");
     var key = 'AIzaSyDVs8DbkrG8d9ZUUCw9zrv2uZ-RL9sLbCQ'
     var url = ('https://maps.googleapis.com/maps/api/geocode/json' + '?address=' + addressArray[0] + '+' + addressArray[1] + '+' + addressArray[2] + ',' + addressArray[3] + ',+' + addressArray[4] + '&key=' + key);
-    console.log(addressArray);
+
     $.ajax({
         dataType: 'json',
         url: url,
