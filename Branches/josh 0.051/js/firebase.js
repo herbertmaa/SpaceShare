@@ -97,7 +97,7 @@ function logout() {
     }).catch(function (error) {
         // An error happened.
     });
-    location.href = "succlogout.html"
+    location.href = "index.html"
 }
 
 

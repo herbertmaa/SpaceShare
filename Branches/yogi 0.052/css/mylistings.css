@@ -1,0 +1,72 @@
+.navbar-default {
+
+    /** background color of our navbar **/
+    background-color: #F8F8F8;
+    border-color: #E7E7E7;
+}
+
+
+.nav-item {
+
+
+    /** padding for the navigation items **/
+    padding-left: 20px;
+    padding-right: 20px;
+
+}
+
+
+.top-buffer {
+
+    /** this buffer is needed to add spacing from the navbar and the content **/
+    margin-top: 40px;
+    margin-bottom: 40px;
+}
+
+
+main {
+
+    /** pushes the main container to the left  (left as 0 for now) **/
+}
+
+
+
+
+.pac-container {
+    z-index: 1500;
+
+}
+
+
+
+#loading_overlay{
+
+    width: 100px;
+    height: 100px;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: auto;
+    transition: all 0.5s ease;
+
+}
+
+.hidden {
+
+    visibility: hidden;
+    opacity: 0;
+    transition: all 0.5s ease;
+
+}
+
+.firebaseui-container{
+    
+    box-shadow:none !important;
+    
+}
+
+
+
+

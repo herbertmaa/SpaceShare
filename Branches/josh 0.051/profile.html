@@ -124,7 +124,7 @@
                                         <div class="col-5">
                                             <label for="image_button" class="opt-btn" id="image_label" style="margin-top:30px; margin-right: 25px;">Change Photo</label>
 
-                                            <input type="file" id="image_button" accept="image/*" style="visibility:hidden;" onchange="uploadImage()">
+                                            <input type="file" id="image_button" accept="image/*" style="visibility:hidden;" >
                                             <input type="file" id="image_button" accept="image/png, image/jpeg" style="visibility:hidden;">
 
                                         </div>
@@ -304,8 +304,35 @@
 
                 }
             });
+            console.log(firebase);
+            var storage = firebase.storage();
+            var storageRef = storage.ref();
+            console.log(storageRef);
+
+        
+            var fileButton = document.getElementById('image_button');
+            fileButton.addEventListener('change', function(e) {
+                var user = firebase.auth().currentUser;
+                var file = e.target.files[0];
+                console.log(file);
+
+                var storageRef = firebase.storage().ref("/img/"  + file.name);
+                console.log(storageRef);
+                storageRef.put(file);
+                
+                storageRef.getDownloadURL().then(function(url) {
+                    console.log(url);
+                    $('#user-img').css({
+                        "background-image": "url(" + url + ")"
+                    });
+                    
+                    console.log(url);
+                    }).catch(function(error) {
+                    // Handle any errors
+                    });
 
 
+                });
         });
     </script>
 </body>

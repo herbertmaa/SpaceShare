@@ -78,7 +78,7 @@ main {
     height: 400px;
 }
 .card-img-top {
-    /*height: 200px;*/
+    height: 200px;
     flex-grow: 0;
 }
 #address {
@@ -99,7 +99,10 @@ main {
     margin-top: 50px;
     margin-right: 20px;
     position: sticky !important;
-    top: 56px;
+    top: 100px;
+    border-style: solid;
+    border-color: grey;
+    border-width: thin;
 }
 footer {
     height: 60px;
