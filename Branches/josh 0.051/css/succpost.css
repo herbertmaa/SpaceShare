@@ -63,7 +63,7 @@ main {
     **/
     background-size: cover;
     overflow: hidden;
-    height: 100%;
+    height: calc(100vh - 85px);
     width: 100vw !important;
     background-size: cover;
     display: table;
@@ -76,7 +76,7 @@ main {
  /** background-size: cover; **/
  background-repeat: no-repeat;
  margin-bottom: 0;
- height: 100vh;
+ height: calc(100vh - 85px);
  background-attachment: fixed;
  background-size:cover;
 }
@@ -85,5 +85,5 @@ main {
      padding-left: 40px;
      margin :0;
      max-width: none;
-     max-height: 100vh;
+     max-height: calc(100vh - 85px);
 }

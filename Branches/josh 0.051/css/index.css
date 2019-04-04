@@ -66,7 +66,7 @@ main {
     **/
     background-size: cover;
     overflow: hidden;
-    height: 100vh;
+    height: calc(100vh - 85px);
     width: 100vw !important;
     background-size: cover;
     display: table;
