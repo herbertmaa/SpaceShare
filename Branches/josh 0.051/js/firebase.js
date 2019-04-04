@@ -65,9 +65,10 @@ firebase.auth().onAuthStateChanged(function (user) {
         var navb = document.getElementsByClassName("navbar-nav");
         navb[0].style.visibility = "visible";
         userID = firebase.auth().currentUser.uid;
-
+        var maingreet = document.getElementById("main-greeting");
         //Renames
         $("#main-greeting").text("Welcome back, " + user.displayName);
+        maingreet.style.visibility = "visible";
     } else {
         console.log("not logged in");
         $("#myprofile").hide();
@@ -84,6 +85,8 @@ firebase.auth().onAuthStateChanged(function (user) {
         navb[0].style.visibility = "visible";
         loggedIn = true;
         $('#loading_overlay').css("display", "none");
+        var maingreet = document.getElementById("main-greeting")
+        maingreet.style.visibility = "visible";
         $('.container').removeClass('hidden');
     }
 });
