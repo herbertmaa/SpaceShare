@@ -15,13 +15,19 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 
 
-
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+
+
+    <!-- Place your stylesheet here-->
+    <link href="./css/index.css" rel="stylesheet" type="text/css">
+
+
 
     <!-- Firebase -->
 
     <script src="https://www.gstatic.com/firebasejs/5.8.4/firebase.js"></script>
+
 
     <!-- Firebase login UI -->
     <script src="https://cdn.firebase.com/libs/firebaseui/3.5.2/firebaseui.js"></script>
@@ -32,9 +38,6 @@
 
     <!-- Load jQuery -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-
-    <!-- Place your stylesheet here-->
-    <link href="./css/faq.css" rel="stylesheet" type="text/css">
 </head>
 
 <body>
@@ -67,16 +70,14 @@
                     <a id="myprofile" class="nav-link" href="profile.html">My Profile</a>
                 </li>
                 <li class="nav-item" id="logout2">
-                    <a id="logout" class="nav-link" href="#" onclick="logout()">Logout</a>
+                    <a id="logout" class="nav-link" href = "#" onclick="logout()">Logout</a>
                 </li>
             </ul>
         </div>
     </nav>
 
 
-
     <!-- Main Content -->
-
 
 
     <div class="modal fade" id="user_login" tabindex="-1" role="dialog">
@@ -99,101 +100,97 @@
 
     <main role="main" class="container">
 
-        <div class="container">
+        <div class="row top-buffer">
+        </div>
+        <div class="mb-4">
+            <h1 class="h3 mb-3 font-weight-normal"> <i class="fab fa-studiovinari fa-2x"></i> </h1>
+            <h1 class="h3 mb-3 font-weight-normal">Share your space with friends.</h1>
 
+        </div>
 
+        <form>
+            <div class="form-row">
 
-            <div class="container">
+                <div class="form-group col-md-6">
+                    <input type="text" class="form-control" id="autocomplete" placeholder=" Where are you from?" onFocus="geolocate()">
+                </div>
 
+            </div>
 
-                <div class="row top-buffer">
+            <div class="form-row">
 
+                <div class="form-group col-md-3">
+
+                    <input type="date" class="form-control" id="search_from">
 
                 </div>
 
+                <div class="form-group col-md-3">
 
-                <div class="row">
-                    <h1> Have some extra space that someone might need? </h1>
-                    <h2> Invite your friends, track your storage space </h2>
-                </div>
-
-
-                <div class="row" id="howitworks">
-
-                    <div class="col-12">
-
-                        <h4> How it works</h4>
-
-                    </div>
-
-                    <div class="col-4">
-                        Upload item Got valuable stuff sitting around? Snap a photo, and in just a few minutes it's posted, verified, and ready to earn you sweet, sweet cash.
-
-                    </div>
-
-
-                    <div class="col-4">
-                        Get requests People near you can browse your items, and soon you'll get notifications of booking requests. Click accept, and you'll be able to coordinate pick-up with the borrower.
-
-                    </div>
-
-
-                    <div class="col-4">
-
-                        Earn money Our payments are processed through Stripe, so it's easy to start earning money from stuff you already own. Plus, you'll be helping your community, and how great is that?
-                    </div>
+                    <input type="date" class="form-control" id="search_to">
 
                 </div>
 
+                <div class="form-group col-md-3">
 
-
-
-                <div id="ready">
-
-
-                    <div class="row">
-
-                        <div class="col-12">
-
-                            <h2> Ready to share?</h2>
-
-                        </div>
-
-                    </div>
-
-                    <div class="row">
-
-                        <div class="col-12">
-
-                            <h3> Help others store their stuff! </h3>
-
-                        </div>
-
-                    </div>
-
-                    <div class="row">
-
-                        <div class="col-12">
-
-                            <button type="button" class="btn btn-primary" onclick="location.href='postListing.html'">Start Lending</button>
-
-                        </div>
-
-                    </div>
-
+                    <input type="button" class="btn btn-primary" id="submit" value="Submit" />
                 </div>
             </div>
 
 
+        </form>
 
-        </div>
+        <!-- Hidden from the user, this will be updated (leave for now for testing purposes) -->
+
+        <!-- Use of Google Places API to sanitize data -->
+
+
+        <table id="address" style="visibility: hidden">
+            <tr>
+                <td class="slimField"><input class="field" id="street_number" /></td>
+                <td class="wideField" colspan="2"><input class="field" id="route" /></td>
+                <td class="wideField" colspan="3"><input class="field" id="locality" /></td>
+                <td class="slimField"><input class="field" id="administrative_area_level_1" /></td>
+            </tr>
+
+        </table>
+
+
+
+
     </main>
+
+    <!-- Footer -->
+
+
+
+
 
     <!-- Placed at the end of the document so the pages load faster -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 
+
+
+    <script>
+        function logout() {
+            console.log("got here");
+            firebase.auth().signOut().then(function() {
+                // Sign-out successful.
+            }).catch(function(error) {
+                // An error happened.
+            });
+            location.href = "succlogout.html"
+        }
+
+    </script>
+
     <script src='./js/firebase.js'></script>
+    <script src='./js/googleAutocomplete.js'></script>
+    <script src='./js/searchInit.js'></script>
+
+
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDVs8DbkrG8d9ZUUCw9zrv2uZ-RL9sLbCQ&libraries=places&callback=initAutocomplete" async defer></script>
 
 
 

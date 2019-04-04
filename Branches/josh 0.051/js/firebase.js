@@ -66,9 +66,10 @@ firebase.auth().onAuthStateChanged(function (user) {
         var navb = document.getElementsByClassName("navbar-nav");
         navb[0].style.visibility = "visible";
         userID = firebase.auth().currentUser.uid;
-
         //Renames
-        $("#main-greeting").text("Welcome back, " + user.displayName);
+        $("#main-greeting").text("Welcome back, " + user.displayName + ",");
+        var greet = document.getElementById("main-greeting");
+        greet.style.visibility = "visible";
     } else {
         console.log("not logged in");
         $("#myprofile").hide();
@@ -81,6 +82,8 @@ firebase.auth().onAuthStateChanged(function (user) {
         $("#signup2").show();
         $("#login").show();
         $("#login2").show();
+        var greet = document.getElementById("main-greeting");
+        greet.style.visibility = "visible";
         var navb = document.getElementsByClassName("navbar-nav");
         navb[0].style.visibility = "visible";
         loggedIn = true;

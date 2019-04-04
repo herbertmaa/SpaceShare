@@ -18,15 +18,9 @@
 
 .top-buffer {
 
-    /** this bufer is needed to add spacing from the navbar and the content **/
-    margin-top: 60px;
-    margin-bottom: 60px;
-}
-
-
-#main {
-
-    /** pushes the main container to the left  (left as 0 for now) **/
+    /** this buffer is needed to add spacing from the navbar and the content **/
+    margin-top: 40px;
+    margin-bottom: 40px;
 }
 
 
@@ -34,30 +28,33 @@
     visibility: hidden;
 }
 
-#howitworks {
-    margin-top: 75px;
 
+
+a:hover {
+
+    text-decoration: none;
 }
 
 
-#ready {
+.link-spacing {
 
-    margin-top: 75px;
-
+    padding-left: 2%;
+    padding-right: 2%;
 }
-
-
-.login_form {
-
-
-    margin: 0 auto;
-    position: absolute;
-    background-color: red;
-}
-
 
 .firebaseui-container {
 
     box-shadow: none !important;
 
+}
+
+#address {
+    visibility: hidden;
+}
+
+
+.container {
+     padding-left: 40px;
+     margin :0;
+     max-width: none;
 }
