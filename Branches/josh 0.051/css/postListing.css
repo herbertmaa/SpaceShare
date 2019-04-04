@@ -22,6 +22,7 @@
 }
 
 main {
+    height: 100vh;
     /** pushes the main container to the left  (left as 0 for now) **/
 }
 
@@ -46,3 +47,12 @@ main {
     
 }
 
+.container{
+    background-color:#F2F0ED;
+    max-width: none;
+    max-height: none;
+    padding-top: 40px;
+    height: 100vh;
+    padding-bottom: 0px;
+    padding-left: 5%;
+}
