@@ -1,9 +1,9 @@
-function updateListings(address, city, province, width, height, length, myKey) {
+function updateListing(address, city, province, width, height, length, myKey) {
     if (myKey != undefined) {
 
         var query = firebase.database().ref('/ListingsTest/' + myKey);
 
-        console.log("hi");
+
         query.child('Address').set(address);
         query.child('City').set(city);
         query.child('Province').set(province);

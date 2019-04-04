@@ -8,14 +8,6 @@
 
 var placeSearch, autocomplete;
 
-var options = {
-
-    types: ['geocode'],
-    componentRestrictions: {
-        country: "ca"
-    }
-
-};
 
 var componentForm = {
     street_number: 'short_name',
@@ -30,7 +22,7 @@ function initAutocomplete() {
     // geographical location types.
     autocomplete = new google.maps.places.Autocomplete(
         document.getElementById('autocomplete'), {
-            options
+            types: ['geocode']
         });
 
     // Avoid paying for data that you don't need by restricting the set of
@@ -39,14 +31,13 @@ function initAutocomplete() {
 
     // When the user selects an address from the drop-down, populate the
     // address fields in the form.
-    //autocomplete.addListener('place_changed', fillInAddress);
+    autocomplete.addListener('place_changed', fillInAddress);
 }
 
-/**function fillInAddress() {
+function fillInAddress() {
     // Get the place details from the autocomplete object.
     var place = autocomplete.getPlace();
 
-    console.log(componentForm);
     for (var component in componentForm) {
         document.getElementById(component).value = '';
         document.getElementById(component).disabled = false;
@@ -61,7 +52,7 @@ function initAutocomplete() {
             document.getElementById(addressType).value = val;
         }
     }
-}**/
+}
 
 
 function geolocate() {
