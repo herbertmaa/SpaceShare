@@ -1,0 +1,73 @@
+.navbar-default {
+
+    /** background color of our navbar **/
+    background-color: #F8F8F8;
+    border-color: #E7E7E7;
+}
+
+
+.nav-item {
+
+
+    /** padding for the navigation items **/
+    padding-left: 20px;
+    padding-right: 20px;
+
+}
+
+
+.top-buffer {
+
+    /** this buffer is needed to add spacing from the navbar and the content **/
+    margin-top: 40px;
+    margin-bottom: 40px;
+}
+
+
+.navbar-nav {
+    visibility: hidden;
+}
+
+
+
+a:hover {
+
+    text-decoration: none;
+}
+
+
+.link-spacing {
+
+    padding-left: 2%;
+    padding-right: 2%;
+}
+
+.firebaseui-container {
+
+    box-shadow: none !important;
+
+}
+
+#address {
+    visibility: hidden;
+}
+
+main {
+    margin: 0 !important;
+    /** pushes the main container to the left  (left as 0 for now) **/
+    /** when deploying to firebase change this to /image/background.jpg **/
+    background-image: url("https://images.unsplash.com/photo-1520038410233-7141be7e6f97?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1053&q=80"); 
+    background-size: cover;
+    overflow: hidden;
+    height: 100vh;
+    width: 100vw !important;
+    background-size: cover;
+    display: table;
+    background-attachment: fixed;
+}
+
+.container {
+     padding-left: 40px;
+     margin :0;
+     max-width: none;
+}

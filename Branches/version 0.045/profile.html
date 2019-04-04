@@ -21,11 +21,12 @@
 
 
     <!-- Place your stylesheet here-->
-    <link href="profile.css" rel="stylesheet" type="text/css">
+    <link href="./css/profile.css" rel="stylesheet" type="text/css">
 
 
 
     <!-- Firebase -->
+
     <script src="https://www.gstatic.com/firebasejs/5.8.4/firebase.js"></script>
 
 
@@ -61,7 +62,7 @@
                     <a class="nav-link " href="#"> Messages</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link " href="postListingEverythingExceptRedirect.html">Add Listing</a>
+                    <a class="nav-link " href="postListing.html">Add Listing</a>
                 </li>
 
                 <li class="nav-item">
@@ -121,9 +122,10 @@
 
 
                                         <div class="col-5">
-                                           <!-- <label for="image_button" class="opt-btn" id="image_label" style="margin-top:30px; margin-right: 25px;">Change Photo</label>-->
+                                            <label for="image_button" class="opt-btn" id="image_label" style="margin-top:30px; margin-right: 25px;">Change Photo</label>
 
-                                            <input type="file" id="image_button" accept="image/*">
+                                            <input type="file" id="image_button" accept="image/*" style="visibility:hidden;" onchange="uploadImage()">
+                                            <input type="file" id="image_button" accept="image/png, image/jpeg" style="visibility:hidden;">
 
                                         </div>
                                     </div>
@@ -225,7 +227,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 
-   <!-- <script type="text/javascript" src="jquery.leanModal.min.js"></script> -->
+    <script type="text/javascript" src="jquery.leanModal.min.js"></script>
 
     <script>
         $(document).ready(function() {
@@ -236,7 +238,7 @@
                 authDomain: "spaceshare-b68f7.firebaseapp.com",
                 databaseURL: "https://spaceshare-b68f7.firebaseio.com",
                 projectId: "spaceshare-b68f7",
-                storageBucket: "gs://spaceshare-b68f7.appspot.com",
+                storageBucket: "",
                 messagingSenderId: "555750963802"
             };
 
@@ -289,7 +291,7 @@
             ui.start('#firebaseui-auth-container', uiConfig); // load our login
 
 
-           // $(".modal_trigger").leanModal();
+            $(".modal_trigger").leanModal();
 
             // This tells us if the user has logged in. 
             firebase.auth().onAuthStateChanged(function(user) {
@@ -304,26 +306,8 @@
             });
 
 
-        
-        console.log(firebase);
-        var storage = firebase.storage();
-        var storageRef = storage.ref();
-
-
-      
-        var fileButton = document.getElementById('image_button');
-        fileButton.addEventListener('change', function(e) {
-            var user = firebase.auth().currentUser;
-            var file = e.target.files[0];
-
-            var storageRef = firebase.storage().ref("/img/"  + user.name + file.name);
-            storageRef.put(file);
-            $('#user-img').append('<img src = ' + file + '></img>')
-
         });
-    });
     </script>
-   
 </body>
 
 </html>
