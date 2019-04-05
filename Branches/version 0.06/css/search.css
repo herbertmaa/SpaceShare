@@ -75,18 +75,21 @@ main {
     width: 60vw;
     display: flex !important;
     flex-flow: row wrap !important;
-    justify-content: space-evenly !important;
+    justify-content: space-around !important;
 }
 .card {
     display: flex;
     flex-flow: column;
+    align-items: center;
     padding: 10px;
     margin-top: 40px;
     height: 400px;
+    width: 300px;
 }
 .card-img-top {
     height: 200px;
     flex-grow: 0;
+    width: 240px;
 }
 #address {
     align-self: flex-start;
@@ -94,7 +97,6 @@ main {
 
 .btn {
     align-self: center;
-    margin-left: 90px;
 }
 .card-body {
     padding: 10px;
