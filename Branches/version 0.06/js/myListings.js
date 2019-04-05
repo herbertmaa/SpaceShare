@@ -14,7 +14,7 @@ $(document).ready(function () {
 
     setTimeout(function () {
         $('#loading_overlay').css("display", "none");
-        $('.container').removeClass('hidden');
+        $('.hidden').removeClass('hidden');
     }, 1000);
 
     $('#update-edit').on('click', () => {
