@@ -172,6 +172,9 @@ function createPost(lsaddress, city, province, length, width, height, descriptio
         Description: description,
         RentedOut: "NULL",
         ListingImage: imageURL
+        City_height: city + "_" + height;
+        City_length:city + "_" + length;
+        City_width:city + "_" + width;
     };
 
     var updates = {};
