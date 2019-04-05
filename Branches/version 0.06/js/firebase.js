@@ -4,14 +4,17 @@ var config = {
     authDomain: "spaceshare-b68f7.firebaseapp.com",
     databaseURL: "https://spaceshare-b68f7.firebaseio.com",
     projectId: "spaceshare-b68f7",
-    storageBucket: "",
+    storageBucket: "spaceshare-b68f7.appspot.com",
     messagingSenderId: "555750963802"
 
 };
 firebase.initializeApp(config);
 
+var imageRef = null;
 var loggedIn = false;
 var userID = null;
+var storage = firebase.storage();
+
 // Initialize the FirebaseUI Widget using Firebase.
 var ui = new firebaseui.auth.AuthUI(firebase.auth());
 //Firebase default configuration
@@ -65,16 +68,21 @@ firebase.auth().onAuthStateChanged(function (user) {
         var navb = document.getElementsByClassName("navbar-nav");
         navb[0].style.visibility = "visible";
         userID = firebase.auth().currentUser.uid;
-        
+
         //Renames the main greeting to Welcome back if you are on the home page
-        if($('#main-greeting').length != 0 ){
-            
+        if ($('#main-greeting').length != 0) {
+
             $("#main-greeting").text("Welcome back, " + user.displayName + "!");
             $("#main-greeting").css("visibility", "visible");
         }
-        if($('#srch').length != 0 ){
+        if ($('#srch').length != 0) {
             $("#srch").css("visibility", "visible");
         }
+
+        //Initialize the image reference then call getProfileImage()
+        imageRef = firebase.database().ref('ProfileImages/' + userID);
+        getProfileImage();
+
     } else {
         console.log("not logged in");
         $("#myprofile").hide();
@@ -91,10 +99,10 @@ firebase.auth().onAuthStateChanged(function (user) {
         navb[0].style.visibility = "visible";
         loggedIn = true;
         $('#loading_overlay').css("display", "none");
-        if($('#main-greeting').length != 0 ){
+        if ($('#main-greeting').length != 0) {
             $("#main-greeting").css("visibility", "visible");
         }
-        if($('#srch').length != 0 ){
+        if ($('#srch').length != 0) {
             $("#srch").css("visibility", "visible");
         }
         /**
@@ -137,6 +145,7 @@ function createPost(lsaddress, city, province, length, width, height, descriptio
         uid = user.uid; // The user's ID, unique to the Firebase project. Do NOT use
         // this value to authenticate with your backend server, if
         // you have one. Use User.getToken() instead.
+        
     }
 
     // throws errors if you're not logged in
@@ -185,25 +194,24 @@ $(function postForm() {
             var addressArray = address.split(" ");
             var streetAddress;
 
-            for (var i = 0; (addressArray.length - 3) > i; i++) {
-                if ( i == 0) {
-                    
+            for (var i = 0;
+                (addressArray.length - 3) > i; i++) {
+                if (i == 0) {
+
                     // The first address component 
-                    
+
                     streetAddress = addressArray[i];
-                
-                    }
-               
-                else{ 
+
+                } else {
                     // Not the first address component
                     var temp = (" ").concat(addressArray[i]);
-                    streetAddress = streetAddress.concat(temp);                  
+                    streetAddress = streetAddress.concat(temp);
 
                 }
-              
-            
+
+
             }
-            
+
             const city = addressArray[addressArray.length - 3];
             const province = addressArray[addressArray.length - 2];
             const length = $('#make_length').val();
@@ -243,4 +251,18 @@ function handleComplete() {
 function redirect() {
     window.location.replace("succpost.html");
     return false;
+}
+
+
+function getProfileImage() {
+
+    imageRef.on('value', function (snapshot) {
+        if (snapshot != null) {
+            $('.prfl-user-icon').css({
+                "background-image": "url(" + snapshot.val().url + ")"
+            });
+        }
+    });
+
+
 }

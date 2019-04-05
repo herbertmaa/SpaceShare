@@ -45,7 +45,8 @@
 
 
     <!--Navigation bar -->
-    <nav class="navbar navbar-expand-lg navbar-light bg-light" style = "height:85px;"> <!-- Height of navbar = 85px -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-light" style="height:85px;">
+        <!-- Height of navbar = 85px -->
         <a class="navbar-brand" href="index.html">SpaceShare</a>
         <button class="navbar-toggler" type="button">
             <span class="navbar-toggler-icon"></span>
@@ -66,7 +67,9 @@
                 </li>
 
                 <li class="nav-item">
-                    <a class="nav-link>" href="index.html"> <div class = "prfl-user-icon" style = "width:50px; height:50px; margin-bottom:0;"> </div> </a>
+                    <a class="nav-link>" href="index.html">
+                        <div class="prfl-user-icon" style="width:50px; height:50px; margin-bottom:0;"> </div>
+                    </a>
                 </li>
             </ul>
         </div>
@@ -124,7 +127,7 @@
                                         <div class="col-5">
                                             <label for="image_button" class="opt-btn" id="image_label" style="margin-top:30px; margin-right: 25px;">Change Photo</label>
 
-                                            <input type="file" id="image_button" accept="image/*" style="visibility:hidden;" >
+                                            <input type="file" id="image_button" accept="image/*" style="visibility:hidden;">
                                             <input type="file" id="image_button" accept="image/png, image/jpeg" style="visibility:hidden;">
 
                                         </div>
@@ -227,114 +230,9 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 
-    <script type="text/javascript" src="jquery.leanModal.min.js"></script>
+    <script src='./js/firebase.js'></script>
+    <script src='./js/profile.js'></script>
 
-    <script>
-        $(document).ready(function() {
-
-            // Initialize Firebase
-            var config = {
-                apiKey: "AIzaSyCE2lSLszDUyZEyY--btpdoYs7Ln6PHAXY",
-                authDomain: "spaceshare-b68f7.firebaseapp.com",
-                databaseURL: "https://spaceshare-b68f7.firebaseio.com",
-                projectId: "spaceshare-b68f7",
-                storageBucket: "",
-                messagingSenderId: "555750963802"
-            };
-
-
-            firebase.initializeApp(config);
-
-            // Initialize the FirebaseUI Widget using Firebase.
-            var ui = new firebaseui.auth.AuthUI(firebase.auth());
-
-            //Firebase default configuration
-            var uiConfig = {
-                callbacks: {
-                    signInSuccessWithAuthResult: function(authResult, redirectUrl) {
-                        // User successfully signed in.
-                        // Return type determines whether we continue the redirect automatically
-                        // or whether we leave that to developer to handle.
-                        return true;
-                    },
-                    uiShown: function() {
-                        // The widget is rendered.
-                        // Hide the loader.
-                        document.getElementById('loader').style.display = 'none';
-                    }
-                },
-                // Will use popup for IDP Providers sign-in flow instead of the default, redirect.
-                signInFlow: 'popup',
-                signInSuccessUrl: 'index.html',
-                signInOptions: [
-                    // Leave the lines as is for the providers you want to offer your users.
-                    firebase.auth.GoogleAuthProvider.PROVIDER_ID,
-                    firebase.auth.FacebookAuthProvider.PROVIDER_ID,
-                    //firebase.auth.TwitterAuthProvider.PROVIDER_ID,
-                    //firebase.auth.GithubAuthProvider.PROVIDER_ID,
-                    firebase.auth.EmailAuthProvider.PROVIDER_ID,
-                    //firebase.auth.PhoneAuthProvider.PROVIDER_ID
-                ],
-                // Terms of service url.
-                tosUrl: 'index.html',
-                // Privacy policy url.
-                privacyPolicyUrl: 'index.html'
-
-
-
-
-            };
-
-
-
-            // Load the login container
-            ui.start('#firebaseui-auth-container', uiConfig); // load our login
-
-
-            $(".modal_trigger").leanModal();
-
-            // This tells us if the user has logged in. 
-            firebase.auth().onAuthStateChanged(function(user) {
-                if (user) {
-                    //user is logged in
-                    console.log("user is logged in");
-
-                } else {
-                    //user is not logged in
-
-                }
-            });
-            console.log(firebase);
-            var storage = firebase.storage();
-            var storageRef = storage.ref();
-            console.log(storageRef);
-
-        
-            var fileButton = document.getElementById('image_button');
-            fileButton.addEventListener('change', function(e) {
-                var user = firebase.auth().currentUser;
-                var file = e.target.files[0];
-                console.log(file);
-
-                var storageRef = firebase.storage().ref("/img/"  + file.name);
-                console.log(storageRef);
-                storageRef.put(file);
-                
-                storageRef.getDownloadURL().then(function(url) {
-                    console.log(url);
-                    $('#user-img').css({
-                        "background-image": "url(" + url + ")"
-                    });
-                    
-                    console.log(url);
-                    }).catch(function(error) {
-                    // Handle any errors
-                    });
-
-
-                });
-        });
-    </script>
 </body>
 
 </html>

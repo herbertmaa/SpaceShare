@@ -45,7 +45,8 @@
 
 
     <!--Navigation bar -->
-    <nav class="navbar navbar-expand-lg navbar-light bg-light" style = "height:85px;"> <!-- Height of navbar = 85px -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-light" style="height:85px;">
+        <!-- Height of navbar = 85px -->
         <a class="navbar-brand" href="index.html">SpaceShare</a>
         <button class="navbar-toggler" type="button">
             <span class="navbar-toggler-icon"></span>
@@ -66,7 +67,9 @@
                 </li>
 
                 <li class="nav-item">
-                    <a class="nav-link>" href="index.html"> <div class = "prfl-user-icon" style = "width:50px; height:50px; margin-bottom:0;"> </div> </a>
+                    <a class="nav-link>" href="index.html">
+                        <div class="prfl-user-icon" style="width:50px; height:50px; margin-bottom:0;"> </div>
+                    </a>
                 </li>
             </ul>
         </div>
@@ -227,11 +230,10 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 
-    <script type="text/javascript" src="jquery.leanModal.min.js"></script>
-
     <script>
         $(document).ready(function() {
 
+            var imageRef;
             // Initialize Firebase
             var config = {
                 apiKey: "AIzaSyCE2lSLszDUyZEyY--btpdoYs7Ln6PHAXY",
@@ -284,22 +286,23 @@
 
 
             };
-            var storageIdRef = firebase.storage().ref("/img/"  + uid);
-            console.log(storageIdRef);
-            var imageRef = firebase.database().ref('ProfileImages/' + uid);
+
 
             // Load the login container
             ui.start('#firebaseui-auth-container', uiConfig); // load our login
 
 
             // This tells us if the user has logged in. 
-            var uid;firebase.auth().onAuthStateChanged(function(user) 
-            {
+            var uid;
+            firebase.auth().onAuthStateChanged(function(user) {
                 if (user) {
                     //user is logged in
                     uid = user.uid;
                     console.log(uid);
                     console.log("user is logged in");
+                    imageRef = firebase.database().ref('ProfileImages/' + uid);
+                    getProfileImage();
+
 
                 } else {
                     //user is not logged in
@@ -307,80 +310,97 @@
                 }
             });
             var storage = firebase.storage();
-            
-        function uploadProfilePic(callback) {
-            
-            var storageRef = storage.ref();
+
+            function uploadProfilePic(callback) {
+
+                var storageRef = storage.ref();
+
+
+                /* 
+                Upon change in the state of the button, add an event listener
+                */
+
+            }
 
             var fileButton = document.getElementById('image_button');
-
-            /* 
-            Upon change in the state of the button, add an event listener
-            */
             fileButton.addEventListener('change', function(e) {
 
-                    var file = e.target.files[0];
-                    console.log(file);
+                console.log("a file was uploaded into the browser");
+                var file = e.target.files[0];
+                const myNewFile = new File([file], 'profile.png', {type: file.type});
 
-                    // Reference to the storage bucket
-                    var storageRef = firebase.storage().ref("/img/"  + uid + "/" + file.name);
+                // Reference to the storage bucket
+                var storageRef = firebase.storage().ref("/img/" + uid + "/" + myNewFile.name);
 
-                    // Loads the file into firebase
-                    storageRef.put(file);
+                // Loads the file into firebase
+                storageRef.put(file).then(() => {
 
                     storageRef.getDownloadURL().then(function(url) {
-                    var imageURL = url;
-                    console.log(imageURL);
-                    createPicture(uid, imageURL);
+                        var imageURL = url;
+                        createPicture(uid, imageURL, getProfileImage);
+                    });
+
                 });
-                callback();
+
+
+
             });
-        }
- /*
+
+
+/*
 A function that creates a post in FireBase
 */
-function createPicture(uid, imageURL) {
+            function createPicture(uid, imageURL, callback) {
 
-    var user = firebase.auth().currentUser;
-    var name, email, photoUrl, uid, emailVerified;
+                var user = firebase.auth().currentUser;
+                var name, email, photoUrl, uid, emailVerified;
 
-    if (user != null) {
-        name = user.displayName;
-        email = user.email;
-        photoUrl = user.photoURL;
-        emailVerified = user.emailVerified;
-        uid = user.uid; // The user's ID, unique to the Firebase project. Do NOT use
-        // this value to authenticate with your backend server, if
-        // you have one. Use User.getToken() instead.
-    }
+                if (user != null) {
+                    name = user.displayName;
+                    email = user.email;
+                    photoUrl = user.photoURL;
+                    emailVerified = user.emailVerified;
+                    uid = user.uid; // The user's ID, unique to the Firebase project. Do NOT use
+                    // this value to authenticate with your backend server, if
+                    // you have one. Use User.getToken() instead.
+                }
 
-    // throws errors if you're not logged in
-    console.log(uid);
-    var postImage = {
-        url: imageURL
-    };
+                // throws errors if you're not logged in
+                var postImage = {
+                    url: imageURL
+                };
 
-    var updates = {};
-    updates['/ProfileImages/' + uid] = postImage;
-    firebase.database().ref().update(updates);
+                var updates = {};
+                updates['/ProfileImages/' + uid] = postImage;
+                firebase.database().ref().update(updates).then(() => {
 
-    
+                    callback();
 
-}
 
-        function getFile() {
-        console.log(imageRef);
-        console.log(imageRef);
+                });
 
-        imageRef.on('value', function(snapshot) {
-            var imageURL = snapshot.val().url;
-            $('.prfl-user-icon').css({
-                "background-image": "url(" + imageURL + ")"
-            });
+
+            }
+
+            function getProfileImage() {
+
+
+                console.log("i was called");
+                imageRef.on('value', function(snapshot) {
+                    if (snapshot != null) {
+                        $('.prfl-user-icon').css({
+                            "background-image": "url(" + snapshot.val().url + ")"
+                        });
+                    }
+                });
+
+
+            }
+
+
+
         });
-        
-    }
-});
+
     </script>
 </body>
 
