@@ -11,23 +11,23 @@
              snapshot.forEach(function (childSnapshot) {
                  if (childSnapshot.child('Account').val() == myUserID) {
 
-                     let tempContainer = $("<div class='card text-center' style='width: 20rem;'> </div>");
+                     let tempContainer = $("<div class='card text-center border-0'> </div>");
                      let tempImage = $("<img src='./img/black.png' alt='Listing Image' height = '200px' width = '300px'>");
-                     let tempCardBody = $("<div class='card-body'> </div>");
+                     let tempCardBody = $("<div class='card-body border m-5 rounded'> </div>");
 
                      let tempHeader = $("<h5 class='card-title mt-2'></h5>");
                      tempHeader.text('Address: ' + childSnapshot.child('Address').val() + ', ' + childSnapshot.child('City').val());
 
-                     let tempDescription = $("<p class='card-text'>A garage fit for a king!</p>");
+                     let tempDescription = $("<p class='card-text'>" + childSnapshot.child('Description').val() + "</p>");
 
                      let tempAttributeDiv = $('<div> </div>');
                      let tempWidthDiv = $('<div> </div>');
                      let tempHeightDiv = $('<div> </div>');
                      let tempLengthDiv = $('<div> </div>');
 
-                     let tempButton = $("<div style = 'display: inline-block' class = 'm-3 edit-button' > <button type= 'button' class='mdl-button mdl-js-button mdl-button--raised " + childSnapshot.child('key').val() + "' data-toggle = 'modal' data-target = '#content_edit'>EDIT</a></div>");
+                     let tempButton = $("<div style = 'display: inline-block' class = 'm-3 edit-button' > <button type= 'button' class='btn btn-primary " + childSnapshot.child('key').val() + "' data-toggle = 'modal' data-target = '#content_edit'>Edit</a></div>");
 
-                     let tempButton2 = $("<div style = 'display: inline-block' class = 'm-3 delete-button style = 'display: inline-block;'" + childSnapshot.child('key').val() + "'><button type = 'button' class='mdl-button mdl-js-button mdl-button--raised " + childSnapshot.child('key').val() + "' data-toggle='modal' data-target='#confirm_delete'>DELETE</a></div>");
+                     let tempButton2 = $("<div style = 'display: inline-block' class = 'm-3 delete-button style = 'display: inline-block;'" + childSnapshot.child('key').val() + "'><button type = 'button' class='btn btn-primary " + childSnapshot.child('key').val() + "' data-toggle='modal' data-target='#confirm_delete'>Delete</a></div>");
 
                      var widthText = 'Width: ' + childSnapshot.child('Width').val();
                      var heightText = 'Height: ' + childSnapshot.child('Height').val();
@@ -54,7 +54,7 @@
                      {
                          
                          //If there are odd number of cards, add a padding card to the cardGroupArray
-                            let tempContainer = $("<div class='card text-center' style='width: 20rem;'> </div>");
+                            let tempContainer = $("<div class='card text-center border-0'> </div>");
                             cardGroupArray.push(tempContainer);
 
                      }
@@ -62,7 +62,7 @@
 
                  for (var i = 0; numGroups > i; i++) {
 
-                     var tempGroup = $("<div class = 'card-group'> </div>");
+                     var tempGroup = $("<div class = 'card-group border-0'> </div>");
                      for (var j = 0; 2 > j; j++) {
                          if (cardGroupArray.length != 0) {
                              tempGroup.prepend(cardGroupArray.pop());

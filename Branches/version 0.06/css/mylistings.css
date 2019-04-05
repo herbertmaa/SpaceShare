@@ -33,7 +33,11 @@ main {
 }
 
 
-
+.card{
+    
+    border: 1px solid rgba(0,0,0,.125);
+    border-radius: .25rem;
+}
 
 .pac-container {
     z-index: 1500;
