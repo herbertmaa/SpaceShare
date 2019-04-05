@@ -7,12 +7,17 @@
 
 
 .nav-item {
+
+
     /** padding for the navigation items **/
     padding-left: 20px;
     padding-right: 20px;
 
 }
 
+.navbar-nav {
+    visibility: hidden;
+}
 
 .top-buffer {
 
@@ -21,17 +26,38 @@
     margin-bottom: 40px;
 }
 
+
 main {
-    height: 100vh;
+
     /** pushes the main container to the left  (left as 0 for now) **/
 }
 
-#address {
-    visibility: hidden;
+
+.card{
+    
+    border: 1px solid rgba(0,0,0,.125);
+    border-radius: .25rem;
 }
 
-.navbar-nav {
-    visibility: hidden;
+.pac-container {
+    z-index: 1500;
+
+}
+
+
+
+#loading_overlay{
+
+    width: 100px;
+    height: 100px;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: auto;
+    transition: all 0.5s ease;
+
 }
 
 .hidden {
@@ -39,6 +65,7 @@ main {
     visibility: hidden;
     opacity: 0;
     transition: all 0.5s ease;
+
 }
 
 .firebaseui-container{
@@ -47,12 +74,6 @@ main {
     
 }
 
-.container{
-    /** background-color:#F2F0ED; **/
-    max-width: none;
-    max-height: none;
-    padding-top: 40px;
-    height: calc(100vh - 85px);
-    padding-bottom: 0px;
-    padding-left: 5%;
-}
+
+
+
