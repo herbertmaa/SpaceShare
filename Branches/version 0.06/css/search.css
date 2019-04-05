@@ -136,3 +136,10 @@ span.points:hover {
     color: #787878;
     padding-right: 400px;
 }
+.dropdown {
+    margin-right: 5vw;
+}
+.btn-primary {
+    position: sticky !important;
+    top: 100px;
+}
