@@ -171,7 +171,10 @@ function createPost(lsaddress, city, province, length, width, height, descriptio
         Account: uid,
         Description: description,
         RentedOut: "NULL",
-        ListingImage: imageURL
+        ListingImage: imageURL,
+        City_height: city + "_" + height,
+        City_length:city + "_" + length,
+        City_width:city + "_" + width
     };
 
     var updates = {};

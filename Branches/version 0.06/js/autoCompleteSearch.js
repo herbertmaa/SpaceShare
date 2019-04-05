@@ -18,6 +18,7 @@ var options = {
 };
 
 function initMap() {
+    console.log("hello")
     map = new google.maps.Map(document.getElementById('map'), {
         center: {
             
@@ -25,6 +26,7 @@ function initMap() {
             lng: 150.644
         },
         zoom: 14
+
     });
 
     //infoWindow = new google.maps.InfoWindow;
@@ -71,6 +73,7 @@ var componentForm = {
 };
 
 function initAutocomplete() {
+    console.log("worllls");
     // Create the autocomplete object, restricting the search predictions to
     // geographical location types.
     autocomplete = new google.maps.places.Autocomplete(
@@ -122,16 +125,27 @@ function geolocate() {
         });
     }
 }
+
 function initialize() {
     
     initMap();
     geocode();
     //initAutocomplete();
 }
-function geocode() {
 
+function initializeMapAutoComplete(){
+    initMap();
+    
+    geocode();
+   
+    initAutocomplete();
+}
+
+function geocode() {
+    console.log("world");
     //location should be this person's address 
     // call this function after the address has been filled in
+
     var address = localStorage.getItem('Address');
     address = address.replace(/,/g, "");
     var addressArray = address.split(" ");
@@ -142,8 +156,9 @@ function geocode() {
         dataType: 'json',
         url: url,
         data: { format: "json-list"},
+        
         success: function(data){
-            
+            console.log(data);
             map.setCenter(data['results'][0].geometry.location);
             var marker = new google.maps.Marker({
             map: map,
