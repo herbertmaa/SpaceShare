@@ -74,7 +74,6 @@ function initAutocomplete() {
     // Create the autocomplete object, restricting the search predictions to
     // geographical location types.
 
-    console.log("hello world");
     autocomplete = new google.maps.places.Autocomplete(
         document.getElementById('autocomplete'), {
             options
@@ -145,6 +144,7 @@ function geocode() {
     // call this function after the address has been filled in
     
     var addressArray = localStorage.getItem('Address');
+    console.log(addressArray);
     var key = 'AIzaSyDVs8DbkrG8d9ZUUCw9zrv2uZ-RL9sLbCQ'
     var url = ('https://maps.googleapis.com/maps/api/geocode/json' + '?address=' + addressArray[0] + '+' + addressArray[1] + '+' + addressArray[2] + ',' + addressArray[3] + ',+' + addressArray[4] + '&key=' + key);
     console.log(addressArray);
@@ -153,7 +153,7 @@ function geocode() {
         url: url,
         data: { format: "json-list"},
         success: function(data){
-            
+            console.log(data);
             map.setCenter(data['results'][0].geometry.location);
             var marker = new google.maps.Marker({
             map: map,

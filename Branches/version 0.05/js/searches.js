@@ -1,7 +1,8 @@
 $('#autocomplete').on('change', event => {
+
   var address = $('#autocomplete').val();
-  console.log(address);
-  
+
+  localStorage.setItem('AddressArr', address);
   address = address.replace(/,/g,"");
   var addressArray = address.split(" ");
   console.log(addressArray);
@@ -12,5 +13,6 @@ $('#autocomplete').on('change', event => {
     document.location.href = "search.html";
 } else {
     window.alert("Enter a valid city or country");
+    
 }
 });
