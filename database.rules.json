@@ -2,6 +2,8 @@
   "rules": {
     ".read": "true",
     ".write": "true",
-    ".indexOn": "City"
+    "$uid": {
+      ".indexOn" : ["City", "City_length", "City_width", "City_height"] 
+    }
   }
 }

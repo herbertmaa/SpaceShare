@@ -136,6 +136,9 @@ function createPost(lsaddress, city, province, length, width, height) {
         Width: width,
         Height: height,
         Account: uid,
+        City_length: city + "_" + length,
+        City_height: city + "_" + height,
+        City_width: city + "_" + width,
         RentedOut: "NULL"
     };
 
