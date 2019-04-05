@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
     <meta name="author" content="">
-    <title>Search Results</title>
+    <title>Share space with your friends | SpaceShare</title>
 
     <!--Template based on URL below-->
     <link rel="canonical" href="https://getbootstrap.com/docs/4.3/examples/starter-template/">
@@ -14,16 +14,14 @@
     <!-- Bootstrap core CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 
+
+
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
-
-    <!-- Place your stylesheet here-->
-    <link href="./css/search.css" rel="stylesheet" type="text/css">
 
     <!-- Firebase -->
 
     <script src="https://www.gstatic.com/firebasejs/5.8.4/firebase.js"></script>
-
 
     <!-- Firebase login UI -->
     <script src="https://cdn.firebase.com/libs/firebaseui/3.5.2/firebaseui.js"></script>
@@ -35,29 +33,25 @@
     <!-- Load jQuery -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
+    <!-- Place your stylesheet here-->
+    <link href="./css/faq.css" rel="stylesheet" type="text/css">
 </head>
 
 <body>
-    
+
+
     <!--Navigation bar -->
-    <nav class="navbar navbar-expand-lg navbar-dark shadow" style="height: 85px; background-color: #566083;">
+    <nav class="navbar navbar-expand-lg navbar-dark shadow" style="height:85px; background-color: #566083">
         <a class="navbar-brand" href="index.html">SpaceShare</a>
         <button class="navbar-toggler" type="button">
             <span class="navbar-toggler-icon"></span>
         </button>
-        <form>
-            <div id="srch" class="form-group">
-                <input type="text" class="form-control" id="autocomplete" placeholder="Type to search">
-                <a class="search-btn" href="#"></a>
-                <i class="fas fa-search"></i>
-            </div>
-        </form>
         <div class="collapse navbar-collapse justify-content-end">
             <ul class="navbar-nav">
                 <li class="nav-item">
                     <a class="nav-link" href="postListing.html">Share Space<span class="sr-only">(current)</span></a>
                 </li>
-                <li class="nav-item">
+                <li class="nav-item active">
                     <a class="nav-link" href="faq.html">About</a>
                 </li>
                 <li class="nav-item" id="signup2">
@@ -73,34 +67,135 @@
                     <a id="myprofile" class="nav-link" href="profile.html">My Profile</a>
                 </li>
                 <li class="nav-item" id="logout2">
-                    <a id="logout" class="nav-link" href = "#" onclick="logout()">Logout</a>
+                    <a id="logout" class="nav-link" href="#" onclick="logout()">Logout</a>
                 </li>
             </ul>
         </div>
     </nav>
-    <!-- Main Content old-color: #F2F0ED-->
-    <main style="margin-bottom: 0; padding-bottom: 45px;">
-    <div id="cards-container">
+
+
+
+    <!-- Main Content -->
+
+
+
+    <div class="modal fade" id="user_login" tabindex="-1" role="dialog">
+
+        <div class="modal-dialog modal-dialog-centered modal-sm" role="document">
+
+            <div class="modal-content" style>
+
+                <div class="modal-body">
+                    <div id="firebaseui-auth-container"></div>
+
+                    <div id="loader">Loading...</div>
+                </div>
+
+            </div>
+
+
+        </div>
     </div>
 
-    <div id="map" style="height: 425px;"></div>
+    <main role="main" class="container">
+
+        <div class="container">
+
+
+
+            <div class="container">
+<!--
+                <div class="row top-buffer" style="background-color:#F2F0ED">
+
+
+                </div>
+-->
+
+                <div class="row">
+                    <h1> Have some extra space that someone might need? </h1>
+                    <h2> Invite your friends, track your storage space </h2>
+                </div>
+
+
+                <div class="row" id="howitworks">
+
+                    <div class="col-12">
+
+                        <h4> How it works</h4>
+
+                    </div>
+
+                    <div class="col-4">
+                        Upload item Got valuable stuff sitting around? Snap a photo, and in just a few minutes it's posted, verified, and ready to earn you sweet, sweet cash.
+
+                    </div>
+
+
+                    <div class="col-4">
+                        Get requests People near you can browse your items, and soon you'll get notifications of booking requests. Click accept, and you'll be able to coordinate pick-up with the borrower.
+
+                    </div>
+
+
+                    <div class="col-4">
+
+                        Earn money Our payments are processed through Stripe, so it's easy to start earning money from stuff you already own. Plus, you'll be helping your community, and how great is that?
+                    </div>
+
+                </div>
+
+
+
+
+                <div id="ready">
+
+
+                    <div class="row">
+
+                        <div class="col-12">
+
+                            <h2> Ready to share?</h2>
+
+                        </div>
+
+                    </div>
+
+                    <div class="row">
+
+                        <div class="col-12">
+
+                            <h3> Help others store their stuff! </h3>
+
+                        </div>
+
+                    </div>
+
+                    <div class="row">
+
+                        <div class="col-12">
+                            <!-- old button color #6A8A8E -->
+                            <button type="button" class="btn btn-primary" onclick="location.href='postListing.html'">Start Sharing</button>
+
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+
+
+
+        </div>
     </main>
-    <footer>     
-        <p> <span class="copyright"> &copy; SpaceShare Inc. All Rights Reserved </span>  <span class = "points">Privacy Policy</span> <span>|</span> <span class = "points">Terms of Use</span> <span>|</span> <span class = "points">Legal</span> <span class = "vert-bars">|</span> <span class = "points">Site Map</span></p>
-        </footer>
+
     <!-- Placed at the end of the document so the pages load faster -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-    
+
     <script src='./js/firebase.js'></script>
-    <script src='./js/autoCompleteSearch.js'></script>
-    <script src="./js/search.js"></script>
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDVs8DbkrG8d9ZUUCw9zrv2uZ-RL9sLbCQ&libraries=places&callback=initialize" async defer></script>
 
 
 
 </body>
 
-
 </html>
- 

@@ -1,0 +1,88 @@
+.navbar-default {
+
+    /** background color of our navbar **/
+    background-color: #A59D92;
+    border-color: #A59D92;
+}
+
+.nav-item {
+
+
+    /** padding for the navigation items **/
+    padding-left: 20px;
+    padding-right: 20px;
+
+}
+
+
+.top-buffer {
+
+    /** this buffer is needed to add spacing from the navbar and the content **/
+    margin-top: 40px;
+    margin-bottom: 40px;
+}
+
+
+.navbar-nav {
+    visibility: hidden;
+}
+
+#main-greeting{
+    visibility: hidden;
+}
+
+
+a:hover {
+    text-decoration: none;
+}
+
+
+.link-spacing {
+
+    padding-left: 2%;
+    padding-right: 2%;
+}
+
+.firebaseui-container {
+
+    box-shadow: none !important;
+
+}
+
+#address {
+    visibility: hidden;
+}
+
+main {
+    margin: 0 !important;
+    /**
+    height: 100vh;
+    **/
+    /** pushes the main container to the left  (left as 0 for now) **/
+    /** when deploying to firebase change this to /image/background.jpg **/
+    /**
+    background-image: url("https://images.unsplash.com/photo-1520038410233-7141be7e6f97?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1053&q=80"); 
+    **/
+    background-size: cover;
+    overflow: hidden;
+    height: calc(100vh - 85px);
+    width: 100vw !important;
+    background-size: cover;
+    display: table;
+    background-attachment: fixed;
+}
+
+
+.jumbotron{
+ background-image: url("https://images.unsplash.com/photo-1520038410233-7141be7e6f97?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1053&q=80");
+ background-size: cover;
+ background-repeat: no-repeat;
+ margin-bottom: 0;
+}
+
+.container {
+     padding-left: 40px;
+     margin :0;
+     max-width: none;
+     max-height: none;
+}
