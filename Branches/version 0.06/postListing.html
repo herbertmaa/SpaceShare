@@ -14,8 +14,6 @@
     <!-- Bootstrap core CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 
-
-
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
 
@@ -23,16 +21,12 @@
     <!-- Place your stylesheet here-->
     <link href="./css/postListing.css" rel="stylesheet" type="text/css">
 
-
-
     <!-- Firebase -->
 
     <script src="https://www.gstatic.com/firebasejs/5.8.4/firebase.js"></script>
 
-
     <!-- Firebase login UI -->
     <script src="https://cdn.firebase.com/libs/firebaseui/3.5.2/firebaseui.js"></script>
-
 
     <!-- Firebase css -->
     <link type="text/css" rel="stylesheet" href="https://cdn.firebase.com/libs/firebaseui/3.5.2/firebaseui.css" />
@@ -43,7 +37,6 @@
 </head>
 
 <body>
-
 
     <!--Navigation bar -->
     <nav class="navbar navbar-expand-lg navbar-light shadow-sm" style="height:85px;  background-color: #whitesmoke;">
@@ -72,114 +65,89 @@
                     <a id="myprofile" class="nav-link" href="profile.html">My Profile</a>
                 </li>
                 <li class="nav-item" id="logout2">
-                    <a id="logout" class="nav-link" href = "#" onclick="logout()">Logout</a>
+                    <a id="logout" class="nav-link" href="#" onclick="logout()">Logout</a>
                 </li>
             </ul>
         </div>
     </nav>
 
-
-
     <div class="modal fade" id="user_login" tabindex="-1" role="dialog">
-
         <div class="modal-dialog modal-dialog-centered modal-sm" role="document">
-
             <div class="modal-content" style>
-
                 <div class="modal-body">
                     <div id="firebaseui-auth-container"></div>
-
                     <div id="loader">Loading...</div>
                 </div>
-
             </div>
-
-
-
         </div>
     </div>
 
-
     <main role="main" class="container">
-        
-        <!--
-        <div class="row top-buffer" style="background-color: #000000;">
-        </div>
--->
-        <div class="mb-4">
 
-
-            <h1 class="h3 mb-3 font-weight-normal">List Your Space:</h1>
-
-        </div>
-
-        <form class="js-form">
-
-            <div class="form-row">
-
-                <div class="form-group col-md-6">
-                    <label for="make_address">Address: </label>
-                    <input type="text" class="form-control" id="autocomplete" placeholder=" Where are you from?" onFocus="geolocate()" required>
+        <!-- <div class="row top-buffer" style="background-color: #000000;"> </div> -->
+        <div class="container pl-5">
+            <div class="row">
+                <div class="col-9">
+                    <h1 class="h3 mb-3 font-weight-normal">List Your Space:</h1>
                 </div>
+                <div class="col-5">
+                    <form class="js-form">
+                        <div class="form-row">
+                            <div class="form-group col-md-9">
+                                <label for="make_address">Address: </label>
+                                <input type="text" class="form-control" id="autocomplete" placeholder=" Where are you from?" onFocus="geolocate()" required>
+                            </div>
+                        </div>
 
-
-
-
-
-            </div>
-
-            <!-- Idea: for dimensions, create a label called dimensions
+                        <!-- Idea: for dimensions, create a label called dimensions
                     and use placeholder text for length width height
             -->
-            <div class="form-row">
-                <label for="dimension">&nbsp;Dimensions: </label>
-            </div>
+                        <div class="form-row">
+                            <label for="dimension">&nbsp;Dimensions: </label>
+                        </div>
 
-            <div class="form-row">
+                        <div class="form-row">
 
-                <div class="form-group col-2" id="dimension">
+                            <div class="form-group col-3" id="dimension">
 
-                    <input type="number" class="form-control" id="make_length" placeholder="length" required>
+                                <input type="number" class="form-control" id="make_length" placeholder="Length" required>
 
-                </div>
+                            </div>
 
-                <div class="form-group col-2">
-                    <input type="number" class="form-control" id="make_width" placeholder="width" required>
+                            <div class="form-group col-3">
+                                <input type="number" class="form-control" id="make_width" placeholder="Width" required>
 
-                </div>
+                            </div>
 
-                <div class="form-group col-2">
-                    <input type="number" class="form-control" id="make_height" placeholder="height" required>
+                            <div class="form-group col-3">
+                                <input type="number" class="form-control" id="make_height" placeholder="Height" required>
 
-                </div>
+                            </div>
 
-            </div>
-            
-            <!-- Make description box -->
-            <div class="form-row" id="descrip">
-                <div class="form-group col-md-6">
-                <label for="descrip">Description: </label>
-                <textarea class="form-control" id="descrip" rows="3" minlength="5" maxlength="50" required></textarea>
-                </div>
-            </div>
+                        </div>
 
+                        <!-- Make description box -->
+                        <div class="form-row" id="descrip">
+                            <div class="form-group col-md-9">
+                                <label for="descrip">Description: </label>
+                                <textarea class="form-control" id="descrip" rows="3" minlength="5" maxlength="50" required></textarea>
+                            </div>
+                        </div>
 
-            <div class="form-row">
-                <label for="upimage">&nbsp;Upload Image: </label>
-            </div>
-            <div class="form-row" id="upimage" style="padding-bottom: 20px;">
-                <div class="input-group col-md-6">
-                    <div class="input-group-prepend">
-                    <span class="input-group-text" id="inputGroupFileAddon01">Upload</span>
-                    </div>
-                    <div class="custom-file" >
-                        <input type="file" class="custom-file-input" id="inputGroupFile01" aria-describedby="inputGroupFileAddon01" >
-                    <label class="custom-file-label" for="inputGroupFile01" >Select Image</label>
-                    </div>
-                </div>
-                
-                <!--
-
+                        <div class="form-row">
+                            <label for="upimage">&nbsp;Upload Image: </label>
+                        </div>
+                        <div class="form-row" id="upimage" style="padding-bottom: 20px;">
+                            <div class="input-group col-md-9">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text" id="inputGroupFileAddon01">Upload</span>
+                                </div>
+                                <div class="custom-file">
+                                    <input type="file" accept="image/png, image/jpeg" class="custom-file-input" id="image_button" aria-describedby="inputGroupFileAddon01">
+                                    <label class="custom-file-label" for="inputGroupFile01">Select Image</label>
+                                </div>
+                            </div>
+                            <!--
                 <div class="form-group col-md-3">
 
                     <label for="search_from">Available From: </label>
@@ -194,68 +162,45 @@
 
                 </div>
                 -->
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group col-md-3">
+                                <!-- old button colour #6A8A8E -->
+                                <button type="submit" id="js-submit" class="btn btn-primary">Submit</button>
+                            </div>
+                        </div>
+                    </form>
 
-            </div>
+                </div>
 
-            <div class="form-row">
-                <div class="form-group col-md-3">
-                    <!-- old button colour #6A8A8E -->
-                    <button type="submit" id="js-submit" class="btn btn-primary">Submit</button>
+                <div class="col-5">
+                    <img id = "listingPhoto" class="rounded border border-light" src="https://images.unsplash.com/photo-1467385829985-2b0fb82b5193?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1051&q=80" alt="default" style="width: 100%;">
                 </div>
             </div>
 
-
-        </form>
-
-
-
-
-
-
-        <!-- Hidden from the user, this will be updated (leave for now for testing purposes) -->
-
-        <!-- Use of Google Places API to sanitize data -->
-
-
-        <table id="address">
-            <tr>
-                <td class="slimField"><input class="field" id="street_number" /></td>
-                <td class="wideField" colspan="2"><input class="field" id="route" /></td>
-                <td class="wideField" colspan="3"><input class="field" id="locality" /></td>
-                <td class="slimField"><input class="field" id="administrative_area_level_1" /></td>
-            </tr>
-
-        </table>
+        </div>
 
     </main>
-    
-    
-    
-        <!-- Footer -->
 
+    <!-- Footer -->
     <footer class="page-footer font-small blue">
-
         <!-- Copyright -->
         <div class="footer-copyright text-center py-3">© 2019 Spaceshare
             <a href="terms.html"> Terms of Use </a>
             <a href="faq.html"> About </a>
-            <a target = "_blank" href="mailto:help@spaceshare.com"> Contact us! </a>
-
+            <a target="_blank" href="mailto:help@spaceshare.com"> Contact us! </a>
         </div>
-
     </footer>
+    
     <!-- Placed at the end of the document so the pages load faster -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
     <!-- <script type="text/javascript" src="jquery.leanModal.min.js"></script> -->
 
-    
-
-
     <script src='./js/firebase.js'></script>
     <script src='./js/googleAutocomplete.js'></script>
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDVs8DbkrG8d9ZUUCw9zrv2uZ-RL9sLbCQ&libraries=places&callback=initAutocomplete" async defer></script>
-
+    <script src = './js/postListing.js'> </script>
 </body>
 
 </html>

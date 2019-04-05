@@ -10,6 +10,8 @@ var config = {
 };
 firebase.initializeApp(config);
 
+var imageLink = null;
+var listingImageRef = null;
 var imageRef = null;
 var loggedIn = false;
 var userID = null;
@@ -82,6 +84,7 @@ firebase.auth().onAuthStateChanged(function (user) {
         //Initialize the image reference then call getProfileImage()
         imageRef = firebase.database().ref('ProfileImages/' + userID);
         getProfileImage();
+        listingImageRef = firebase.database().ref('ListingImages/' + userID);
 
     } else {
         console.log("not logged in");
@@ -127,7 +130,7 @@ function logout() {
 /*
 A function that creates a post in FireBase
 */
-function createPost(lsaddress, city, province, length, width, height, description) {
+function createPost(lsaddress, city, province, length, width, height, description, imageURL) {
     // Get a key for a new Post.
 
     let newPostKey = firebase.database().ref().push().key;
@@ -145,11 +148,18 @@ function createPost(lsaddress, city, province, length, width, height, descriptio
         uid = user.uid; // The user's ID, unique to the Firebase project. Do NOT use
         // this value to authenticate with your backend server, if
         // you have one. Use User.getToken() instead.
-        
+
     }
+
+
 
     // throws errors if you're not logged in
     console.log(uid);
+
+    if (imageURL === null) {
+        imageURL = "NULL";
+        //If the user has not uploaded an image that is okay, set this variable as "NULL"
+    }
     var postData = {
         Address: lsaddress,
         key: newPostKey,
@@ -160,7 +170,11 @@ function createPost(lsaddress, city, province, length, width, height, descriptio
         Height: height,
         Account: uid,
         Description: description,
-        RentedOut: "NULL"
+        RentedOut: "NULL",
+        ListingImage: imageURL
+        City_height: city + "_" + height;
+        City_length:city + "_" + length;
+        City_width:city + "_" + width;
     };
 
     var updates = {};
@@ -220,7 +234,7 @@ $(function postForm() {
             const description = $('textarea#descrip').val();
 
             console.log(streetAddress, city, province, length, width, height);
-            createPost(streetAddress, city, province, length, width, height, description);
+            createPost(streetAddress, city, province, length, width, height, description, imageLink);
             handleComplete();
         }
         // redirect();
