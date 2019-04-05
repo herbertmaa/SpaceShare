@@ -81,8 +81,21 @@ main {
 }
 
 .container {
-     padding-left: 40px;
-     margin :0;
+
+    margin :0;
      max-width: none;
      max-height: none;
+}
+
+#aboutMe{
+    
+    background-color:white;
+    height:100vh;
+    
+}
+
+
+.loading{
+    /**display:none;**/
+
 }

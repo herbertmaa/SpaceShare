@@ -69,15 +69,13 @@
                     <a id="myprofile" class="nav-link" href="profile.html">My Profile</a>
                 </li>
                 <li class="nav-item" id="logout2">
-                    <a id="logout" class="nav-link" href = "#" onclick="logout()">Logout</a>
+                    <a id="logout" class="nav-link" href="#" onclick="logout()">Logout</a>
                 </li>
             </ul>
         </div>
     </nav>
 
-
     <!-- Main Content -->
-
 
     <div class="modal fade" id="user_login" tabindex="-1" role="dialog">
 
@@ -102,7 +100,7 @@
         <div class="row top-buffer">
         </div>
         <div class="mb-4">
-            <h1 class="h3 mb-3 font-weight-normal" id = "main-greeting">Search for Space:</h1>
+            <h1 class="h3 mb-3 font-weight-normal" id="main-greeting">Find extra space in your neighborhood: </h1>
 
         </div>
 
@@ -114,22 +112,22 @@
                 </div>
 
             </div>
-            
+
             <div class="form-row">
 
                 <div class="form-group col-1" id="dimension">
 
-                    <input type="number" class="form-control" id="make_length" placeholder="length" required>
+                    <input type="number" class="form-control" id="make_length" placeholder="Length" required>
 
                 </div>
 
                 <div class="form-group col-1">
-                    <input type="number" class="form-control" id="make_width" placeholder="width" required>
+                    <input type="number" class="form-control" id="make_width" placeholder="Width" required>
 
                 </div>
 
                 <div class="form-group col-1">
-                    <input type="number" class="form-control" id="make_height" placeholder="height" required>
+                    <input type="number" class="form-control" id="make_height" placeholder="Height" required>
 
                 </div>
 
@@ -152,12 +150,18 @@
 
                 <div class="form-group col-md-3">
 
-                    <input type="button" class="btn btn-primary" id="submit" value="Search"/>
+                    <input type="button" class="btn btn-primary" id="submit" value="Search" />
                 </div>
             </div>
 
 
         </form>
+
+
+
+
+
+
 
         <!-- Hidden from the user, this will be updated (leave for now for testing purposes) -->
 
@@ -179,11 +183,71 @@
 
     </main>
 
+    <section class="features-icons bg-light text-center mt-5 loading">
+        <div class="container" id="aboutMe">
+
+            <div class="row mt-5">
+                <div class="col-lg-12">
+                    <h2 class="text-left pt-4 mt-4">Have some extra space that someone might need?</h2>
+                    <h3 class="text-left pt-2"> Invite your friends, track your storage space </h3>
+
+                </div>
+            </div>
+
+
+            <div class="row mt-5">
+                <div class="col-lg-4 mt-5">
+                    <div class="features-icons-item mx-auto mb-5 mb-lg-0 mb-lg-3">
+                        <div class="features-icons-icon">
+                            <i class="far fa-handshake fa-5x text-primary"></i> </div>
+                        <h3>Find space easily</h3>
+                        <p class="lead mb-0 mt-3 pt-3">Upload item Got valuable stuff sitting around? Snap a photo, and in just a few minutes it's posted, verified, and ready to earn you sweet, sweet cash.</p>
+                    </div>
+                </div>
+                <div class="col-lg-4 mt-5">
+                    <div class="features-icons-item mx-auto mb-5 mb-lg-0 mb-lg-3">
+                        <div class="features-icons-icon">
+                            <i class="fas fa-truck-moving fa-5x text-primary"></i>
+                        </div>
+                        <h3>Put your space to use</h3>
+                        <p class="lead mb-0 mt-3 pt-3">Get requests People near you can browse your items, and soon you'll get notifications of booking requests. Click accept, and you'll be able to coordinate pick-up with the borrower.</p>
+                    </div>
+                </div>
+                <div class="col-lg-4 mt-5">
+                    <div class="features-icons-item mx-auto mb-0 mb-lg-3">
+                        <div class="features-icons-icon">
+                            <i class="fas fa-recycle fa-5x text-primary"></i>
+                        </div>
+                        <h3>Eco-friendly</h3>
+                        <p class="lead mb-0 mt-3 pt-3">Earn money Our payments are processed through Stripe, so it's easy to start earning money from stuff you already own. Plus, you'll be helping your community, and how great is that?</p>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="row mt-5">
+                <div class="col-lg-12">
+
+                    <button type="button" class="btn btn-primary p-2" onclick="location.href='postListing.html'">Start Sharing</button>
+
+                </div>
+            </div>
+        </div>
+    </section>
+
     <!-- Footer -->
 
+    <footer class="page-footer font-small blue">
 
+        <!-- Copyright -->
+        <div class="footer-copyright text-center py-3">© 2019 Spaceshare
+            <a href="terms.html"> Terms of Use </a>
+            <a href="faq.html"> About </a>
+            <a target = "_blank" href="mailto:help@spaceshare.com"> Contact us! </a>
 
+        </div>
 
+    </footer>
 
     <!-- Placed at the end of the document so the pages load faster -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
