@@ -68,7 +68,7 @@ main {
     background-color: #F8F8F8;
     top: 0px;
     background-size: cover;
-    background-image: url(./img/silhouette.jpg);
+    background-image: url(../img/silhouette.jpg);
     margin-bottom: 25px;
     background-position: center;
 }

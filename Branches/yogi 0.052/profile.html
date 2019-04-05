@@ -284,58 +284,103 @@
 
 
             };
-
-
+            var storageIdRef = firebase.storage().ref("/img/"  + uid);
+            console.log(storageIdRef);
+            var imageRef = firebase.database().ref('ProfileImages/' + uid);
 
             // Load the login container
             ui.start('#firebaseui-auth-container', uiConfig); // load our login
 
 
-
             // This tells us if the user has logged in. 
-            firebase.auth().onAuthStateChanged(function(user) {
+            var uid;firebase.auth().onAuthStateChanged(function(user) 
+            {
                 if (user) {
                     //user is logged in
+                    uid = user.uid;
+                    console.log(uid);
                     console.log("user is logged in");
 
                 } else {
                     //user is not logged in
 
                 }
-
-                console.log(firebase);
-            var storage = firebase.storage();
-            var storageRef = storage.ref();
-            console.log(storageRef);
-
-        
-            var fileButton = document.getElementById('image_label');
-            fileButton.addEventListener('change', function(e) {
-                var user = firebase.auth().currentUser;
-                var file = e.target.files[0];
-                console.log(file);
-
-                var storageRef = firebase.storage().ref("/img/"  + file.name);
-                console.log(storageRef);
-                storageRef.put(file);
-                
-                storageRef.getDownloadURL().then(function(url) {
-                    console.log(url);
-                    $('#user-img').css({
-                        "background-image": "url(" + url + ")"
-                    });
-                    
-                    console.log(url);
-                    }).catch(function(error) {
-                    // Handle any errors
-                    });
-                });
             });
+            var storage = firebase.storage();
+            
+        function uploadProfilePic(callback) {
+            
+            var storageRef = storage.ref();
 
-           
+            var fileButton = document.getElementById('image_button');
 
+            /* 
+            Upon change in the state of the button, add an event listener
+            */
+            fileButton.addEventListener('change', function(e) {
 
+                    var file = e.target.files[0];
+                    console.log(file);
+
+                    // Reference to the storage bucket
+                    var storageRef = firebase.storage().ref("/img/"  + uid + "/" + file.name);
+
+                    // Loads the file into firebase
+                    storageRef.put(file);
+
+                    storageRef.getDownloadURL().then(function(url) {
+                    var imageURL = url;
+                    console.log(imageURL);
+                    createPicture(uid, imageURL);
+                });
+                callback();
+            });
+        }
+ /*
+A function that creates a post in FireBase
+*/
+function createPicture(uid, imageURL) {
+
+    var user = firebase.auth().currentUser;
+    var name, email, photoUrl, uid, emailVerified;
+
+    if (user != null) {
+        name = user.displayName;
+        email = user.email;
+        photoUrl = user.photoURL;
+        emailVerified = user.emailVerified;
+        uid = user.uid; // The user's ID, unique to the Firebase project. Do NOT use
+        // this value to authenticate with your backend server, if
+        // you have one. Use User.getToken() instead.
+    }
+
+    // throws errors if you're not logged in
+    console.log(uid);
+    var postImage = {
+        url: imageURL
+    };
+
+    var updates = {};
+    updates['/ProfileImages/' + uid] = postImage;
+    firebase.database().ref().update(updates);
+
+    
+
+}
+
+        function getFile() {
+        console.log(imageRef);
+        console.log(imageRef);
+
+        imageRef.on('value', function(snapshot) {
+            var imageURL = snapshot.val().url;
+            $('.prfl-user-icon').css({
+                "background-image": "url(" + imageURL + ")"
+            });
         });
+        
+    }
+});
     </script>
 </body>
 
