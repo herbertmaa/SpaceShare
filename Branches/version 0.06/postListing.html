@@ -57,7 +57,7 @@
                     <a class="nav-link" href="#">Share Space<span class="sr-only">(current)</span></a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="faq.html">Help</a>
+                    <a class="nav-link" href="faq.html">About</a>
                 </li>
                 <li class="nav-item" id="signup2">
                     <a class="nav-link" data-toggle="modal" href="#user_login" id="signup"> Sign up</a>
@@ -156,8 +156,11 @@
             </div>
             
             <!-- Make description box -->
-            <div class="form-row">
-                <label for="descrip">&nbsp;Description: </label>
+            <div class="form-row" id="descrip">
+                <div class="form-group col-md-6">
+                <label for="descrip">Description: </label>
+                <textarea class="form-control" id="descrip" rows="3" minlength="5" maxlength="50" required></textarea>
+                </div>
             </div>
 
 

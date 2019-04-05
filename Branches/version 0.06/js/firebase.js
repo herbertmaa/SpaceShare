@@ -119,7 +119,7 @@ function logout() {
 /*
 A function that creates a post in FireBase
 */
-function createPost(lsaddress, city, province, length, width, height) {
+function createPost(lsaddress, city, province, length, width, height, description) {
     // Get a key for a new Post.
 
     let newPostKey = firebase.database().ref().push().key;
@@ -150,6 +150,7 @@ function createPost(lsaddress, city, province, length, width, height) {
         Width: width,
         Height: height,
         Account: uid,
+        Description: description,
         RentedOut: "NULL"
     };
 
@@ -208,9 +209,10 @@ $(function postForm() {
             const length = $('#make_length').val();
             const width = $('#make_width').val();
             const height = $('#make_height').val();
+            const description = $('textarea#descrip').val();
 
             console.log(streetAddress, city, province, length, width, height);
-            createPost(streetAddress, city, province, length, width, height);
+            createPost(streetAddress, city, province, length, width, height, description);
             handleComplete();
         }
         // redirect();
