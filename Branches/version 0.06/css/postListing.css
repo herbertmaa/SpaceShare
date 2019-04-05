@@ -22,7 +22,8 @@
 }
 
 main {
-    height: calc(100vh-85px);
+    height: calc(100vh-85px-56px);
+    padding-top: 0px;
     /** pushes the main container to the left  (left as 0 for now) **/
 }
 
