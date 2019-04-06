@@ -74,6 +74,7 @@ main {
     background-image: url(../img/silhouette.jpg);
     margin-bottom: 25px;
     background-position: center;
+    visibility: hidden;
 }
 
 

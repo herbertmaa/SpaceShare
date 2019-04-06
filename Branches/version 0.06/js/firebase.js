@@ -80,6 +80,9 @@ firebase.auth().onAuthStateChanged(function (user) {
         if ($('#srch').length != 0) {
             $("#srch").css("visibility", "visible");
         }
+        if ($('.prfl-user-icon').length != 0){
+            $('.prfl-user-icon').css("visibility", "visible");
+        }
 
         //Initialize the image reference then call getProfileImage()
         imageRef = firebase.database().ref('ProfileImages/' + userID);
@@ -108,6 +111,10 @@ firebase.auth().onAuthStateChanged(function (user) {
         if ($('#srch').length != 0) {
             $("#srch").css("visibility", "visible");
         }
+        if ($('.prfl-user-icon').length != 0){
+            $('.prfl-user-icon').css("visibility", "visible");
+        }
+        
         /**
         var maingreet = document.getElementById("main-greeting");
         maingreet.style.visibility = "visible";
