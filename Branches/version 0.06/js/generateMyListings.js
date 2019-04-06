@@ -16,7 +16,7 @@
 
 
                      if (childSnapshot.child('ListingImage').val() === "NULL") {
-                         tempImage = $("<img src='./img/black.png' alt='Listing Image' height = '200px' width = '240px'>");
+                         tempImage = $("<img src= 'https://images.unsplash.com/photo-1467385829985-2b0fb82b5193?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1051&q=80' alt='Listing Image' height = '200px' width = '240px'>");
                      } else {
 
                          //This listing has an image.
