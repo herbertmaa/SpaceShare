@@ -178,7 +178,7 @@ function createPost(lsaddress, city, province, length, width, height, descriptio
     };
 
     var updates = {};
-    updates['ListingsTest/' + newPostKey] = postData;
+    updates['Listings/' + newPostKey] = postData;
     firebase.database().ref().update(updates);
 
 }

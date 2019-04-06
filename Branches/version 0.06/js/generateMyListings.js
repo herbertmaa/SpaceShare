@@ -4,7 +4,7 @@
          Return type = 1 if it found listings and Return Type = 0 if No listings were found 
          **/
          var foundListings = 0;
-         var query = firebase.database().ref('/ListingsTest');
+         var query = firebase.database().ref('/Listings');
 
          var cardGroupArray = [];
          query.on('value', function (snapshot) {
@@ -12,7 +12,21 @@
                  if (childSnapshot.child('Account').val() == myUserID) {
 
                      let tempContainer = $("<div class='card text-center border-0'> </div>");
-                     let tempImage = $("<img src='./img/black.png' alt='Listing Image' height = '200px' width = '300px'>");
+                     let tempImage;
+
+
+                     if (childSnapshot.child('ListingImage').val() === "NULL") {
+                         tempImage = $("<img src='./img/black.png' alt='Listing Image' height = '200px' width = '240px'>");
+                     } else {
+
+                         //This listing has an image.
+                         tempImage = $("<img src='" + childSnapshot.child('ListingImage').val() + "' alt='Listing Image' height = '200px' width = '240px'>");
+                         
+                         console.log(childSnapshot.child('ListingImage').val());
+
+                     }
+
+
                      let tempCardBody = $("<div class='card-body border m-5 rounded'> </div>");
 
                      let tempHeader = $("<h5 class='card-title mt-2'></h5>");
@@ -49,15 +63,14 @@
                  return 0;
              } else {
 
-                 
-                 if(foundListings % 2 == 1)
-                     {
-                         
-                         //If there are odd number of cards, add a padding card to the cardGroupArray
-                            let tempContainer = $("<div class='card text-center border-0'> </div>");
-                            cardGroupArray.push(tempContainer);
 
-                     }
+                 if (foundListings % 2 == 1) {
+
+                     //If there are odd number of cards, add a padding card to the cardGroupArray
+                     let tempContainer = $("<div class='card text-center border-0'> </div>");
+                     cardGroupArray.push(tempContainer);
+
+                 }
                  var numGroups = Math.round(foundListings / 2);
 
                  for (var i = 0; numGroups > i; i++) {
@@ -67,7 +80,7 @@
                          if (cardGroupArray.length != 0) {
                              tempGroup.prepend(cardGroupArray.pop());
                          }
-                         
+
                      }
                      console.log("hi");
                      $('#content').prepend(tempGroup);
