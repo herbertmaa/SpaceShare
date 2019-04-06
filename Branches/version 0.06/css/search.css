@@ -1,7 +1,8 @@
 nav {
     position: sticky !important;
     top: 0;
-    z-index: 1;
+    opacity: 1;
+    overflow: hidden;
 }
 .navbar-default {
 
@@ -76,20 +77,22 @@ main {
     display: flex !important;
     flex-flow: row wrap !important;
     justify-content: space-around !important;
+    z-index: -1;
 }
 .card {
     display: flex;
     flex-flow: column;
-    align-items: center;
+    align-items: flex-start;
     padding: 10px;
     margin-top: 40px;
-    height: 400px;
+    height: 430px;
     width: 300px;
 }
 .card-img-top {
     height: 200px;
     flex-grow: 0;
     width: 240px;
+    align-self: center;
 }
 #address {
     align-self: flex-start;
@@ -99,6 +102,8 @@ main {
     align-self: center;
 }
 .card-body {
+    display: flex;
+    flex-flow: column nowrap;
     padding: 10px;
     flex-grow: 0;
 }
@@ -124,6 +129,7 @@ footer {
 }
 footer p {
     margin: 0;
+    offset-position: 100vh;
 }
 footer span {
     display: inline-block;
@@ -144,4 +150,8 @@ span.points:hover {
 .btn-primary {
     position: sticky !important;
     top: 100px;
+}
+#description {
+    align-self: center;
+    font-size: 1.1em;
 }
