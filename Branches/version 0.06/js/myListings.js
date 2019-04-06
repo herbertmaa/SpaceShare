@@ -70,7 +70,7 @@ $(document).ready(function () {
             $('#confirm_delete_form').trigger('reset');
             if (keyToChange != undefined) {
 
-                var query = firebase.database().ref('/ListingsTest');
+                var query = firebase.database().ref('/Listings');
                 query.child(keyToChange).remove();
             }
             location.reload();

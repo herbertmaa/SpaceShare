@@ -2,11 +2,11 @@
 $(document).ready(function() {
 
     var db = firebase.database();
-    var query = db.ref('/ListingsTest/').orderByChild('City').equalTo(localStorage.getItem('City'));
-   // var keys = db.ref('/ListingsTest/' + userUID);
+    var query = db.ref('/Listings/').orderByChild('City').equalTo(localStorage.getItem('City'));
+   // var keys = db.ref('/Listings/' + userUID);
 
    console.log(query)
-;    /* Iterates through the ListingsTest object and then creates as many divs 
+;    /* Iterates through the Listings object and then creates as many divs 
     as there are listings*/
 
     var user = firebase.auth().currentUser;
@@ -37,7 +37,7 @@ $(document).ready(function() {
         });
     });
     $('#heightSort').on('click', function() {
-        var filterQuery = db.ref('/ListingsTest/').orderByChild('City_height').startAt(localStorage.getItem('City'));
+        var filterQuery = db.ref('/Listings/').orderByChild('City_height').startAt(localStorage.getItem('City'));
         filterQuery.on('value', function(snapshot) {
             console.log(snapshot);
             $('#cards-container').empty();
@@ -77,7 +77,7 @@ $(document).ready(function() {
         }); 
     });
     $('#lengthSort').on('click', function() {
-        var filterQuery = db.ref('/ListingsTest/').orderByChild('City_length').startAt(localStorage.getItem('City'));
+        var filterQuery = db.ref('/Listings/').orderByChild('City_length').startAt(localStorage.getItem('City'));
         filterQuery.on('value', function(snapshot) {
             
             $('#cards-container').empty();
