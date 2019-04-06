@@ -41,6 +41,9 @@ a:hover {
     text-decoration: none;
 }
 
+html{
+    scroll-behavior: smooth;
+}
 
 .link-spacing {
 

@@ -15,6 +15,9 @@
 
 }
 
+.navbar-nav {
+    visibility: hidden;
+}
 
 .top-buffer {
 
