@@ -43,9 +43,14 @@
 
 <body>
 
+    
+    <div id='loading_overlay'>
 
+        <div class="mdl-spinner mdl-js-spinner is-active " style="width: 5rem; height: 5rem;"></div>
+    </div>
+    
     <!--Navigation bar -->
-    <nav class="navbar navbar-expand-lg navbar-light light shadow-sm" style="height:85px; background-color: #whitesmoke;">
+    <nav class="navbar navbar-expand-lg navbar-light shadow-sm" style="height:85px; background-color: #whitesmoke;">
         <a class="navbar-brand" href="index.html">SpaceShare</a>
         <button class="navbar-toggler" type="button">
             <span class="navbar-toggler-icon"></span>
@@ -59,7 +64,7 @@
                     <a class="nav-link" href="faq.html">About</a>
                 </li>
                 <li class="nav-item" id="signup2">
-                    <a class="nav-link" data-toggle="modal" href="#user_login" id="signup">Sign up</a>
+                    <a class="nav-link" data-toggle="modal" href="#user_login" id="signup"> Sign up</a>
                 </li>
                 <li class="nav-item" id="login2">
                     <a class="nav-link" id="login" data-toggle="modal" href="#user_login">Login</a>
@@ -77,39 +82,35 @@
         </div>
     </nav>
 
-
-    <!-- Main Content -->
-
-
-
     <!-- Firebase login container -->
-    <div class="container">
+    <div class="container hidden">
 
-        <div class="form-row " id="user_login">
+        <div class="modal fade" id="user_login" tabindex="-1" role="dialog">
 
-            <div class="col-12">
+            <div class="modal-dialog modal-dialog-centered modal-sm" role="document">
 
-                <div id="firebaseui-auth-container"></div>
+                <div class="modal-content" style>
 
-                <div id="loader">Loading...</div>
+                    <div class="modal-body">
+                        <div id="firebaseui-auth-container"></div>
+
+                        <div id="loader">Loading...</div>
+                    </div>
+
+                </div>
+
+
 
             </div>
-
         </div>
 
 
     </div>
-    <main role="main" class="container">
-
-        <!--
-        <div class="row top-buffer">
-        </div>
--->
-
-
-
-
-        <div class="container pt-4">
+    
+    
+    <!-- Main content -->
+    <main role="main" class="container hidden">
+    <div class="container pt-4">
             <!-- change this later , border is dark for testing -->
             <div class="row">
 
@@ -182,7 +183,7 @@
 
 
 
-<!-- Current Information -->
+                <!-- Current Information -->
                 <div class="col-5 border mdl-card mdl-color--white">
 
 
@@ -240,24 +241,23 @@
                                     <input type="email" class="form-control" id="your_email" placeholder="Where should we send emails?">
                                 </div>
                             </div>
-                            
+
                         </form>
 
 
                     </fieldset>
-<!-- -->
+                    <!-- -->
+                </div>
+
             </div>
-
         </div>
-        </div>
-
 
     </main>
-    
-    
-        <!-- Footer -->
 
-    <footer class="page-footer font-small blue">
+
+    <!-- Footer -->
+
+    <footer class="page-footer font-small blue hidden">
 
         <!-- Copyright -->
         <div class="footer-copyright text-center py-3">© 2019 Spaceshare

@@ -1,7 +1,8 @@
 $(document).ready(function () {
-    
-    
+
+
     var fileButton = document.getElementById('image_button');
+
     fileButton.addEventListener('change', function (e) {
 
         console.log("a file was uploaded into the browser");
@@ -26,6 +27,11 @@ $(document).ready(function () {
 
     });
 
+
+    setTimeout(function () {
+        $('#loading_overlay').css("display", "none");
+        $('.hidden').removeClass('hidden');
+    }, 1000);
 
 });
 
