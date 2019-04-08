@@ -26,16 +26,20 @@ $(document).ready(function () {
         //This will check if any of the inputs are not correct. If even one is incorrect this loop will break and the value of validInputs will be set to false
 
         for (var i = 0; MAX_INPUTS > i; i++) {
+
+            console.log("i: " + i + " " + elements[i]);
+
             if (elements[i].value.length == 0) {
                 validInputs = false;
                 break;
             }
         }
 
+
         if (validInputs) {
             var address = elements[0].value;
             var addressArray = address.split(",");
-            updateListings(addressArray[0], addressArray[1], addressArray[2], elements[1].value, elements[2].value, elements[3].value, keyToChange);
+            updateListings(addressArray[0], addressArray[1], addressArray[2], elements[1].value, elements[2].value, elements[3].value, elements[4].value, keyToChange);
             $('#content_edit').modal({
                 show: false
             });
@@ -46,22 +50,20 @@ $(document).ready(function () {
 
         }
     });
-    
-    
+
+
     /** When the user clicks the EDIT button this function will be called **/
-    
+
     $('#content').on('click', 'button', function () {
-        
+
         var classNames = $(this).attr("class").toString().split(' ');
         $.each(classNames, function (i, className) {
             if ((className).startsWith("-L")) {
                 keyToChange = className;
             }
         });
-        
+
         updateForm(keyToChange);
-        console.log(keyToChange);
-        console.log(userID);
 
     });
 
@@ -91,8 +93,9 @@ $(document).ready(function () {
 
 });
 
+/** This method adds placeholders to the modal that is loaded when the EDIT button is clicked" **/
 
-function updateForm(listingKey){
+function updateForm(listingKey) {
 
     var query = firebase.database().ref('/Listings/' + listingKey);
     query.on('value', function (snapshot) {
