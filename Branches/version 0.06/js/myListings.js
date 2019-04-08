@@ -22,7 +22,7 @@ $(document).ready(function () {
         //all elements should be entered if a change needs to be made.
         var elements = document.getElementById("message-form").elements;
         var validInputs = true;
-        var MAX_INPUTS = 4; // Address, Width, Height, Length
+        var MAX_INPUTS = 5; // Address, Width, Height, Length, and Description
         //This will check if any of the inputs are not correct. If even one is incorrect this loop will break and the value of validInputs will be set to false
 
         for (var i = 0; MAX_INPUTS > i; i++) {
@@ -46,15 +46,22 @@ $(document).ready(function () {
 
         }
     });
+    
+    
+    /** When the user clicks the EDIT button this function will be called **/
+    
     $('#content').on('click', 'button', function () {
-
-        console.log(this);
+        
         var classNames = $(this).attr("class").toString().split(' ');
         $.each(classNames, function (i, className) {
             if ((className).startsWith("-L")) {
                 keyToChange = className;
             }
         });
+        
+        updateForm(keyToChange);
+        console.log(keyToChange);
+        console.log(userID);
 
     });
 
@@ -83,3 +90,19 @@ $(document).ready(function () {
     });
 
 });
+
+
+function updateForm(listingKey){
+
+    var query = firebase.database().ref('/Listings/' + listingKey);
+    query.on('value', function (snapshot) {
+
+        $('#autocomplete').attr("placeholder", snapshot.child('Address').val());
+        $('#width').attr("placeholder", snapshot.child('Width').val());
+        $('#height').attr("placeholder", snapshot.child('Height').val());
+        $('#length').attr("placeholder", snapshot.child('Length').val());
+        $('#new_descript').attr("placeholder", snapshot.child('Description').val());
+
+    });
+
+}
