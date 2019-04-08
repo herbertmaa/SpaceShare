@@ -39,13 +39,7 @@ var uiConfig = {
     signInFlow: 'popup',
     signInSuccessUrl: 'index.html',
     signInOptions: [
-            // Leave the lines as is for the providers you want to offer your users.
-            //firebase.auth.GoogleAuthProvider.PROVIDER_ID,
-            //firebase.auth.FacebookAuthProvider.PROVIDER_ID,
-            //firebase.auth.TwitterAuthProvider.PROVIDER_ID,
-            //firebase.auth.GithubAuthProvider.PROVIDER_ID,
             firebase.auth.EmailAuthProvider.PROVIDER_ID,
-            //firebase.auth.PhoneAuthProvider.PROVIDER_ID
         ],
     // Terms of service url.
     tosUrl: 'terms.html',
@@ -80,7 +74,7 @@ firebase.auth().onAuthStateChanged(function (user) {
         if ($('#srch').length != 0) {
             $("#srch").css("visibility", "visible");
         }
-        if ($('.prfl-user-icon').length != 0){
+        if ($('.prfl-user-icon').length != 0) {
             $('.prfl-user-icon').css("visibility", "visible");
         }
 
@@ -104,17 +98,16 @@ firebase.auth().onAuthStateChanged(function (user) {
         var navb = document.getElementsByClassName("navbar-nav");
         navb[0].style.visibility = "visible";
         loggedIn = true;
-        $('#loading_overlay').css("display", "none");
         if ($('#main-greeting').length != 0) {
             $("#main-greeting").css("visibility", "visible");
         }
         if ($('#srch').length != 0) {
             $("#srch").css("visibility", "visible");
         }
-        if ($('.prfl-user-icon').length != 0){
+        if ($('.prfl-user-icon').length != 0) {
             $('.prfl-user-icon').css("visibility", "visible");
         }
-        
+
         /**
         var maingreet = document.getElementById("main-greeting");
         maingreet.style.visibility = "visible";
@@ -180,8 +173,8 @@ function createPost(lsaddress, city, province, length, width, height, descriptio
         RentedOut: "NULL",
         ListingImage: imageURL,
         City_height: city + "_" + height,
-        City_length:city + "_" + length,
-        City_width:city + "_" + width
+        City_length: city + "_" + length,
+        City_width: city + "_" + width
     };
 
     var updates = {};
