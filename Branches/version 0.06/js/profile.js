@@ -32,7 +32,7 @@ $(document).ready(function () {
     }, 1000);
 
 
-    checkProfileExists(createProfile(), loadDefaultInfo());
+    checkProfileExists(loadDefaultInfo(), createProfile());
 
 });
 
