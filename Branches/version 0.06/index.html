@@ -8,9 +8,6 @@
     <meta name="author" content="">
     <title>Share space with your friends | SpaceShare</title>
 
-    <!--Template based on URL below-->
-    <link rel="canonical" href="https://getbootstrap.com/docs/4.3/examples/starter-template/">
-
     <!-- Bootstrap core CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 
@@ -19,7 +16,7 @@
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
 
 
-    <!-- Place your stylesheet here-->
+    <!--Our stylesheet-->
     <link href="./css/index.css" rel="stylesheet" type="text/css">
 
 
@@ -42,7 +39,7 @@
 <body>
 
 
-    <!--Navigation bar background-color: #566083-->
+    <!--Navigation bar-->
     <nav class="navbar navbar-expand-lg navbar-light shadow-sm" style="height:85px; background-color: #whitesmoke;">
         <a class="navbar-brand" href="index.html">SpaceShare</a>
         <button class="navbar-toggler" type="button">
@@ -103,7 +100,7 @@
             <h1 class="h3 mb-3 font-weight-normal" id="main-greeting">Find extra space in your neighborhood: </h1>
 
         </div>
-
+        <!-- Search for space! -->
         <form>
             <div class="form-row">
 
@@ -134,22 +131,7 @@
             </div>
 
             <div class="form-row">
-                <!--
                 <div class="form-group col-md-3">
-
-                    <input type="date" class="form-control" id="search_from">
-
-                </div>
-
-                <div class="form-group col-md-3">
-
-                    <input type="date" class="form-control" id="search_to">
-
-                </div>
-                -->
-
-                <div class="form-group col-md-3">
-
                     <input type="button" class="btn btn-primary" id="submit" value="Search" />
                 </div>
             </div>
@@ -158,16 +140,9 @@
         </form>
 
 
-
-
-
-
-
-        <!-- Hidden from the user, this will be updated (leave for now for testing purposes) -->
-
         <!-- Use of Google Places API to sanitize data -->
 
-
+        <!-- hidden from user, allows us to easily separate and retrieve the Google autofill data into categories -->
         <table id="address" style="visibility: hidden">
             <tr>
                 <td class="slimField"><input class="field" id="street_number" /></td>
@@ -232,51 +207,20 @@
 
                 </div>
             </div>
-            
+            <!-- Footer -->
             <footer class="page-footer font-small blue">
 
-        <!-- Copyright -->
-        <div class="footer-copyright text-center py-3">© 2019 Spaceshare
-            <a href="terms.html"> Terms of Use </a>
-            <a href="faq.html"> About </a>
-            <a target = "_blank" href="mailto:help@spaceshare.com"> Contact us! </a>
+                <!-- Copyright -->
+                <div class="footer-copyright text-center py-3">© 2019 Spaceshare
+                    <a href="terms.html"> Terms of Use </a>
+                    <a href="faq.html"> About </a>
+                    <a target = "_blank" href="mailto:help@spaceshare.com"> Contact us! </a>
 
+                </div>
+
+            </footer>
         </div>
-
-    </footer>
-        </div>
-        <!--
-        <footer class="page-footer font-small blue">
--->
-        <!-- Copyright -->
-        <!--
-        <div class="footer-copyright text-center py-3">© 2019 Spaceshare
-            <a href="terms.html"> Terms of Use </a>
-            <a href="faq.html"> About </a>
-            <a target = "_blank" href="mailto:help@spaceshare.com"> Contact us! </a>
-
-        </div>
-
-    </footer>
--->
     </section>
-
-    <!-- Footer -->
-    
-<!--
-    <footer class="page-footer font-small blue">
--->
-        <!-- Copyright -->
-<!--
-        <div class="footer-copyright text-center py-3">© 2019 Spaceshare
-            <a href="terms.html"> Terms of Use </a>
-            <a href="faq.html"> About </a>
-            <a target = "_blank" href="mailto:help@spaceshare.com"> Contact us! </a>
-
-        </div>
-
-    </footer>
--->
 
     <!-- Placed at the end of the document so the pages load faster -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
