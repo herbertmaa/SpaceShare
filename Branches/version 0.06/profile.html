@@ -43,12 +43,12 @@
 
 <body>
 
-    
+
     <div id='loading_overlay'>
 
         <div class="mdl-spinner mdl-js-spinner is-active " style="width: 5rem; height: 5rem;"></div>
     </div>
-    
+
     <!--Navigation bar -->
     <nav class="navbar navbar-expand-lg navbar-light shadow-sm" style="height:85px; background-color: #whitesmoke;">
         <a class="navbar-brand" href="index.html">SpaceShare</a>
@@ -106,11 +106,11 @@
 
 
     </div>
-    
-    
+
+
     <!-- Main content -->
     <main role="main" class="container hidden">
-    <div class="container pt-4">
+        <div class="container pt-4">
             <!-- change this later , border is dark for testing -->
             <div class="row">
 
@@ -147,7 +147,7 @@
 
                             <div class="row justify-content-start">
                                 <div class="form-group col-md-7">
-                                    <textarea class="form-control" form="usrform" placeholder="A description about yourself in 200 characters or less" maxlength="200"></textarea>
+                                    <textarea id = "description" class="form-control" form="usrform" placeholder="A description about yourself in 200 characters or less" maxlength="200"></textarea>
                                 </div>
                             </div>
 
@@ -183,71 +183,6 @@
 
 
 
-                <!-- Current Information -->
-                <div class="col-5 border mdl-card mdl-color--white">
-
-
-                    <fieldset>
-
-                        <form>
-                            <div class="row justify-content-start mt-4">
-                                <div class="form-group col-12">
-
-                                    <div class="row">
-                                        <div id="user-img" class="col-5">
-                                            <div id="user-img" class="prfl-user-icon">
-                                            </div>
-                                        </div>
-
-
-                                        <div class="col-5">
-                                            <label for="image_button" class="opt-btn" id="image_label" style="margin-top:30px; margin-right: 25px;">Change Photo</label>
-
-                                            <input type="file" id="image_button" accept="image/*" style="visibility:hidden;">
-                                            <input type="file" id="image_button" accept="image/png, image/jpeg" style="visibility:hidden;">
-
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="row justify-content-start">
-                                <div class="form-group col-md-7">
-                                    <input type="text" class="form-control" id="full_name" placeholder="Your Current Name">
-                                </div>
-                            </div>
-
-                            <div class="row justify-content-start">
-                                <div class="form-group col-md-7">
-                                    <textarea class="form-control" form="usrform" placeholder="A description about yourself in 200 characters or less" maxlength="200"></textarea>
-                                </div>
-                            </div>
-
-                            <div class="row justify-content-start">
-                                <div class="form-group col-md-7">
-                                    <input type="text" class="form-control" id="phone_number" placeholder="Phone No.">
-                                </div>
-                            </div>
-
-                            <div class="row justify-content-start">
-                                <div class="form-group col-md-7">
-                                    <input type="text" class="form-control" id="your_address" placeholder="Enter your address">
-                                </div>
-                            </div>
-
-
-                            <div class="row justify-content-start">
-                                <div class="form-group col-md-7">
-                                    <input type="email" class="form-control" id="your_email" placeholder="Where should we send emails?">
-                                </div>
-                            </div>
-
-                        </form>
-
-
-                    </fieldset>
-                    <!-- -->
-                </div>
 
             </div>
         </div>

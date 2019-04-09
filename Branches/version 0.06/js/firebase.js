@@ -280,3 +280,94 @@ function getProfileImage() {
 
 
 }
+
+
+/** A function that loads the default user information in the profile page **/
+
+function loadDefaultInfo() {
+
+
+    firebase.auth().onAuthStateChanged(function (user) {
+        if (user) {
+
+            let currentUser = firebase.auth().currentUser;
+            firebase.database().ref("/Profiles/" + currentUser.uid).once("value", snapshot => {
+                if (snapshot.exists()) {
+                    $("#full_name").attr("placeholder", snapshot.val().Name);
+                    $("#full_name").attr("value", snapshot.val().Name);
+
+                    $("#description").attr("placeholder", snapshot.val().Description);
+                    $("#description").attr("value", snapshot.val().Description);
+
+                    $("#phone_number").attr("placeholder", snapshot.val().Phone);
+                    $("#phone_number").attr("value", snapshot.val().Phone);
+
+                    $("#your_address").attr("placeholder", snapshot.val().Address);
+                    $("#your_address").attr("value", snapshot.val().Address);
+
+                    $("#your_email").attr("placeholder", snapshot.val().Email);
+                    $("#your_email").attr("value", snapshot.val().Email);
+
+                } else {
+                    console.log("Profile does not exist. No information to load.");
+                }
+            });
+
+        } else {
+
+
+            //user is not logged in.
+        }
+    });
+
+}
+/** A function that creates a user's profile. This method does not check if the profile has already been created. As that functionality is in the function checkProfileExists(). If a profile has already been created, no changes are made to the database. **/
+function createProfile() {
+
+    firebase.auth().onAuthStateChanged(function (user) {
+        if (user) {
+
+            let currentUser = firebase.auth().currentUser;
+            //Create the user's profile in Firebase if it does not currently exist
+            var postData = {
+                Name: currentUser.displayName,
+                Address: "Enter your address",
+                Phone: "Enter your phone number",
+                Description: "A description about yourself in 200 characters or less",
+                Email: currentUser.email
+            };
+            var updates = {};
+            updates['Profiles/' + currentUser.uid] = postData;
+            firebase.database().ref().update(updates);
+            console.log("created profile");
+
+        } else {
+
+
+            //user is not logged in.
+        }
+    });
+}
+
+/** A method that checks if a user's profile already exists in the Firebase database, if the user's profile does not exist, this function calls the callback function passed to it **/
+
+function checkProfileExists(success, fail) {
+
+    firebase.auth().onAuthStateChanged(function (user) {
+        if (user) {
+            let currentUser = firebase.auth().currentUser;
+            //Check if the the Profile has been created yet in the database
+            firebase.database().ref("/Profiles/" + currentUser.uid).once("value", snapshot => {
+                if (snapshot.exists()) {
+                    console.log("User already exists in the database!");
+                    //The user already exists in Firebase.
+                    success; //Call the success() function if the profile exists.
+                } else {
+                    fail; //Call the fail() function if the profile does not exist.
+                }
+            });
+        } else {
+            //The user is not logged in.
+        }
+    });
+}

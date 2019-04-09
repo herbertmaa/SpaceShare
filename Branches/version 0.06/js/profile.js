@@ -1,6 +1,5 @@
 $(document).ready(function () {
 
-
     var fileButton = document.getElementById('image_button');
 
     fileButton.addEventListener('change', function (e) {
@@ -27,11 +26,13 @@ $(document).ready(function () {
 
     });
 
-
     setTimeout(function () {
         $('#loading_overlay').css("display", "none");
         $('.hidden').removeClass('hidden');
     }, 1000);
+
+
+    checkProfileExists(createProfile(), loadDefaultInfo());
 
 });
 
