@@ -1,5 +1,4 @@
 .navbar-default {
-
     /** background color of our navbar **/
     background-color: #F8F8F8;
     border-color: #E7E7E7;
@@ -38,7 +37,6 @@
 }
 
 .container{
-    /** background-color:#F2F0ED; **/
     max-width: none;
     max-height: none;
     padding-top: 5px;
