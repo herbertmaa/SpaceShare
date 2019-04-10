@@ -20,7 +20,7 @@ nav {
 
 }
 #srch{
-    visibility: hidden;
+    visibility: visible;
 }
 .navbar-nav {
     visibility: hidden;

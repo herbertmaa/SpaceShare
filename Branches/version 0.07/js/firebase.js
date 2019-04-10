@@ -51,29 +51,14 @@ var uiConfig = {
 // Load the login container
 ui.start('#firebaseui-auth-container', uiConfig); // load our login
 
-// This tells us if the user has logged in. 
+
+// This function sets the profile image to the user's
+// User's Profile Image can be accessed on every page
 firebase.auth().onAuthStateChanged(function (user) {
     if (user) {
 
         //User is logged in
-        //Update the navigation bar so there are affordances regarding the login status of the user
-        $("#signup").hide();
-        $("#signup2").hide();
-        $("#login").hide();
-        $("#login2").hide();
-        var navb = document.getElementsByClassName("navbar-nav");
-        navb[0].style.visibility = "visible";
         userID = firebase.auth().currentUser.uid;
-
-        //Renames the main greeting to Welcome back if you are on the home page
-        if ($('#main-greeting').length != 0) {
-
-            $("#main-greeting").text("Welcome back, " + user.displayName + "!");
-            $("#main-greeting").css("visibility", "visible");
-        }
-        if ($('#srch').length != 0) {
-            $("#srch").css("visibility", "visible");
-        }
         if ($('.prfl-user-icon').length != 0) {
             $('.prfl-user-icon').css("visibility", "visible");
         }
@@ -83,6 +68,23 @@ firebase.auth().onAuthStateChanged(function (user) {
         getProfileImage();
         listingImageRef = firebase.database().ref('ListingImages/' + userID);
 
+    } else {
+        // loggedIn = true;
+        }
+    });
+
+/* function that changes the navbar based on if your logged in or not */
+/* ALL PAGES USE THIS FUNCTION */
+function navb(){
+    firebase.auth().onAuthStateChanged(function (user) {
+    if (user) {
+        //User is logged in
+        $("#signup").hide();
+        $("#signup2").hide();
+        $("#login").hide();
+        $("#login2").hide();
+        var navb = document.getElementsByClassName("navbar-nav");
+        navb[0].style.visibility = "visible";
     } else {
         console.log("not logged in");
         $("#myprofile").hide();
@@ -97,24 +99,28 @@ firebase.auth().onAuthStateChanged(function (user) {
         $("#login2").show();
         var navb = document.getElementsByClassName("navbar-nav");
         navb[0].style.visibility = "visible";
-        loggedIn = true;
-        if ($('#main-greeting').length != 0) {
-            $("#main-greeting").css("visibility", "visible");
-        }
-        if ($('#srch').length != 0) {
-            $("#srch").css("visibility", "visible");
-        }
-        if ($('.prfl-user-icon').length != 0) {
-            $('.prfl-user-icon').css("visibility", "visible");
-        }
-
-        /**
-        var maingreet = document.getElementById("main-greeting");
-        maingreet.style.visibility = "visible";
-        $('.container').removeClass('hidden');
-        **/
     }
 });
+}
+
+// Called here because everypage has the navbar and needs this function to run
+navb();
+
+/* changes index.html greeting if your are logged in or not */
+/* only index.html uses this function */
+function greeting(){
+    firebase.auth().onAuthStateChanged(function (user) {
+    if (user) {
+        //User is logged in
+        userID = firebase.auth().currentUser.uid;
+        $("#main-greeting").text("Welcome back, " + user.displayName + "!");
+        $("#main-greeting").css("visibility", "visible");
+    } else {
+        console.log("not logged in");
+            $("#main-greeting").css("visibility", "visible");
+    }
+    });
+}
 
 
 function logout() {

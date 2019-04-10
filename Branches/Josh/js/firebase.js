@@ -55,6 +55,7 @@ ui.start('#firebaseui-auth-container', uiConfig); // load our login
 
 firebase.auth().onAuthStateChanged(function (user) {
     if (user) {
+        userID = firebase.auth().currentUser.uid;
         if ($('.prfl-user-icon').length != 0) {
             $('.prfl-user-icon').css("visibility", "visible");
         }
