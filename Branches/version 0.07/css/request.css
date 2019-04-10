@@ -1,0 +1,14 @@
+.h1 {
+  text-align: center;
+  position: relative;
+  top: 50px;
+}
+main {
+  min-height: calc(100% - 170px);
+}
+footer {
+  height: 85px;
+  width: 100%;
+  position: absolute;
+  bottom: 0px
+}
