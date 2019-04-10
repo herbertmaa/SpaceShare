@@ -39,13 +39,7 @@ var uiConfig = {
     signInFlow: 'popup',
     signInSuccessUrl: 'index.html',
     signInOptions: [
-            // Leave the lines as is for the providers you want to offer your users.
-            //firebase.auth.GoogleAuthProvider.PROVIDER_ID,
-            //firebase.auth.FacebookAuthProvider.PROVIDER_ID,
-            //firebase.auth.TwitterAuthProvider.PROVIDER_ID,
-            //firebase.auth.GithubAuthProvider.PROVIDER_ID,
             firebase.auth.EmailAuthProvider.PROVIDER_ID,
-            //firebase.auth.PhoneAuthProvider.PROVIDER_ID
         ],
     // Terms of service url.
     tosUrl: 'terms.html',
@@ -80,6 +74,9 @@ firebase.auth().onAuthStateChanged(function (user) {
         if ($('#srch').length != 0) {
             $("#srch").css("visibility", "visible");
         }
+        if ($('.prfl-user-icon').length != 0) {
+            $('.prfl-user-icon').css("visibility", "visible");
+        }
 
         //Initialize the image reference then call getProfileImage()
         imageRef = firebase.database().ref('ProfileImages/' + userID);
@@ -101,13 +98,16 @@ firebase.auth().onAuthStateChanged(function (user) {
         var navb = document.getElementsByClassName("navbar-nav");
         navb[0].style.visibility = "visible";
         loggedIn = true;
-        $('#loading_overlay').css("display", "none");
         if ($('#main-greeting').length != 0) {
             $("#main-greeting").css("visibility", "visible");
         }
         if ($('#srch').length != 0) {
             $("#srch").css("visibility", "visible");
         }
+        if ($('.prfl-user-icon').length != 0) {
+            $('.prfl-user-icon').css("visibility", "visible");
+        }
+
         /**
         var maingreet = document.getElementById("main-greeting");
         maingreet.style.visibility = "visible";
@@ -173,8 +173,8 @@ function createPost(lsaddress, city, province, length, width, height, descriptio
         RentedOut: "NULL",
         ListingImage: imageURL,
         City_height: city + "_" + height,
-        City_length:city + "_" + length,
-        City_width:city + "_" + width
+        City_length: city + "_" + length,
+        City_width: city + "_" + width
     };
 
     var updates = {};
@@ -267,7 +267,7 @@ function redirect() {
     return false;
 }
 
-
+/** This function will try to retrieve the profile image URL from Firebase and then parse the URL through jQuery into the page **/
 function getProfileImage() {
 
     imageRef.on('value', function (snapshot) {
@@ -279,4 +279,113 @@ function getProfileImage() {
     });
 
 
+}
+
+
+/** A function that loads the default user information in the profile page **/
+
+function loadDefaultInfo() {
+
+
+    firebase.auth().onAuthStateChanged(function (user) {
+        if (user) {
+
+            let currentUser = firebase.auth().currentUser;
+            firebase.database().ref("/Profiles/" + currentUser.uid).once("value", snapshot => {
+                if (snapshot.exists()) {
+                    $("#full_name").attr("placeholder", snapshot.val().Name);
+                    $("#full_name").attr("value", snapshot.val().Name);
+
+                    $("#description").attr("placeholder", snapshot.val().Description);
+
+                    $("#phone_number").attr("placeholder", snapshot.val().Phone);
+
+                    $("#your_address").attr("placeholder", snapshot.val().Address);
+
+                    $("#your_email").attr("placeholder", snapshot.val().Email);
+                    $("#your_email").attr("value", snapshot.val().Email);
+
+                } else {
+                    console.log("Profile does not exist. No information to load.");
+                }
+            });
+
+        } else {
+
+
+            //user is not logged in.
+        }
+    });
+
+}
+/** A function that creates a user's profile. This method does not check if the profile has already been created. As that functionality is in the function checkProfileExists(). If a profile has already been created, no changes are made to the database. **/
+function createProfile() {
+    firebase.auth().onAuthStateChanged(function (user) {
+        if (user) {
+            let currentUser = firebase.auth().currentUser;
+            //Create the user's profile in Firebase if it does not currently exist
+            var postData = {
+                Name: currentUser.displayName,
+                Address: "Enter your address",
+                Phone: "Enter your phone number",
+                Description: "A description about yourself in 200 characters or less",
+                Email: currentUser.email
+            };
+            var updates = {};
+            updates['Profiles/' + currentUser.uid] = postData;
+            firebase.database().ref().update(updates);
+            console.log("created profile");
+
+        } else {
+
+
+            //user is not logged in.
+        }
+    });
+}
+
+/** A method that checks if a user's profile already exists in the Firebase database, if the user's profile does not exist, this function calls the callback function passed to it **/
+
+function checkProfileExists(success, fail) {
+
+    firebase.auth().onAuthStateChanged(function (user) {
+        if (user) {
+            let currentUser = firebase.auth().currentUser;
+            //Check if the the Profile has been created yet in the database
+            firebase.database().ref("/Profiles/" + currentUser.uid).once("value", snapshot => {
+                if (snapshot.exists()) {
+                    //The user already exists in Firebase.
+                    success(); //Call the success() function if the profile exists.
+                } else {
+                    fail(); //Call the fail() function if the profile does not exist.
+                }
+            });
+        } else {
+            //The user is not logged in.
+        }
+    });
+}
+
+function changeProfile(name, address, phone, description, email) {
+
+    firebase.auth().onAuthStateChanged(function (user) {
+        if (user) {
+            let currentUser = firebase.auth().currentUser;
+
+            var query = firebase.database().ref('/Profiles/' + currentUser.uid);
+
+            console.log(address, description, email, name, phone);
+            query.child('Address').set(address);
+            query.child('Description').set(description);
+            query.child('Email').set(email);
+            query.child('Name').set(name);
+            query.child('Phone').set(phone);
+            location.reload();
+
+        } else {
+
+            //The user is not logged in.
+        }
+
+    });
 }

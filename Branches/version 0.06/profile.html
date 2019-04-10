@@ -44,8 +44,13 @@
 <body>
 
 
+    <div id='loading_overlay'>
+
+        <div class="mdl-spinner mdl-js-spinner is-active " style="width: 5rem; height: 5rem;"></div>
+    </div>
+
     <!--Navigation bar -->
-    <nav class="navbar navbar-expand-lg navbar-light light shadow-sm" style="height:85px; background-color: #whitesmoke;">
+    <nav class="navbar navbar-expand-lg navbar-light shadow-sm" style="height:85px; background-color: #whitesmoke;">
         <a class="navbar-brand" href="index.html">SpaceShare</a>
         <button class="navbar-toggler" type="button">
             <span class="navbar-toggler-icon"></span>
@@ -59,7 +64,7 @@
                     <a class="nav-link" href="faq.html">About</a>
                 </li>
                 <li class="nav-item" id="signup2">
-                    <a class="nav-link" data-toggle="modal" href="#user_login" id="signup">Sign up</a>
+                    <a class="nav-link" data-toggle="modal" href="#user_login" id="signup"> Sign up</a>
                 </li>
                 <li class="nav-item" id="login2">
                     <a class="nav-link" id="login" data-toggle="modal" href="#user_login">Login</a>
@@ -77,46 +82,42 @@
         </div>
     </nav>
 
-
-    <!-- Main Content -->
-
-
-
     <!-- Firebase login container -->
-    <div class="container">
+    <div class="container hidden">
 
-        <div class="form-row " id="user_login">
+        <div class="modal fade" id="user_login" tabindex="-1" role="dialog">
 
-            <div class="col-12">
+            <div class="modal-dialog modal-dialog-centered modal-sm" role="document">
 
-                <div id="firebaseui-auth-container"></div>
+                <div class="modal-content" style>
 
-                <div id="loader">Loading...</div>
+                    <div class="modal-body">
+                        <div id="firebaseui-auth-container"></div>
+
+                        <div id="loader">Loading...</div>
+                    </div>
+
+                </div>
+
+
 
             </div>
-
         </div>
 
 
     </div>
-    <main role="main" class="container">
-
-        <!--
-        <div class="row top-buffer">
-        </div>
--->
 
 
-
-
+    <!-- Main content -->
+    <main role="main" class="container hidden">
         <div class="container pt-4">
             <!-- change this later , border is dark for testing -->
-            <div class="row">
+            <div class="row justify-content-center">
 
-                <div class="col-5 border mdl-card mdl-color--white mr-5">
+                <div class="col-6 border mdl-card mdl-color--white">
                     <fieldset>
 
-                        <form>
+                        <form id="profile-form">
                             <div class="row justify-content-start mt-4">
                                 <div class="form-group col-12">
 
@@ -128,7 +129,7 @@
 
 
                                         <div class="col-5">
-                                            <label for="image_button" class="opt-btn" id="image_label" style="margin-top:30px; margin-right: 25px;">Change Photo</label>
+                                            <label for="image_button" class="opt-btn" id="image_label" style="margin-top:30px">Change Photo</label>
 
                                             <input type="file" id="image_button" accept="image/*" style="visibility:hidden;">
                                             <input type="file" id="image_button" accept="image/png, image/jpeg" style="visibility:hidden;">
@@ -139,39 +140,45 @@
                             </div>
 
                             <div class="row justify-content-start">
-                                <div class="form-group col-md-7">
-                                    <input type="text" class="form-control" id="full_name" placeholder="Your Current Name">
+                                <div class="form-group col-lg-6">
+                                    <label for="full_name">Name:</label>
+                                    <input type="text" class="form-control" id="full_name" placeholder="Your Name">
+
                                 </div>
                             </div>
 
                             <div class="row justify-content-start">
-                                <div class="form-group col-md-7">
-                                    <textarea class="form-control" form="usrform" placeholder="A description about yourself in 200 characters or less" maxlength="200"></textarea>
+                                <div class="form-group col-lg-8">
+                                    <label for="description">Life story:</label>
+                                    <textarea id="description" rows = "4" class="form-control" form="usrform" placeholder="A description about yourself in 200 characters or less" maxlength="350"></textarea>
                                 </div>
                             </div>
 
                             <div class="row justify-content-start">
-                                <div class="form-group col-md-7">
+                                <div class="form-group col-lg-8">
+                                    <label for="phone_number">Contact number:</label>
                                     <input type="text" class="form-control" id="phone_number" placeholder="Phone No.">
                                 </div>
                             </div>
 
                             <div class="row justify-content-start">
-                                <div class="form-group col-md-7">
+                                <div class="form-group col-lg-8">
+                                    <label for="your_address">Mailing address:</label>
                                     <input type="text" class="form-control" id="your_address" placeholder="Enter your address">
                                 </div>
                             </div>
 
 
                             <div class="row justify-content-start">
-                                <div class="form-group col-md-7">
+                                <div class="form-group col-lg-8">
+                                    <label for="your_email">Email address:</label>
                                     <input type="email" class="form-control" id="your_email" placeholder="Where should we send emails?">
                                 </div>
                             </div>
 
-                            <div class="row justify-content-start">
-                                <div class="form-group col-12">
-                                    <button type="submit" class="btn btn-primary">Update Profile</button>
+                            <div class="row justify-content-md-center">
+                                <div class="form-group col-4 mt-3">
+                                    <button type="button" id="update-edit" class="btn btn-primary">Update Profile</button>
                                 </div>
                             </div>
                         </form>
@@ -182,82 +189,16 @@
 
 
 
-<!-- Current Information -->
-                <div class="col-5 border mdl-card mdl-color--white">
 
-
-                    <fieldset>
-
-                        <form>
-                            <div class="row justify-content-start mt-4">
-                                <div class="form-group col-12">
-
-                                    <div class="row">
-                                        <div id="user-img" class="col-5">
-                                            <div id="user-img" class="prfl-user-icon">
-                                            </div>
-                                        </div>
-
-
-                                        <div class="col-5">
-                                            <label for="image_button" class="opt-btn" id="image_label" style="margin-top:30px; margin-right: 25px;">Change Photo</label>
-
-                                            <input type="file" id="image_button" accept="image/*" style="visibility:hidden;">
-                                            <input type="file" id="image_button" accept="image/png, image/jpeg" style="visibility:hidden;">
-
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="row justify-content-start">
-                                <div class="form-group col-md-7">
-                                    <input type="text" class="form-control" id="full_name" placeholder="Your Current Name">
-                                </div>
-                            </div>
-
-                            <div class="row justify-content-start">
-                                <div class="form-group col-md-7">
-                                    <textarea class="form-control" form="usrform" placeholder="A description about yourself in 200 characters or less" maxlength="200"></textarea>
-                                </div>
-                            </div>
-
-                            <div class="row justify-content-start">
-                                <div class="form-group col-md-7">
-                                    <input type="text" class="form-control" id="phone_number" placeholder="Phone No.">
-                                </div>
-                            </div>
-
-                            <div class="row justify-content-start">
-                                <div class="form-group col-md-7">
-                                    <input type="text" class="form-control" id="your_address" placeholder="Enter your address">
-                                </div>
-                            </div>
-
-
-                            <div class="row justify-content-start">
-                                <div class="form-group col-md-7">
-                                    <input type="email" class="form-control" id="your_email" placeholder="Where should we send emails?">
-                                </div>
-                            </div>
-                            
-                        </form>
-
-
-                    </fieldset>
-<!-- -->
             </div>
-
         </div>
-        </div>
-
 
     </main>
-    
-    
-        <!-- Footer -->
 
-    <footer class="page-footer font-small blue">
+
+    <!-- Footer -->
+
+    <footer class="page-footer font-small blue hidden">
 
         <!-- Copyright -->
         <div class="footer-copyright text-center py-3">© 2019 Spaceshare
