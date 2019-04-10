@@ -46,10 +46,6 @@
             <span class="navbar-toggler-icon"></span>
         </button>
         <form>
-            <div id="srch" class="form-group">
-                <input type="text" class="form-control" id="autocomplete" placeholder="Type to search">
-                <a class="search-btn" href="#"></a>
-            </div>
         </form>
         <div class="collapse navbar-collapse justify-content-end">
             <ul class="navbar-nav">
@@ -77,6 +73,20 @@
             </ul>
         </div>
     </nav>
+
+     <!--Firebase login-->
+     <div class="modal fade" id="user_login" tabindex="-1" role="dialog">
+            <div class="modal-dialog modal-dialog-centered modal-sm" role="document">
+                <div class="modal-content" style>
+                    <div class="modal-body">
+                        <div id="firebaseui-auth-container"></div>
+                        <div id="loader">Loading...</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
     <main>
         <h1 class="h1">Your listing has been requested.</h1>
     </main>
@@ -97,7 +107,7 @@
     <!-- Placed at the end of the document so the pages load faster -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-
+    <script src="./js/firebase.js"></script>
 
 
 </body>

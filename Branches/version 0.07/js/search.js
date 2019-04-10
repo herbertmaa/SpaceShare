@@ -10,8 +10,8 @@ $(document).ready(function() {
     var length = localStorage.getItem('Length');
     var width = localStorage.getItem('Width'); 
     var height = localStorage.getItem('Height');
-
-    
+    var uid = localStorage.getItem('uid');
+    var loggedIn = localStorage.getItem('uid') != "";
     showListings(query);
 
     $('#heightSort').on('click', function() {
@@ -133,13 +133,15 @@ $(document).ready(function() {
         $('#exampleModal').modal('toggle');
         $('#requestListing').on('click', function() {
             var regex = new RegExp("REQUEST");
-            if ($('#request').val().match(regex)) {
+            if (($('#request').val().match(regex)) && loggedIn) {
                 var request = db.ref('/Listings/' + key);
                 request.child('RentedOut').set(uid);
                 window.location.href = 'succrequest.html';
-            } else {
+            } else if (($('#request').val().match(regex)) && loggedIn) {
                 alert("Invalid Entry");
                 $('#request').trigger('reset');
+            } else if (($('#request').val().match(regex)) && !loggedIn) {
+                $('#user_login').modal('toggle');
             }
         });
     });

@@ -23,10 +23,7 @@ $('#submit').on('click', event => {
     var widthIsInvalid  = $('#make_width').val() === "" || $('#make_width').val() < 0;
     var heightIsInvalid  = $('#make_height').val() === "" || $('#make_height').val() < 0;
 
-    if (!loggedIn) {
-      event.preventDefault();
-      $('#user_login').modal('toggle');
-    } else if (!addressIsEmpty && !cityIsEmpty && !lengthIsInvalid && !heightIsInvalid  && !widthIsInvalid)  {
+    if (!addressIsEmpty && !cityIsEmpty && !lengthIsInvalid && !heightIsInvalid  && !widthIsInvalid)  {
          document.location.href = "search.html";
       } else {
         window.alert("Enter valid data");
