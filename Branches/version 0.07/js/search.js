@@ -5,7 +5,7 @@ $(document).ready(function() {
     var db = firebase.database();
     var query = db.ref('/Listings/').orderByChild('City').equalTo(citySearched);
 
-    var uid = localStorage.getItem('uid');
+    
 
     var length = localStorage.getItem('Length');
     var width = localStorage.getItem('Width'); 
@@ -21,24 +21,25 @@ $(document).ready(function() {
      * For ex Vancouver_09
      * Shows all the listings with the Vancouver and then sorts them lexicograhically on their height, width or length.
      */ 
-        var filterQuery = db.ref('/Listings/').orderByChild('City_height').startAt(citySearched).endAt(citySearched + "\uf8ff");
+        var filterQuery = db.ref('/Listings/').orderByChild('City_height').startAt(citySearched).endAt(citySearched + "_\uf8ff");
         $('.card').replaceWith(showListings(filterQuery));
     });
 
     $('#widthSort').on('click', function() {
-        var filterQuery = db.ref('/Listings/').orderByChild('City_width').startAt(citySearched).endAt(citySearched + "\uf8ff");
+        var filterQuery = db.ref('/Listings/').orderByChild('City_width').startAt(citySearched).endAt(citySearched + "_\uf8ff");
         $('.card').replaceWith(showListings(filterQuery));
     });
 
     $('#lengthSort').on('click', function() {
-        var filterQuery = db.ref('/Listings/').orderByChild('City_length').startAt(localStorage.getItem('City')).endAt(citySearched +"\uf8ff");
+        var filterQuery = db.ref('/Listings/').orderByChild('City_length').startAt(citySearched).endAt(citySearched + "_\uf8ff");
         $('.card').replaceWith(showListings(filterQuery));
     });
 
     function showListings(database) {
         var cityInput, addressInput, heightInput, lengthInput, widthInput, provinceInput, imgURL, descrip, key;
-
+        var count = 0;
         database.on('value', function(snapshot) {
+            
             snapshot.forEach(function (childSnapshot) {
 
                 cityInput = childSnapshot.val().City;
@@ -51,23 +52,34 @@ $(document).ready(function() {
                 descrip = childSnapshot.val().Description; 
                 key = childSnapshot.val().key;
 
-                if (childSnapshot.val().RentedOut == "NULL" && lengthInput >= length &&
-                    widthInput >= width && heightInput >= height) {
+
+                var greaterThanHeight = heightInput >= height;
+                var greaterThanLength = lengthInput >= length;
+                var greaterThanWidth = widthInput >= width;
+                if (childSnapshot.val().RentedOut == "NULL" && (greaterThanHeight &&
+                    greaterThanLength && greaterThanWidth)) {
+                        
                     createCard(cityInput, addressInput, heightInput, lengthInput, widthInput, provinceInput, imgURL, descrip, key);
-                } else if (childSnapshot.val().RentedOut != "NULL" && lengthInput >= length &&
-                widthInput >= width && heightInput >= height) {
+                    count++;
+                    
+                } else if (childSnapshot.val().RentedOut != "NULL" && (greaterThanHeight &&
+                    greaterThanLength && greaterThanWidth)) {
                     createRentedCard(cityInput, addressInput, heightInput, lengthInput, widthInput, provinceInput, imgURL, descrip, key);
-                } else if (childSnapshot.val().RentedOut == "NULL") {
-                    createCard(cityInput, addressInput, heightInput, lengthInput, widthInput, provinceInput, imgURL, descrip, key);
-                } else if (childSnapshot.val().RentedOut != "NULL") {
-                    createRentedCard(cityInput, addressInput, heightInput, lengthInput, widthInput, provinceInput, imgURL, descrip, key);
-                } else {
-                    $('#cards-container').append('<h1 class = "h1"> Sorry, No listings found</h1>')
-                }
+                    count++;
+                }  
             });
+            console.log(count);
+            if (count == 0) {
+                $('#dropdownMenuButton').css("display", "none");
+                $('#cards-container').append('<h3 class = "h3 mt-5 pt-5">Sorry! no listings found :(</h3>');
+            }
+            else{
+
+                $('#dropdownMenuButton').css("visibility", "visible");
+            }
         });
-        
     }
+        
 
     // Creates a card with the given inputs.
     function createCard(city, address, height, length, width, province, url, description, key) {

@@ -122,11 +122,13 @@ function loadgreeting(){
 
 function logout() {
     firebase.auth().signOut().then(function () {
+        localStorage.setItem('uid', "");
         // Sign-out successful.
     }).catch(function (error) {
         // An error happened.
     });
     location.href = "index.html"
+    
 }
 
 

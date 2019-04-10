@@ -73,6 +73,7 @@ main {
     justify-content: space-around;
     margin-bottom: 50px;
     z-index: -1;
+    min-height: calc(100vh - 85px);
 }
 #cards-container {
     width: 60vw;
@@ -120,7 +121,7 @@ main {
     border-color: grey;
     border-width: thin;
 }
-footer {
+/*footer {
     height: 60px;
     background-color: #ededed;
     display: flex;
@@ -145,7 +146,7 @@ span.points:hover {
 .copyright {
     color: #787878;
     padding-right: 400px;
-}
+}*/
 .dropdown {
     margin-right: 5vw;
 }
@@ -157,6 +158,13 @@ span.points:hover {
     align-self: center;
     font-size: 1.1em;
 }
-#overlay {
-    display: none;
+.firebaseui-container {
+
+    box-shadow: none !important;
+
+}
+
+#dropdownMenuButton{
+
+    visibility: hidden;
 }
