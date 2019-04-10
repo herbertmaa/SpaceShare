@@ -8,9 +8,6 @@
     <meta name="author" content="">
     <title>Share space with your friends | SpaceShare</title>
 
-    <!--Template based on URL below-->
-    <link rel="canonical" href="https://getbootstrap.com/docs/4.3/examples/starter-template/">
-
     <!-- Bootstrap core CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 
@@ -18,7 +15,7 @@
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
 
 
-    <!-- Place your stylesheet here-->
+    <!-- Our Stylesheet -->
     <link href="./css/postListing.css" rel="stylesheet" type="text/css">
 
     <!-- Firebase -->
@@ -82,9 +79,9 @@
         </div>
     </div>
 
+    <!-- Main container where our stuff goes -->
     <main role="main" class="container">
-
-        <!-- <div class="row top-buffer" style="background-color: #000000;"> </div> -->
+        
         <div class="container pl-5 pt-0">
             <div class="row">
                 <div class="col-9">
@@ -99,13 +96,12 @@
                             </div>
                         </div>
 
-                        <!-- Idea: for dimensions, create a label called dimensions
-                    and use placeholder text for length width height
-            -->
+                        <!-- Dimensions Label -->
+                        
                         <div class="form-row">
                             <label for="dimension">&nbsp;Dimensions: </label>
                         </div>
-
+                        <!-- Length, Width Height boxes -->
                         <div class="form-row">
 
                             <div class="form-group col-3" id="dimension">
@@ -126,14 +122,15 @@
 
                         </div>
 
-                        <!-- Make description box -->
+                        <!-- Description Box -->
                         <div class="form-row" id="descrip">
                             <div class="form-group col-md-9">
                                 <label for="descrip">Description: </label>
                                 <textarea class="form-control" id="descrip" rows="3" minlength="5" maxlength="50" required></textarea>
                             </div>
                         </div>
-
+                        
+                        <!-- Upload Image -->
                         <div class="form-row">
                             <label for="upimage">&nbsp;Upload Image: </label>
                         </div>
@@ -147,25 +144,10 @@
                                     <label class="custom-file-label" for="inputGroupFile01">Select Image</label>
                                 </div>
                             </div>
-                            <!--
-                <div class="form-group col-md-3">
-
-                    <label for="search_from">Available From: </label>
-                    <input type="date" class="form-control" id="search_from">
-
-                </div>
-
-                <div class="form-group col-md-3">
-
-                    <label for="search_to">Available To: </label>
-                    <input type="date" class="form-control" id="search_to">
-
-                </div>
-                -->
+                            
                         </div>
                         <div class="form-row">
                             <div class="form-group col-md-3">
-                                <!-- old button colour #6A8A8E -->
                                 <button type="submit" id="js-submit" class="btn btn-primary">Submit</button>
                             </div>
                         </div>
@@ -193,9 +175,9 @@
     </footer>
     
     <!-- Placed at the end of the document so the pages load faster -->
+    <!-- All of our javascript files -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-    <!-- <script type="text/javascript" src="jquery.leanModal.min.js"></script> -->
 
     <script src='./js/firebase.js'></script>
     <script src='./js/googleAutocomplete.js'></script>
