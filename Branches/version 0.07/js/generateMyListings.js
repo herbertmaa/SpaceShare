@@ -44,7 +44,7 @@ function generateMyListings(myUserID) {
                 var heightText = 'Height: ' + childSnapshot.child('Height').val();
                 var lengthText = 'Length: ' + childSnapshot.child('Length').val();
 
-                tempAttributeDiv.text(widthText + " " + heightText + " " + lengthText);
+                tempAttributeDiv.text(lengthText + " " + widthText + " " + heightText);
 
 
                 /** If the RentedOut key in Firebase is assigned to a user, this listing has already been rented out **/
