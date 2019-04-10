@@ -1,3 +1,10 @@
+/** 
+
+Version 1.0.0
+This javascript file controls the client logic related to when a user enters invalid information on the search page. 
+**/
+
+
 $('#autocomplete').on('change', event => {
 
   var address = $('#autocomplete').val();
