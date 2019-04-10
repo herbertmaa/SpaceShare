@@ -26,7 +26,7 @@ var uiConfig = {
             // User successfully signed in.
             // Return type determines whether we continue the redirect automatically
             // or whether we leave that to developer to handle.
-            
+
             $('#user_login').modal('hide');
             return true;
         },
@@ -69,37 +69,37 @@ firebase.auth().onAuthStateChanged(function (user) {
 
     } else {
         // loggedIn = true;
-        }
-    });
+    }
+});
 
 /* function that changes the navbar based on if your logged in or not */
 /* ALL PAGES USE THIS FUNCTION */
-function loadnavbar(){
+function loadnavbar() {
     firebase.auth().onAuthStateChanged(function (user) {
-    if (user) {
-        //User is logged in
-        $("#signup").hide();
-        $("#signup2").hide();
-        $("#login").hide();
-        $("#login2").hide();
-        var navb = document.getElementsByClassName("navbar-nav");
-        navb[0].style.visibility = "visible";
-    } else {
-        console.log("not logged in");
-        $("#myprofile").hide();
-        $("#myprofile2").hide();
-        $("#mylistings").hide();
-        $("#mylistings2").hide();
-        $("#logout").hide();
-        $("#logout2").hide();
-        $("#signup").show();
-        $("#signup2").show();
-        $("#login").show();
-        $("#login2").show();
-        var navb = document.getElementsByClassName("navbar-nav");
-        navb[0].style.visibility = "visible";
-    }
-});
+        if (user) {
+            //User is logged in
+            $("#signup").hide();
+            $("#signup2").hide();
+            $("#login").hide();
+            $("#login2").hide();
+            var navb = document.getElementsByClassName("navbar-nav");
+            navb[0].style.visibility = "visible";
+        } else {
+            console.log("not logged in");
+            $("#myprofile").hide();
+            $("#myprofile2").hide();
+            $("#mylistings").hide();
+            $("#mylistings2").hide();
+            $("#logout").hide();
+            $("#logout2").hide();
+            $("#signup").show();
+            $("#signup2").show();
+            $("#login").show();
+            $("#login2").show();
+            var navb = document.getElementsByClassName("navbar-nav");
+            navb[0].style.visibility = "visible";
+        }
+    });
 }
 
 // Called here because everypage has the navbar and needs this function to run
@@ -107,17 +107,17 @@ loadnavbar();
 
 /* changes index.html greeting if your are logged in or not */
 /* only index.html uses this function */
-function loadgreeting(){
+function loadgreeting() {
     firebase.auth().onAuthStateChanged(function (user) {
-    if (user) {
-        //User is logged in
-        userID = firebase.auth().currentUser.uid;
-        $("#main-greeting").text("Welcome back, " + user.displayName + "!");
-        $("#main-greeting").css("visibility", "visible");
-    } else {
-        console.log("not logged in");
+        if (user) {
+            //User is logged in
+            userID = firebase.auth().currentUser.uid;
+            $("#main-greeting").text("Welcome back, " + user.displayName + "!");
             $("#main-greeting").css("visibility", "visible");
-    }
+        } else {
+            console.log("not logged in");
+            $("#main-greeting").css("visibility", "visible");
+        }
     });
 }
 
@@ -130,7 +130,7 @@ function logout() {
         // An error happened.
     });
     location.href = "index.html"
-    
+
 }
 
 
@@ -384,3 +384,35 @@ function changeProfile(name, address, phone, description, email) {
     });
 }
 
+
+function checkLoggedIn(success, fail) {
+
+    let user = firebase.auth().currentUser;
+    if (user) {
+        success();
+        console.log("called success");
+        //The user is logged in, call the success function passed
+
+    } else {
+        console.log("called fail");
+        console.log(fail);
+        fail();
+        //The user is not logged in, call the fail function passed.
+    }
+
+
+}
+
+function requestListing(key) {
+
+    let user = firebase.auth().currentUser;
+    if (user) {
+        var request = db.ref('/Listings/' + key);
+        request.child('RentedOut').set(this.userID);
+        window.location.href = 'succrequest.html';
+        //The user is logged in, call the success function passed
+
+    } else {
+        //The user is not logged in, call the fail function passed.
+    }
+}
