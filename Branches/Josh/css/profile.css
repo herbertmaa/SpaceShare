@@ -15,6 +15,9 @@
 
 }
 
+.navbar-nav {
+    visibility: hidden;
+}
 
 .top-buffer {
 
@@ -22,40 +25,6 @@
     margin-top: 40px;
     margin-bottom: 40px;
 }
-
-
-main {
-
-    /** pushes the main container to the left  (left as 0 for now) **/
-}
-
-
-
-#lean_overlay {
-    position: fixed;
-    z-index: 100;
-    top: 0px;
-    left: 0px;
-    height: 100%;
-    width: 100%;
-    background: #000;
-    display: none;
-}
-
-
-#user_login {
-
-    display: inline;
-    position: absolute;
-    margin-left: auto;
-    margin-right: auto;
-    left: 0;
-    right: 0;
-    display: none;
-    width: 300px;
-
-}
-
 
 .prfl-user-icon {
 
@@ -68,9 +37,10 @@ main {
     background-color: #F8F8F8;
     top: 0px;
     background-size: cover;
-    background-image: url(./img/silhouette.jpg);
+    background-image: url(../img/silhouette.jpg);
     margin-bottom: 25px;
     background-position: center;
+    visibility: visible;
 }
 
 
@@ -84,4 +54,33 @@ main {
     text-align: center;
     cursor: pointer;
     display: inline-block;
+}
+
+.hidden {
+
+    visibility: hidden;
+    opacity: 0;
+    transition: all 0.5s ease;
+
+}
+
+
+#loading_overlay {
+
+    width: 100px;
+    height: 100px;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: auto;
+    transition: all 0.5s ease;
+
+}
+
+.firebaseui-container {
+
+    box-shadow: none !important;
+
 }

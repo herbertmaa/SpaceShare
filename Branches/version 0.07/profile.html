@@ -58,7 +58,7 @@
         <div class="collapse navbar-collapse justify-content-end">
             <ul class="navbar-nav">
                 <li class="nav-item">
-                    <a class="nav-link" href="postListing.html">+Add Listing<span class="sr-only">(current)</span></a>
+                    <a class="nav-link" href="postListing.html"><span class="text-primary"> + </span>Add Listing<span class="sr-only"></span></a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="faq.html">About</a>
@@ -112,12 +112,12 @@
     <main role="main" class="container hidden">
         <div class="container pt-4">
             <!-- change this later , border is dark for testing -->
-            <div class="row">
+            <div class="row justify-content-center">
 
-                <div class="col-5 border mdl-card mdl-color--white mr-5">
+                <div class="col-6 border mdl-card mdl-color--white">
                     <fieldset>
 
-                        <form id = "profile-form">
+                        <form id="profile-form">
                             <div class="row justify-content-start mt-4">
                                 <div class="form-group col-12">
 
@@ -129,7 +129,7 @@
 
 
                                         <div class="col-5">
-                                            <label for="image_button" class="opt-btn" id="image_label" style="margin-top:30px; margin-right: 25px;">Change Photo</label>
+                                            <label for="image_button" class="opt-btn" id="image_label" style="margin-top:30px">Change Photo</label>
 
                                             <input type="file" id="image_button" accept="image/*" style="visibility:hidden;">
                                             <input type="file" id="image_button" accept="image/png, image/jpeg" style="visibility:hidden;">
@@ -140,39 +140,45 @@
                             </div>
 
                             <div class="row justify-content-start">
-                                <div class="form-group col-md-7">
-                                    <input type="text" class="form-control" id="full_name" placeholder="Your Current Name">
+                                <div class="form-group col-lg-6">
+                                    <label for="full_name">Name:</label>
+                                    <input type="text" class="form-control" id="full_name" placeholder="Your Name">
+
                                 </div>
                             </div>
 
                             <div class="row justify-content-start">
-                                <div class="form-group col-md-7">
-                                    <textarea id = "description" class="form-control" form="usrform" placeholder="A description about yourself in 200 characters or less" maxlength="200"></textarea>
+                                <div class="form-group col-lg-8">
+                                    <label for="description">Life story:</label>
+                                    <textarea id="description" rows="4" class="form-control" form="usrform" placeholder="A description about yourself in 200 characters or less" maxlength="350"></textarea>
                                 </div>
                             </div>
 
                             <div class="row justify-content-start">
-                                <div class="form-group col-md-7">
+                                <div class="form-group col-lg-8">
+                                    <label for="phone_number">Contact number:</label>
                                     <input type="text" class="form-control" id="phone_number" placeholder="Phone No.">
                                 </div>
                             </div>
 
                             <div class="row justify-content-start">
-                                <div class="form-group col-md-7">
+                                <div class="form-group col-lg-8">
+                                    <label for="your_address">Mailing address:</label>
                                     <input type="text" class="form-control" id="your_address" placeholder="Enter your address">
                                 </div>
                             </div>
 
 
                             <div class="row justify-content-start">
-                                <div class="form-group col-md-7">
+                                <div class="form-group col-lg-8">
+                                    <label for="your_email">Email address:</label>
                                     <input type="email" class="form-control" id="your_email" placeholder="Where should we send emails?">
                                 </div>
                             </div>
 
-                            <div class="row justify-content-start">
-                                <div class="form-group col-12">
-                                    <button type="button" id = "update-edit" class="btn btn-primary">Update Profile</button>
+                            <div class="row justify-content-md-center">
+                                <div class="form-group col-4 mt-3">
+                                    <button type="button" id="update-edit" class="btn btn-primary">Update Profile</button>
                                 </div>
                             </div>
                         </form>

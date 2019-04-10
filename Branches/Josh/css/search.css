@@ -3,7 +3,6 @@ nav {
     top: 0;
     opacity: 1;
     overflow: hidden;
-    z-index: 1;
 }
 .navbar-default {
 
@@ -72,23 +71,22 @@ main {
     display: flex;
     justify-content: space-around;
     margin-bottom: 50px;
-    z-index: -1;
 }
 #cards-container {
     width: 60vw;
     display: flex !important;
     flex-flow: row wrap !important;
     justify-content: space-around !important;
+    z-index: -1;
 }
 .card {
     display: flex;
     flex-flow: column;
-    align-items: center;
-    justify-content: space-around;
+    align-items: flex-start;
     padding: 10px;
     margin-top: 40px;
-    height: 470px;
-    width: 320px;
+    height: 430px;
+    width: 300px;
 }
 .card-img-top {
     height: 200px;
@@ -149,14 +147,11 @@ span.points:hover {
 .dropdown {
     margin-right: 5vw;
 }
-.dropdown-toggle {
+.btn-primary {
     position: sticky !important;
     top: 100px;
 }
 #description {
     align-self: center;
     font-size: 1.1em;
-}
-#overlay {
-    display: none;
 }
