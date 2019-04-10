@@ -239,19 +239,6 @@ $(function postForm() {
             createPost(streetAddress, city, province, length, width, height, description, imageLink);
             handleComplete();
         }
-        // redirect();
-        // window.location.replace("succpost.html");
-        // }
-        /**
-        if (user == null){
-            event.preventDefault();
-            $('#user_login').modal('toggle')
-            // window.alert("Please login");
-            // location.href("#user_login"); 
-        }
-        **/
-        // window.location.replace("succpost.html");
-        // location.href = "succpost.html";
     })
 });
 
