@@ -6,7 +6,6 @@ $(document).ready(function () {
 
     fileButton.addEventListener('change', function (e) {
 
-        console.log("a file was uploaded into the browser");
         var file = e.target.files[0];
         const myNewFile = new File([file], 'profile.png', {
             type: file.type
@@ -16,14 +15,12 @@ $(document).ready(function () {
         var storageRef = firebase.storage().ref("/img/" + userID + "/" + myNewFile.name);
         var uploader = $('#uploader');
 
-        console.log(uploader);
         uploader.css("display", "block");
         // Loads the file into firebase
         var task = storageRef.put(file);
 
         task.on('state_changed', 
         function progress(snapshot) {
-            console.log("testing");
             var percentage = (snapshot.bytesTransferred / snapshot.totalBytes) * 25;
             
 
@@ -123,14 +120,11 @@ function checkInput(callback) {
     for (var i = 2; MAX_INPUTS >= i; i++) {
         if (elements[i].value.length == 0) {
 
-            console.log(elements[i].value.length);
             validInputs = false;
-            console.log("invalid");
             break;
         }
     }
     if (validInputs) {
-        console.log("called callback");
 
         callback(elements[2].value, elements[4].value, elements[3].value, $("#description").val(), elements[5].value);
 

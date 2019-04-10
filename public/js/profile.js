@@ -14,9 +14,44 @@ $(document).ready(function () {
 
         // Reference to the storage bucket
         var storageRef = firebase.storage().ref("/img/" + userID + "/" + myNewFile.name);
+        var uploader = $('#uploader');
 
+        console.log(uploader);
+        uploader.css("display", "block");
         // Loads the file into firebase
-        storageRef.put(file).then(() => {
+        var task = storageRef.put(file);
+
+        task.on('state_changed', 
+        function progress(snapshot) {
+            console.log("testing");
+            var percentage = (snapshot.bytesTransferred / snapshot.totalBytes) * 25;
+            
+
+            uploader.val(percentage);
+            window.setTimeout(() =>{
+
+                uploader.val(uploader.val() + percentage);
+                window.setTimeout(() =>{
+
+                    uploader.val(uploader.val() + percentage);
+                    window.setTimeout(() =>{
+                        uploader.val(uploader.val() + percentage);
+
+                    }, 50);
+                }, 75);
+
+            }, 100);
+
+
+        },
+        function error(err) {
+
+        },
+        function complete() {
+
+        }
+        );
+        task.then(() => {
 
             storageRef.getDownloadURL().then(function (url) {
                 var imageURL = url;
@@ -71,7 +106,6 @@ function createPicture(uid, imageURL, callback) {
     firebase.database().ref().update(updates).then(() => {
 
         callback();
-
 
     });
 

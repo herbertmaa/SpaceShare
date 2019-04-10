@@ -18,7 +18,6 @@ var options = {
 };
 
 function initMap() {
-    console.log("hello")
     map = new google.maps.Map(document.getElementById('map'), {
         center: {
             
@@ -73,7 +72,6 @@ var componentForm = {
 };
 
 function initAutocomplete() {
-    console.log("worllls");
     // Create the autocomplete object, restricting the search predictions to
     // geographical location types.
     autocomplete = new google.maps.places.Autocomplete(
@@ -142,7 +140,6 @@ function initializeMapAutoComplete(){
 }
 
 function geocode() {
-    console.log("world");
     //location should be this person's address 
     // call this function after the address has been filled in
 
@@ -158,7 +155,6 @@ function geocode() {
         data: { format: "json-list"},
         
         success: function(data){
-            console.log(data);
             map.setCenter(data['results'][0].geometry.location);
             var marker = new google.maps.Marker({
             map: map,
