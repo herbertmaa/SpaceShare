@@ -59,6 +59,7 @@ firebase.auth().onAuthStateChanged(function (user) {
 
         //User is logged in
         userID = firebase.auth().currentUser.uid;
+        localStorage.setItem('uid', userID);
         //Initialize the image reference then call getProfileImage()
         imageRef = firebase.database().ref('ProfileImages/' + userID);
         getProfileImage();
@@ -378,3 +379,4 @@ function changeProfile(name, address, phone, description, email) {
 
     });
 }
+

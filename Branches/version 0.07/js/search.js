@@ -5,19 +5,13 @@ $(document).ready(function() {
     var db = firebase.database();
     var query = db.ref('/Listings/').orderByChild('City').equalTo(citySearched);
 
-    var user = firebase.auth().currentUser;
-    var name, email, photoUrl, uid, emailVerified;
+    var uid = localStorage.getItem('uid');
 
-    if (user != null) {
-        name = user.displayName;
-        email = user.email;
-        photoUrl = user.photoURL;
-        emailVerified = user.emailVerified;
-        uid = user.uid; // The user's ID, unique to the Firebase project. Do NOT use
-        // this value to authenticate with your backend server, if
-        // you have one. Use User.getToken() instead.
-    }
+    var length = localStorage.getItem('Length');
+    var width = localStorage.getItem('Width'); 
+    var height = localStorage.getItem('Height');
 
+    
     showListings(query);
 
     $('#heightSort').on('click', function() {
@@ -56,10 +50,19 @@ $(document).ready(function() {
                 imgURL = childSnapshot.val().ListingImage;
                 descrip = childSnapshot.val().Description; 
                 key = childSnapshot.val().key;
-                if (childSnapshot.val().RentedOut == "NULL") {
+
+                if (childSnapshot.val().RentedOut == "NULL" && lengthInput >= length &&
+                    widthInput >= width && heightInput >= height) {
                     createCard(cityInput, addressInput, heightInput, lengthInput, widthInput, provinceInput, imgURL, descrip, key);
-                } else {
+                } else if (childSnapshot.val().RentedOut != "NULL" && lengthInput >= length &&
+                widthInput >= width && heightInput >= height) {
                     createRentedCard(cityInput, addressInput, heightInput, lengthInput, widthInput, provinceInput, imgURL, descrip, key);
+                } else if (childSnapshot.val().RentedOut == "NULL") {
+                    createCard(cityInput, addressInput, heightInput, lengthInput, widthInput, provinceInput, imgURL, descrip, key);
+                } else if (childSnapshot.val().RentedOut != "NULL") {
+                    createRentedCard(cityInput, addressInput, heightInput, lengthInput, widthInput, provinceInput, imgURL, descrip, key);
+                } else {
+                    $('#cards-container').append('<h1 class = "h1"> Sorry, No listings found</h1>')
                 }
             });
         });
@@ -78,7 +81,7 @@ $(document).ready(function() {
         let cardBody = $('<div class = "card-body"></div>');
         let cardTitle = $('<h5 class = "card-title">' + address + '<br>' + city + '<br>' + province + '</h5>');
         let cardText = $('<p class = "card-text">Length: ' + length + "&nbspWidth: " + width + '&nbspHeight: ' +  height + '</p>');
-        let cardDescrip = $('<p class = "card-text id = "description">' + description + '</p>');
+        let cardDescrip = $('<p class = "card-text description">' + description + '</p>');
         let button = $('<button type = "button" class = "btn btn-primary request" data-target = "exampleModal" data-toggle = "modal" data-key =' + key + '>Request</button>');
 
         
@@ -100,7 +103,7 @@ $(document).ready(function() {
         let cardBody = $('<div class = "card-body"></div>');
         let cardTitle = $('<h5 class = "card-title">' + address + '<br>' + city + '<br>' + province + '</h5>');
         let cardText = $('<p class = "card-text">Length: ' + length + "&nbspWidth: " + width + '&nbspHeight: ' +  height + '</p>');
-        let cardDescrip = $('<p class = "card-text id = "description">' + description + '</p>');
+        let cardDescrip = $('<p class = "card-text description">' + description + '</p>');
         let button = $('<button type = "button" class = "btn btn-primary request" data-target = "exampleModal" data-toggle = "modal" data-key =' + key + ' disabled>Reserved</button>');
 
         
@@ -120,8 +123,8 @@ $(document).ready(function() {
             var regex = new RegExp("REQUEST");
             if ($('#request').val().match(regex)) {
                 var request = db.ref('/Listings/' + key);
-                request.child('RentedOut').set('RENTED by' + uid);
-                window.location.href = 'request.html';
+                request.child('RentedOut').set(uid);
+                window.location.href = 'succrequest.html';
             } else {
                 alert("Invalid Entry");
                 $('#request').trigger('reset');
