@@ -15,6 +15,9 @@
 
 }
 
+.navbar-nav {
+    visibility: hidden;
+}
 
 .top-buffer {
 
@@ -25,12 +28,15 @@
 
 
 main {
-
-    /** pushes the main container to the left  (left as 0 for now) **/
+    min-height: calc(100vh - 85px);
 }
 
 
-
+.card{
+    
+    border: 1px solid rgba(0,0,0,.125);
+    border-radius: .25rem;
+}
 
 .pac-container {
     z-index: 1500;
@@ -66,4 +72,7 @@ main {
     box-shadow:none !important;
     
 }
+
+
+
 

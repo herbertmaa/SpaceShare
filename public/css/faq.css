@@ -1,10 +1,8 @@
 .navbar-default {
-
     /** background color of our navbar **/
     background-color: #F8F8F8;
     border-color: #E7E7E7;
 }
-
 
 .nav-item {
 
@@ -25,7 +23,6 @@
 
 
 #main {
-
     /** pushes the main container to the left  (left as 0 for now) **/
 }
 
@@ -35,12 +32,17 @@
 }
 
 #howitworks {
-
-
     margin-top: 75px;
 
 }
 
+.container{
+    max-width: none;
+    max-height: none;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    margin: 0 !important;
+}
 
 #ready {
 
@@ -57,27 +59,13 @@
     background-color: red;
 }
 
-#user_login {
 
-    display: inline;
-    position: absolute;
-    margin-left: auto;
-    margin-right: auto;
-    left: 0;
-    right: 0;
-    display: none;
-    width: 300px;
+.firebaseui-container {
+
+    box-shadow: none !important;
 
 }
 
-
-#lean_overlay {
-    position: fixed;
-    z-index: 200;
-    top: 0px;
-    left: 0px;
-    height: 100%;
-    width: 100%;
-    background: #000;
-    display: none;
+#aboutMe{
+    padding-bottom: 0px;
 }

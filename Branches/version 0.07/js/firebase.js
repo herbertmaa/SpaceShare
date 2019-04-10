@@ -26,6 +26,8 @@ var uiConfig = {
             // User successfully signed in.
             // Return type determines whether we continue the redirect automatically
             // or whether we leave that to developer to handle.
+            
+            $('#user_login').modal('hide');
             return true;
         },
         uiShown: function () {
@@ -37,7 +39,7 @@ var uiConfig = {
     credentialHelper: firebaseui.auth.CredentialHelper.NONE,
     // Will use popup for IDP Providers sign-in flow instead of the default, redirect.
     signInFlow: 'popup',
-    signInSuccessUrl: 'index.html',
+    signInSuccessUrl: '#',
     signInOptions: [
             firebase.auth.EmailAuthProvider.PROVIDER_ID,
         ],

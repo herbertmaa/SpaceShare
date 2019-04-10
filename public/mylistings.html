@@ -8,8 +8,6 @@
     <meta name="author" content="">
     <title>Share space with your friends | SpaceShare</title>
 
-    <!--Template based on URL below-->
-
     <!-- Bootstrap core CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 
@@ -48,24 +46,33 @@
 
 
     <!--Navigation bar -->
-    <nav class="navbar navbar-expand-lg navbar-light bg-light" style="height:85px;">
+    <nav class="navbar navbar-expand-lg navbar-light shadow-sm" style="height:85px; background-color: #whitesmoke;">
         <a class="navbar-brand" href="index.html">SpaceShare</a>
         <button class="navbar-toggler" type="button">
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse justify-content-end">
             <ul class="navbar-nav">
-                <li class="nav-item  active">
-                    <a class="nav-link" href="postListing.html">Become a Sharer <span class="sr-only">(current)</span></a>
+                <li class="nav-item">
+                    <a class="nav-link" href="postListing.html"><span class = "text-primary"> + </span>Add Listing<span class="sr-only"></span></a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="faq.html">Help</a>
+                    <a class="nav-link" href="faq.html">About</a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" data-toggle="modal" href="#user_login"> Sign up</a>
+                <li class="nav-item" id="signup2">
+                    <a class="nav-link" data-toggle="modal" href="#user_login" id="signup"> Sign up</a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" data-toggle="modal" href="#user_login">Login</a>
+                <li class="nav-item" id="login2">
+                    <a class="nav-link" id="login" data-toggle="modal" href="#user_login">Login</a>
+                </li>
+                <li class="nav-item active" id="mylistings2">
+                    <a id="mylistings" class="nav-link" href="mylistings.html">My Listings</a>
+                </li>
+                <li class="nav-item" id="myprofile2">
+                    <a id="myprofile" class="nav-link" href="profile.html">My Profile</a>
+                </li>
+                <li class="nav-item" id="logout2">
+                    <a id="logout" class="nav-link" href="#" onclick="logout()">Logout</a>
                 </li>
             </ul>
         </div>
@@ -125,7 +132,6 @@
 
                 <div class="modal-content">
 
-
                     <div class="modal-body">
                         <div class="container">
 
@@ -150,7 +156,6 @@
                                     <div class="col-4">
                                         <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
                                             <input class="mdl-textfield__input" type="text" pattern="-?[0-9]*(\.[0-9]+)?" id="width">
-                                            <label class="mdl-textfield__label" for="width">Width</label>
                                             <span class="mdl-textfield__error">Input is not a number!</span>
                                         </div>
                                     </div>
@@ -158,7 +163,6 @@
                                     <div class="col-4">
                                         <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
                                             <input class="mdl-textfield__input" type="text" pattern="-?[0-9]*(\.[0-9]+)?" id="height">
-                                            <label class="mdl-textfield__label" for="height">Height</label>
                                             <span class="mdl-textfield__error">Input is not a number!</span>
                                         </div>
                                     </div>
@@ -167,17 +171,30 @@
                                     <div class="col-4">
                                         <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
                                             <input class="mdl-textfield__input" type="text" pattern="-?[0-9]*(\.[0-9]+)?" id="length">
-                                            <label class="mdl-textfield__label" for="height">Length</label>
                                             <span class="mdl-textfield__error">Input is not a number!</span>
                                         </div>
                                     </div>
-                                </div>
 
+                                </div>
 
                                 <div class="row">
 
+
+                                    <div class="col">
+
+
+                                        <div class="form-group">
+                                            <textarea class="form-control" id="new_descript" rows="4" placeholder = "Your new description!"></textarea>
+                                        </div>
+
+                                    </div>
+
+
+                                </div>
+                                <div class="row">
+
                                     <div class="col-12">
-                                        <button type="button" id="update-edit" class="btn btn-primary btn-block" data-dismiss="modal">Update</button>
+                                        <button type="button" id="update-edit" class="btn btn-primary btn-block">Update</button>
 
                                     </div>
                                 </div>
@@ -193,17 +210,14 @@
             </div>
         </div>
 
-        <!-- The confirm delete button -->
+        <!-- The confirm delete card -->
 
         <div class="modal fade" id="confirm_delete" tabindex="-1" role="dialog">
-
             <div class="modal-dialog modal-dialog-centered" role="document">
                 <div class="modal-content">
-
                     <div class="modal-header">
                         <h5 class="modal-title"> Are you sure? </h5>
                     </div>
-
                     <div class="modal-body">
                         <div class="container">
 
@@ -239,18 +253,28 @@
 
                 </div>
             </div>
-
-
         </div>
 
 
 
     </main>
 
+    <!-- Footer -->
 
+    <footer class="page-footer font-small blue hidden">
 
+        <!-- Copyright -->
+        <div class="footer-copyright text-center py-3">© 2019 Spaceshare
+            <a href="terms.html"> Terms of Use </a>
+            <a href="faq.html"> About </a>
+            <a target="_blank" href="mailto:help@spaceshare.com"> Contact us! </a>
+
+        </div>
+
+    </footer>
 
     <!-- Placed at the end of the document so the pages load faster -->
+    <!-- our script files -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 
