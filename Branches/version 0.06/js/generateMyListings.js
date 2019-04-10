@@ -41,7 +41,7 @@
 
                      let tempButton = $("<div style = 'display: inline-block' class = 'm-3 edit-button' > <button type= 'button' class='btn btn-primary " + childSnapshot.child('key').val() + "' data-toggle = 'modal' data-target = '#content_edit'>Edit</a></div>");
 
-                     let tempButton2 = $("<div style = 'display: inline-block' class = 'm-3 delete-button style = 'display: inline-block;'" + childSnapshot.child('key').val() + "'><button type = 'button' class='btn btn-primary " + childSnapshot.child('key').val() + "' data-toggle='modal' data-target='#confirm_delete'>Delete</a></div>");
+                     let tempButton2 = $("<div style = 'display: inline-block' class = 'm-3 delete-button style = 'display: inline-block;'" + childSnapshot.child('key').val() + "'><button type = 'button' class='btn btn-primary " + childSnapshot.child('key').val() + "' data-toggle='modal' data-target='#confirm_delete'>Delete</button></div>");
 
                      var widthText = 'Width: ' + childSnapshot.child('Width').val();
                      var heightText = 'Height: ' + childSnapshot.child('Height').val();

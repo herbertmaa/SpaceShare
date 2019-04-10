@@ -29,46 +29,79 @@ $(document).ready(function() {
      * Shows all the listings with the Vancouver and then sorts them lexicograhically on their height, width or length.
      */ 
         var filterQuery = db.ref('/Listings/').orderByChild('City_height').startAt(citySearched).endAt(citySearched + "\uf8ff");
-        showListings(filterQuery);
+        $('.card').replaceWith(showListings(filterQuery));
     });
 
     $('#widthSort').on('click', function() {
         var filterQuery = db.ref('/Listings/').orderByChild('City_width').startAt(citySearched).endAt(citySearched + "\uf8ff");
-        showListings(filterQuery);
+        $('.card').replaceWith(showListings(filterQuery));
     });
 
     $('#lengthSort').on('click', function() {
         var filterQuery = db.ref('/Listings/').orderByChild('City_length').startAt(localStorage.getItem('City')).endAt(citySearched +"\uf8ff");
-        showListings(filterQuery);
+        $('.card').replaceWith(showListings(filterQuery));
     });
+
+    function showListings(database) {
+        var cityInput, addressInput, heightInput, lengthInput, widthInput, provinceInput, imgURL, descrip;
+
+        database.on('value', function(snapshot) {
+            snapshot.forEach(function (childSnapshot) {
+
+                cityInput = childSnapshot.val().City;
+                addressInput = childSnapshot.val().Address;
+                heightInput = childSnapshot.val().Height;
+                lengthInput = childSnapshot.val().Length;
+                widthInput = childSnapshot.val().Width;
+                provinceInput = childSnapshot.val().Province;
+                imgURL = childSnapshot.val().ListingImage;
+                descrip = childSnapshot.val().Description; 
+
+                if (childSnapshot.val().RentedOut == "NULL") {
+                    createCard(cityInput, addressInput, heightInput, lengthInput, widthInput, provinceInput, imgURL, descrip);
+                }
+            });
+        });
+        
+    }
+
+    // Creates a card with the given inputs.
+    function createCard(city, address, height, length, width, province, url, description) {
+        let card = $('<div class = "card"></div>');
+        let cardImg = $('<img class = "card-img-top" alt= "Listing Image">');
+        if (url != "NULL") {
+        cardImg.attr('src', url);
+        } else {
+            cardImg.attr('src', "https://images.unsplash.com/photo-1467385829985-2b0fb82b5193?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1051&q=80");
+        }
+        let cardBody = $('<div class = "card-body"></div>');
+        let cardTitle = $('<h5 class = "card-title">' + address + '<br>' + city + '<br>' + province + '</h5>');
+        let cardText = $('<p class = "card-text">Length: ' + length + "&nbspWidth: " + width + '&nbspHeight: ' +  height + '</p>');
+        let cardDescrip = $('<p class = "card-text id = "description">' + description + '</p>');
+        let button = $('<button type = "button" class = "btn btn-primary request" data-target = "exampleModal" data-toggle = "modal">Request</button>');
+
+        
+        cardBody.append(cardTitle).append(cardText).append(cardDescrip).append(button);
+        card.append(cardImg);
+        card.append(cardBody);
+        $('#cards-container').append(card);
+
+        
+    }
+
+});
+$('#cards-container').on('click', '.request', function() {
+    $('#exampleModal').modal('toggle');
 });
 
-function showListings(database) {
-    var cityInput, addressInput, heightInput, lengthInput, widthInput, provinceInput, imgURL, descrip;
 
-    database.on('value', function(snapshot) {
-        $('#cards-container').empty();
-        snapshot.forEach(function (childSnapshot) {
-
-            cityInput = childSnapshot.val().City;
-            addressInput = childSnapshot.val().Address;
-            heightInput = childSnapshot.val().Height;
-            lengthInput = childSnapshot.val().Length;
-            widthInput = childSnapshot.val().Width;
-            provinceInput = childSnapshot.val().Province;
-            imgURL = childSnapshot.val().ListingImage;
-            descrip = childSnapshot.val().Description; 
-
-            // Creates a card with the given inputs.
-            createCard(cityInput, addressInput, heightInput, lengthInput, widthInput, provinceInput, imgURL, descrip);
-        });
-    });
-    
-}
-function createCard(city, address, height, length, width, province, url, description) {
-    $('<div class="card"><img class="card-img-top" src=' + url + 'alt="Card image cap"><div class="card-body"><h5 class="card-title">' 
-    +   address + '<br>' +   city + '<br>'  + province + '</h5><p class="card-text">' 
-    +  "Length: " + length + "&nbsp&nbspWidth: " +  
-    width + '&nbsp&nbspHeight: ' +  height + '<br></p>' + '<p class= "card-text" id = "description">\"' + description + '\"</p> <a href="#" class="btn btn-primary">Request</a></div></div>').appendTo('#cards-container');
-}
+$('#requestListing').on('click', function() {
+    var regex = new RegExp("REQUEST");
+    if ($('#request').val().match(regex)) {
+        window.location.href = "request.html";
+    } else {
+        alert("Invalid Entry");
+        $('#request').trigger('reset');
+    }
+});
 

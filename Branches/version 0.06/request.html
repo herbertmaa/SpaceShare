@@ -18,7 +18,7 @@
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
 
     <!-- Place your stylesheet here-->
-    <link href="./css/search.css" rel="stylesheet" type="text/css">
+    <link href="./css/request.css" rel="stylesheet" type="text/css">
 
     <!-- Firebase -->
 
@@ -77,75 +77,28 @@
             </ul>
         </div>
     </nav>
-    <!-- Main Content old-color: #F2F0ED-->
-    <main style="margin-bottom: 0; padding-bottom: 45px;">
-    <div id="cards-container">
-
-    </div>
-    <div class="dropdown">
-        <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          Sort By
-        </button>
-        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-          <a class="dropdown-item" id = "lengthSort" href="#">Length</a>
-          <a class="dropdown-item" id = "widthSort" href="#">Width</a>
-          <a class="dropdown-item" id = "heightSort" href="#">Height</a>
-        </div>
-      </div>
-
-      <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog" role="document">
-              <div class="modal-content">
-                <div class="modal-header">
-                  <h5 class="modal-title" id="exampleModalLabel">Please type in REQUEST to continue</h5>
-                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                  </button>
-                </div>
-                <div class="modal-body">
-                    <div class="input-group input-group-sm mb-3">
-                        <input type="text" id = "request" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm">
-                    </div>
-                </div>
-                <div class="modal-footer">
-                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                  <button type="button" class="btn btn-primary" id = "requestListing">Save changes</button>
-                </div>
-              </div>
-            </div>
-          </div>
-
-        <div id="map" style="height: 425px;"></div>
+    <main>
+      <h1 class= "h1">Your listing has been requested.</h1>
     </main>
-
-
-
 
     <!-- Footer -->
 
     <footer class="page-footer font-small blue">
 
-        <!-- Copyright -->
-        <div class="footer-copyright text-center py-3">© 2019 Spaceshare <b>|</b>
-            <a href="terms.html"> Terms of Use <b style = "color : black;">|</b> </a>
-            <a href="faq.html"> About <b style = "color : black;">|</b> </a>
-            <a target="_blank" href="mailto:help@spaceshare.com"> Contact us! </a>
+      <!-- Copyright -->
+      <div class="footer-copyright text-center py-3">© 2019 Spaceshare <b>|</b>
+          <a href="terms.html"> Terms of Use <b style = "color : black;">|</b> </a>
+          <a href="faq.html"> About <b style = "color : black;">|</b> </a>
+          <a target="_blank" href="mailto:help@spaceshare.com"> Contact us! </a>
 
-        </div>
+      </div>
 
-    </footer>
-    <button class = "btn btn-primary request" type="button">Request</button>
-    <!-- Placed at the end of the document so the pages load faster -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-    <script src="./js/search.js"></script>
-    <script src='./js/firebase.js'></script>
-    <script src='./js/autoCompleteSearch.js'></script>
-    
-    <script src= "js/searches.js"></script>
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDVs8DbkrG8d9ZUUCw9zrv2uZ-RL9sLbCQ&libraries=places&callback=initializeMapAutoComplete" async defer></script>
+  </footer>
+  <!-- Placed at the end of the document so the pages load faster -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 
-   
+
 
 </body>
 
