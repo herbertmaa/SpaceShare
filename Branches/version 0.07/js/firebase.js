@@ -59,10 +59,6 @@ firebase.auth().onAuthStateChanged(function (user) {
 
         //User is logged in
         userID = firebase.auth().currentUser.uid;
-        if ($('.prfl-user-icon').length != 0) {
-            $('.prfl-user-icon').css("visibility", "visible");
-        }
-
         //Initialize the image reference then call getProfileImage()
         imageRef = firebase.database().ref('ProfileImages/' + userID);
         getProfileImage();
@@ -75,7 +71,7 @@ firebase.auth().onAuthStateChanged(function (user) {
 
 /* function that changes the navbar based on if your logged in or not */
 /* ALL PAGES USE THIS FUNCTION */
-function navb(){
+function loadnavbar(){
     firebase.auth().onAuthStateChanged(function (user) {
     if (user) {
         //User is logged in
@@ -104,11 +100,11 @@ function navb(){
 }
 
 // Called here because everypage has the navbar and needs this function to run
-navb();
+loadnavbar();
 
 /* changes index.html greeting if your are logged in or not */
 /* only index.html uses this function */
-function greeting(){
+function loadgreeting(){
     firebase.auth().onAuthStateChanged(function (user) {
     if (user) {
         //User is logged in
