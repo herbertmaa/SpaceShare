@@ -140,7 +140,6 @@ $(document).ready(function () {
 
 function loadConfirmRequest(key) {
 
-    console.log("loadConfirmRequest was called");
     $('#exampleModal').modal('toggle');
     $('#requestListing').on('click', function () {
         var regex = new RegExp("REQUEST");

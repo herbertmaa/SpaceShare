@@ -47,7 +47,6 @@ $(document).ready(function () {
 
                 var query = firebase.database().ref('/Listings');
                 query.child(keyToChange).remove();
-                console.log("deleted");
             }
 
         } else {
