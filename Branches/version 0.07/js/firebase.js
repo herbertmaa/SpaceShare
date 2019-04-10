@@ -28,6 +28,8 @@ var uiConfig = {
             // or whether we leave that to developer to handle.
 
             $('#user_login').modal('hide');
+            loadnavbar();
+
             return true;
         },
         uiShown: function () {
@@ -77,15 +79,24 @@ firebase.auth().onAuthStateChanged(function (user) {
 function loadnavbar() {
     firebase.auth().onAuthStateChanged(function (user) {
         if (user) {
+            console.log("user is logged in");
             //User is logged in
             $("#signup").hide();
             $("#signup2").hide();
             $("#login").hide();
             $("#login2").hide();
+            $("#myprofile").show();
+            $("#myprofile2").show();
+            $("#logout").show();
+            $("#logout2").show();
+            $("#mylistings").show();
+            $("#mylistings2").show();
+
             var navb = document.getElementsByClassName("navbar-nav");
             navb[0].style.visibility = "visible";
         } else {
-            console.log("not logged in");
+
+            console.log("testing 12345");
             $("#myprofile").hide();
             $("#myprofile2").hide();
             $("#mylistings").hide();
@@ -115,7 +126,6 @@ function loadgreeting() {
             $("#main-greeting").text("Welcome back, " + user.displayName + "!");
             $("#main-greeting").css("visibility", "visible");
         } else {
-            console.log("not logged in");
             $("#main-greeting").css("visibility", "visible");
         }
     });
