@@ -7,8 +7,6 @@
 
 
 .nav-item {
-
-
     /** padding for the navigation items **/
     padding-left: 20px;
     padding-right: 20px;
@@ -23,9 +21,9 @@
     margin-bottom: 40px;
 }
 
-
 main {
-    /** pushes the main container to the left  (left as 0 for now) **/
+    height: calc(100vh-85px-56px);
+    padding-top: 0px;
 }
 
 #address {
@@ -36,27 +34,23 @@ main {
     visibility: hidden;
 }
 
-#lean_overlay {
-    position: fixed;
-    z-index: 100;
-    top: 0px;
-    left: 0px;
-    height: 100%;
-    width: 100%;
-    background: #000;
-    display: none;
+.hidden {
+
+    visibility: hidden;
+    opacity: 0;
+    transition: all 0.5s ease;
 }
 
+.firebaseui-container{
+    
+    box-shadow:none !important;
+    
+}
 
-#user_login {
-
-    display:inline;
-    position: absolute;
-    margin-left: auto;
-    margin-right: auto;
-    left: 0;
-    right: 0;
-    display:none;
-    width:300px;
-
+.container{
+    max-width: none;
+    max-height: none;
+    padding-top: 40px;
+    height: calc(100vh - 85px);
+    padding-bottom: 0px;
 }

@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>Share space with your friends | SpaceShare</title>
+
+    <!-- Bootstrap core CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+
+
+    <!-- Place your stylesheet here-->
+    <link href="./css/mylistings.css" rel="stylesheet" type="text/css">
+
+
+
+    <!-- Firebase -->
+
+    <script src="https://www.gstatic.com/firebasejs/5.8.4/firebase.js"></script>
+
+
+    <!-- Firebase login UI -->
+    <script src="https://cdn.firebase.com/libs/firebaseui/3.5.2/firebaseui.js"></script>
+
+
+    <!-- Firebase css -->
+    <link type="text/css" rel="stylesheet" href="https://cdn.firebase.com/libs/firebaseui/3.5.2/firebaseui.css" />
+
+    <!-- Load jQuery -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+</head>
+
+<body>
+
+    <div id='loading_overlay'>
+
+        <div class="mdl-spinner mdl-js-spinner is-active " style="width: 5rem; height: 5rem;"></div>
+    </div>
+
+
+    <!--Navigation bar -->
+    <nav class="navbar navbar-expand-lg navbar-light shadow-sm" style="height:85px; background-color: #whitesmoke;">
+        <a class="navbar-brand" href="index.html">SpaceShare</a>
+        <button class="navbar-toggler" type="button">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse justify-content-end">
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link" href="postListing.html">+Add Listing<span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="faq.html">About</a>
+                </li>
+                <li class="nav-item" id="signup2">
+                    <a class="nav-link" data-toggle="modal" href="#user_login" id="signup"> Sign up</a>
+                </li>
+                <li class="nav-item" id="login2">
+                    <a class="nav-link" id="login" data-toggle="modal" href="#user_login">Login</a>
+                </li>
+                <li class="nav-item active" id="mylistings2">
+                    <a id="mylistings" class="nav-link" href="mylistings.html">My Listings</a>
+                </li>
+                <li class="nav-item" id="myprofile2">
+                    <a id="myprofile" class="nav-link" href="profile.html">My Profile</a>
+                </li>
+                <li class="nav-item" id="logout2">
+                    <a id="logout" class="nav-link" href="#" onclick="logout()">Logout</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+
+    <div class="container hidden">
+
+        <div class="modal fade" id="user_login" tabindex="-1" role="dialog">
+
+            <div class="modal-dialog modal-dialog-centered modal-sm" role="document">
+
+                <div class="modal-content" style>
+
+                    <div class="modal-body">
+                        <div id="firebaseui-auth-container"></div>
+
+                        <div id="loader">Loading...</div>
+                    </div>
+
+                </div>
+
+
+
+            </div>
+        </div>
+
+
+    </div>
+    <main role="main" class="container hidden">
+
+        <div class="row top-buffer">
+        </div>
+
+        <div class="container" id="content">
+
+
+
+        </div>
+
+        <!-- Padding between the header and the content -->
+        <div class="row">
+
+            <div class="col">
+
+                <br>
+
+            </div>
+
+        </div>
+
+        <!-- The edit content card -->
+        <div class="modal fade" id="content_edit" tabindex="-1" role="dialog">
+
+            <div class="modal-dialog modal-dialog-centered" role="document">
+
+                <div class="modal-content">
+
+                    <div class="modal-body">
+                        <div class="container">
+
+                            <div class="row justify-content-end">
+
+                                <div class="col-3">
+                                    <button type="button" class="mdl-button mdl-js-button mdl-button--raised" style="margin-left: 30%;" data-dismiss="modal">X</button>
+
+                                </div>
+                            </div>
+                            <form id="message-form" action='#'>
+
+                                <div class="row justify-content-center">
+                                    <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label" style="width: 75%;">
+                                        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label" style="width: 100%;">
+                                            <input class="mdl-textfield__input" type="text" id="autocomplete" onFocus="geolocate()">
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row justify-content-center">
+                                    <div class="col-4">
+                                        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                                            <input class="mdl-textfield__input" type="text" pattern="-?[0-9]*(\.[0-9]+)?" id="width">
+                                            <span class="mdl-textfield__error">Input is not a number!</span>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-4">
+                                        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                                            <input class="mdl-textfield__input" type="text" pattern="-?[0-9]*(\.[0-9]+)?" id="height">
+                                            <span class="mdl-textfield__error">Input is not a number!</span>
+                                        </div>
+                                    </div>
+
+
+                                    <div class="col-4">
+                                        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                                            <input class="mdl-textfield__input" type="text" pattern="-?[0-9]*(\.[0-9]+)?" id="length">
+                                            <span class="mdl-textfield__error">Input is not a number!</span>
+                                        </div>
+                                    </div>
+
+                                </div>
+
+                                <div class="row">
+
+
+                                    <div class="col">
+
+
+                                        <div class="form-group">
+                                            <textarea class="form-control" id="new_descript" rows="4" placeholder = "Your new description!"></textarea>
+                                        </div>
+
+                                    </div>
+
+
+                                </div>
+                                <div class="row">
+
+                                    <div class="col-12">
+                                        <button type="button" id="update-edit" class="btn btn-primary btn-block">Update</button>
+
+                                    </div>
+                                </div>
+
+                            </form>
+
+                        </div>
+
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- The confirm delete card -->
+
+        <div class="modal fade" id="confirm_delete" tabindex="-1" role="dialog">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title"> Are you sure? </h5>
+                    </div>
+                    <div class="modal-body">
+                        <div class="container">
+
+                            <div class="row">
+
+                                <div class="col">
+                                    You are about to permanently delete a listing. Please confirm you wish to delete this listing by entering the word "DELETE" in the box below
+                                </div>
+                            </div>
+                            <form id=confirm_delete_form action="#">
+                                <div class="row justify-content-end">
+                                    <div class="col-12">
+
+                                        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label" id="type_delete_holder">
+                                            <input class="mdl-textfield__input" type="text" pattern="DELETE" id="type_delete">
+                                            <span class="mdl-textfield__error">Please enter "DELETE"</span>
+                                        </div>
+                                    </div>
+                                    <div class="row justify-content-end">
+
+                                        <div class="col-12 order-last" style="margin-top: 20px;">
+                                            <button type="button" class="btn btn-primary" data-dismiss="modal">Cancel</button>
+                                            <button type="button" class="btn btn-secondary" id="delete_confirm"> Delete </button>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+
+                        </div>
+                    </div>
+
+
+                </div>
+            </div>
+        </div>
+
+
+
+    </main>
+
+    <!-- Footer -->
+
+    <footer class="page-footer font-small blue hidden">
+
+        <!-- Copyright -->
+        <div class="footer-copyright text-center py-3">© 2019 Spaceshare
+            <a href="terms.html"> Terms of Use </a>
+            <a href="faq.html"> About </a>
+            <a target="_blank" href="mailto:help@spaceshare.com"> Contact us! </a>
+
+        </div>
+
+    </footer>
+
+    <!-- Placed at the end of the document so the pages load faster -->
+    <!-- our script files -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+
+    <script src='./js/firebase.js'></script>
+    <script src='./js/generateMyListings.js'></script>
+    <script src='./js/updateListings.js'></script>
+    <script src="./js/googleAutocomplete.js"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDVs8DbkrG8d9ZUUCw9zrv2uZ-RL9sLbCQ&libraries=places&callback=initAutocomplete&geolocate" async defer></script>
+    <script src="./js/myListings.js"></script>
+
+
+</body>
+
+</html>
