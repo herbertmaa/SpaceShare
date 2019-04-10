@@ -2,7 +2,6 @@ $(document).ready(function () {
 
     var fileButton = document.getElementById('image_button');
     fileButton.addEventListener('change', function (e) {
-        console.log("a file was uploaded into the browser");
         var file = e.target.files[0];
         var imageKey = firebase.database().ref().push().key;
         const myNewFile = new File([file], 'listing' + imageKey + '.png', {
@@ -67,7 +66,6 @@ function createListingPicture(uid, imageURL, callback) {
 function changeListingPhoto() {
 
     listingImageRef.on('value', function (snapshot) {
-        console.log(snapshot);
         if (snapshot != null) {
             $('#listingPhoto').attr("src", snapshot.val().url);
         }

@@ -79,7 +79,6 @@ firebase.auth().onAuthStateChanged(function (user) {
 function loadnavbar() {
     firebase.auth().onAuthStateChanged(function (user) {
         if (user) {
-            console.log("user is logged in");
             //User is logged in
             $("#signup").hide();
             $("#signup2").hide();
@@ -96,7 +95,6 @@ function loadnavbar() {
             navb[0].style.visibility = "visible";
         } else {
 
-            console.log("testing 12345");
             $("#myprofile").hide();
             $("#myprofile2").hide();
             $("#mylistings").hide();
@@ -152,7 +150,6 @@ function createPost(lsaddress, city, province, length, width, height, descriptio
 
     let newPostKey = firebase.database().ref().push().key;
     /** let userID = firebase.auth().currentUser.uid; **/
-    console.log(newPostKey);
 
     var user = firebase.auth().currentUser;
     var name, email, photoUrl, uid, emailVerified;
@@ -171,7 +168,6 @@ function createPost(lsaddress, city, province, length, width, height, descriptio
 
 
     // throws errors if you're not logged in
-    console.log(uid);
 
     if (imageURL === null) {
         imageURL = "NULL";
@@ -250,7 +246,6 @@ $(function postForm() {
             const height = $('#make_height').val();
             const description = $('textarea#descrip').val();
 
-            console.log(streetAddress, city, province, length, width, height);
             createPost(streetAddress, city, province, length, width, height, description, imageLink);
             handleComplete();
         }
@@ -378,7 +373,6 @@ function changeProfile(name, address, phone, description, email) {
 
             var query = firebase.database().ref('/Profiles/' + currentUser.uid);
 
-            console.log(address, description, email, name, phone);
             query.child('Address').set(address);
             query.child('Description').set(description);
             query.child('Email').set(email);
@@ -400,12 +394,9 @@ function checkLoggedIn(success, fail) {
     let user = firebase.auth().currentUser;
     if (user) {
         success();
-        console.log("called success");
         //The user is logged in, call the success function passed
 
     } else {
-        console.log("called fail");
-        console.log(fail);
         fail();
         //The user is not logged in, call the fail function passed.
     }

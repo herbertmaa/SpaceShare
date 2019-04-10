@@ -1,10 +1,18 @@
+/** 
+
+Version 3.0.1
+
+This javascript file controls the client and server-sided logic related to retrieving and loading listings that are available in the database. This file will only load information related to the user's queries and then dynamically creates the page based on the listings retrieved through the search. 
+
+**/
+
+
 let db = firebase.database();
 
 $(document).ready(function () {
 
     var citySearched = localStorage.getItem('City')
     var query = db.ref('/Listings/').orderByChild('City').equalTo(citySearched);
-
 
 
     var length = localStorage.getItem('Length');
@@ -137,10 +145,10 @@ $(document).ready(function () {
 
 });
 
+/** This function attempts to make a request based on the user input **/ 
 
 function loadConfirmRequest(key) {
 
-    console.log("loadConfirmRequest was called");
     $('#exampleModal').modal('toggle');
     $('#requestListing').on('click', function () {
         var regex = new RegExp("REQUEST");
@@ -155,8 +163,6 @@ function loadConfirmRequest(key) {
                 console.log("User is not logged in");
             });
 
-            //request.child('RentedOut').set(uid);
-            //window.location.href = 'succrequest.html';
 
 
 

@@ -1,6 +1,9 @@
-/** This function generates a div container for existing listings that a user previously created,
-if no listings exist it will create a message letting the user know to create some listings 
-Return type = 1 if it found listings and Return Type = 0 if No listings were found **/
+/** 
+
+Version 3.0.1
+This javascript file controls the client logic related to retrieving and loading listings that the user created. It dynamically creates the page for the user's "My Listings"
+
+**/
 
 function generateMyListings(myUserID) {
 
