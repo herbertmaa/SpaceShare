@@ -129,21 +129,25 @@ $(document).ready(function() {
     $('#cards-container').on('click', '.request', function() {
         var button = $(this);
         var key = button.attr('data-key');
-        
-        $('#exampleModal').modal('toggle');
-        $('#requestListing').on('click', function() {
+        if (!loggedIn) {
+            $('#user_login').modal('toggle');
+        } else {
+            $('#exampleModal').modal('toggle');
+            $('#requestListing').on('click', function() {
             var regex = new RegExp("REQUEST");
-            if (($('#request').val().match(regex)) && loggedIn) {
-                var request = db.ref('/Listings/' + key);
-                request.child('RentedOut').set(uid);
-                window.location.href = 'succrequest.html';
-            } else if (($('#request').val().match(regex)) && loggedIn) {
-                alert("Invalid Entry");
-                $('#request').trigger('reset');
-            } else if (($('#request').val().match(regex)) && !loggedIn) {
-                $('#user_login').modal('toggle');
-            }
-        });
+             
+                if (($('#request').val().match(regex))) {
+                    var request = db.ref('/Listings/' + key);
+                    request.child('RentedOut').set(uid);
+                    window.location.href = 'succrequest.html';
+                } else if (($('#request').val().match(regex))) {
+                    alert("Invalid Entry");
+                    $('#request').trigger('reset');
+                } 
+
+            });
+            
+        }
     });
 
 });
