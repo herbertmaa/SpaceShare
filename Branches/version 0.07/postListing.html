@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>Share space with your friends | SpaceShare</title>
+
+    <!-- Bootstrap core CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+
+
+    <!-- Our Stylesheet -->
+    <link href="./css/postListing.css" rel="stylesheet" type="text/css">
+
+    <!-- Firebase -->
+
+    <script src="https://www.gstatic.com/firebasejs/5.8.4/firebase.js"></script>
+
+    <!-- Firebase login UI -->
+    <script src="https://cdn.firebase.com/libs/firebaseui/3.5.2/firebaseui.js"></script>
+
+    <!-- Firebase css -->
+    <link type="text/css" rel="stylesheet" href="https://cdn.firebase.com/libs/firebaseui/3.5.2/firebaseui.css" />
+
+    <!-- Load jQuery -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+</head>
+
+<body>
+
+    <!--Navigation bar -->
+    <nav class="navbar navbar-expand-lg navbar-light shadow-sm" style="height:85px;  background-color: #whitesmoke;">
+        <a class="navbar-brand" href="index.html">SpaceShare</a>
+        <button class="navbar-toggler" type="button">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse justify-content-end">
+            <ul class="navbar-nav">
+                <li class="nav-item  active">
+                    <a class="nav-link" href="#">+Add Listing<span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="faq.html">About</a>
+                </li>
+                <li class="nav-item" id="signup2">
+                    <a class="nav-link" data-toggle="modal" href="#user_login" id="signup"> Sign up</a>
+                </li>
+                <li class="nav-item" id="login2">
+                    <a class="nav-link" id="login" data-toggle="modal" href="#user_login">Login</a>
+                </li>
+                <li class="nav-item" id="mylistings2">
+                    <a id="mylistings" class="nav-link" href="mylistings.html">My Listings</a>
+                </li>
+                <li class="nav-item" id="myprofile2">
+                    <a id="myprofile" class="nav-link" href="profile.html">My Profile</a>
+                </li>
+                <li class="nav-item" id="logout2">
+                    <a id="logout" class="nav-link" href="#" onclick="logout()">Logout</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="modal fade" id="user_login" tabindex="-1" role="dialog">
+        <div class="modal-dialog modal-dialog-centered modal-sm" role="document">
+            <div class="modal-content" style>
+                <div class="modal-body">
+                    <div id="firebaseui-auth-container"></div>
+                    <div id="loader">Loading...</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main container where our stuff goes -->
+    <main role="main" class="container">
+        
+        <div class="container pl-5 pt-0">
+            <div class="row">
+                <div class="col-9">
+                    <h1 class="h3 mb-3 font-weight-normal">List Your Space:</h1>
+                </div>
+                <div class="col-5">
+                    <form class="js-form">
+                        <div class="form-row">
+                            <div class="form-group col-md-9">
+                                <label for="make_address">Address: </label>
+                                <input type="text" class="form-control" id="autocomplete" placeholder=" Where are you from?" onFocus="geolocate()" required>
+                            </div>
+                        </div>
+
+                        <!-- Dimensions Label -->
+                        
+                        <div class="form-row">
+                            <label for="dimension">&nbsp;Dimensions: </label>
+                        </div>
+                        <!-- Length, Width Height boxes -->
+                        <div class="form-row">
+
+                            <div class="form-group col-3" id="dimension">
+
+                                <input type="number" class="form-control" id="make_length" min="0" placeholder="Length" required>
+
+                            </div>
+
+                            <div class="form-group col-3">
+                                <input type="number" class="form-control" id="make_width" min="0" placeholder="Width" required>
+
+                            </div>
+
+                            <div class="form-group col-3">
+                                <input type="number" class="form-control" id="make_height" min="0" placeholder="Height" required>
+
+                            </div>
+
+                        </div>
+
+                        <!-- Description Box -->
+                        <div class="form-row" id="descrip">
+                            <div class="form-group col-md-9">
+                                <label for="descrip">Description: </label>
+                                <textarea class="form-control" id="descrip" rows="3" minlength="5" maxlength="50" required></textarea>
+                            </div>
+                        </div>
+                        
+                        <!-- Upload Image -->
+                        <div class="form-row">
+                            <label for="upimage">&nbsp;Upload Image: </label>
+                        </div>
+                        <div class="form-row" id="upimage" style="padding-bottom: 20px;">
+                            <div class="input-group col-md-9">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text" id="inputGroupFileAddon01">Upload</span>
+                                </div>
+                                <div class="custom-file">
+                                    <input type="file" accept="image/png, image/jpeg" class="custom-file-input" id="image_button" aria-describedby="inputGroupFileAddon01">
+                                    <label class="custom-file-label" for="inputGroupFile01">Select Image</label>
+                                </div>
+                            </div>
+                            
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group col-md-3">
+                                <button type="submit" id="js-submit" class="btn btn-primary">Submit</button>
+                            </div>
+                        </div>
+                    </form>
+
+                </div>
+
+                <div class="col-5">
+                    <img id = "listingPhoto" class="rounded border border-light" src="https://images.unsplash.com/photo-1467385829985-2b0fb82b5193?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1051&q=80" alt="default" style="width: 100%;">
+                </div>
+            </div>
+
+        </div>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="page-footer font-small blue">
+        <!-- Copyright -->
+        <div class="footer-copyright text-center py-3">© 2019 Spaceshare
+            <a href="terms.html"> Terms of Use </a>
+            <a href="faq.html"> About </a>
+            <a target="_blank" href="mailto:help@spaceshare.com"> Contact us! </a>
+        </div>
+    </footer>
+    
+    <!-- Placed at the end of the document so the pages load faster -->
+    <!-- All of our javascript files -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+
+    <script src='./js/firebase.js'></script>
+    <script src='./js/googleAutocomplete.js'></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDVs8DbkrG8d9ZUUCw9zrv2uZ-RL9sLbCQ&libraries=places&callback=initAutocomplete" async defer></script>
+    <script src = './js/postListing.js'> </script>
+</body>
+
+</html>
