@@ -72,7 +72,6 @@ function createPicture(uid, imageURL, callback) {
 
         callback();
 
-
     });
 
 

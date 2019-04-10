@@ -328,7 +328,7 @@ function createProfile() {
             var updates = {};
             updates['Profiles/' + currentUser.uid] = postData;
             firebase.database().ref().update(updates);
-            console.log("created profile");
+            loadDefaultInfo();
 
         } else {
 
