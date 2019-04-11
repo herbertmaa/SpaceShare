@@ -41,6 +41,7 @@ We use [GitHub] for versioning. For the versions available, see the [tags on thi
 
 ## Authors
 
-** Herbert Ma ** https://github.com/herbertmaa/
-** Yogesh Verma ** https://github.com/yogiduzit
-** Josh Ghinger ** https://github.com/Gjhinger
+* **Herbert Ma** - [Profile](https://github.com/herbertmaa/)
+* **Yogesh Verma** - [Profile](https://github.com/yogiduzit/)
+* **Josh Jhinger** - [Profile](https://github.com/Gjhinger/)
+
