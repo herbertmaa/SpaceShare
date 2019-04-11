@@ -1,8 +1,16 @@
+/** 
+
+Version 3.02
+This javascript file controls the client logic related to posting a listing on SpaceShare. It calls Firebase whenever creating a listing and controls the logic behind creating a listing picture. 
+
+**/
+
+
+
 $(document).ready(function () {
 
     var fileButton = document.getElementById('image_button');
     fileButton.addEventListener('change', function (e) {
-        console.log("a file was uploaded into the browser");
         var file = e.target.files[0];
         var imageKey = firebase.database().ref().push().key;
         const myNewFile = new File([file], 'listing' + imageKey + '.png', {
@@ -62,12 +70,10 @@ function createListingPicture(uid, imageURL, callback) {
 
 }
 
-
 /** This function returns the URL of the image photo **/
 function changeListingPhoto() {
 
     listingImageRef.on('value', function (snapshot) {
-        console.log(snapshot);
         if (snapshot != null) {
             $('#listingPhoto').attr("src", snapshot.val().url);
         }

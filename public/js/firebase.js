@@ -1,3 +1,13 @@
+/** 
+
+Version 3.0.1
+
+This javascript file controls all server-sided logic related to retrieving and loading information stored in Firebase.
+Firebase storage is used for storing database information and images. This file also authenticates and verifies users and controls login functionality for our website. 
+
+**/
+
+
 // Initialize Firebase
 var config = {
     apiKey: "AIzaSyCE2lSLszDUyZEyY--btpdoYs7Ln6PHAXY",
@@ -26,6 +36,10 @@ var uiConfig = {
             // User successfully signed in.
             // Return type determines whether we continue the redirect automatically
             // or whether we leave that to developer to handle.
+
+            $('#user_login').modal('hide');
+            loadnavbar();
+
             return true;
         },
         uiShown: function () {
@@ -37,7 +51,7 @@ var uiConfig = {
     credentialHelper: firebaseui.auth.CredentialHelper.NONE,
     // Will use popup for IDP Providers sign-in flow instead of the default, redirect.
     signInFlow: 'popup',
-    signInSuccessUrl: 'index.html',
+    signInSuccessUrl: '#',
     signInOptions: [
             firebase.auth.EmailAuthProvider.PROVIDER_ID,
         ],
@@ -67,37 +81,44 @@ firebase.auth().onAuthStateChanged(function (user) {
 
     } else {
         // loggedIn = true;
-        }
-    });
+    }
+});
 
 /* function that changes the navbar based on if your logged in or not */
 /* ALL PAGES USE THIS FUNCTION */
-function loadnavbar(){
+function loadnavbar() {
     firebase.auth().onAuthStateChanged(function (user) {
-    if (user) {
-        //User is logged in
-        $("#signup").hide();
-        $("#signup2").hide();
-        $("#login").hide();
-        $("#login2").hide();
-        var navb = document.getElementsByClassName("navbar-nav");
-        navb[0].style.visibility = "visible";
-    } else {
-        console.log("not logged in");
-        $("#myprofile").hide();
-        $("#myprofile2").hide();
-        $("#mylistings").hide();
-        $("#mylistings2").hide();
-        $("#logout").hide();
-        $("#logout2").hide();
-        $("#signup").show();
-        $("#signup2").show();
-        $("#login").show();
-        $("#login2").show();
-        var navb = document.getElementsByClassName("navbar-nav");
-        navb[0].style.visibility = "visible";
-    }
-});
+        if (user) {
+            //User is logged in
+            $("#signup").hide();
+            $("#signup2").hide();
+            $("#login").hide();
+            $("#login2").hide();
+            $("#myprofile").show();
+            $("#myprofile2").show();
+            $("#logout").show();
+            $("#logout2").show();
+            $("#mylistings").show();
+            $("#mylistings2").show();
+
+            var navb = document.getElementsByClassName("navbar-nav");
+            navb[0].style.visibility = "visible";
+        } else {
+
+            $("#myprofile").hide();
+            $("#myprofile2").hide();
+            $("#mylistings").hide();
+            $("#mylistings2").hide();
+            $("#logout").hide();
+            $("#logout2").hide();
+            $("#signup").show();
+            $("#signup2").show();
+            $("#login").show();
+            $("#login2").show();
+            var navb = document.getElementsByClassName("navbar-nav");
+            navb[0].style.visibility = "visible";
+        }
+    });
 }
 
 // Called here because everypage has the navbar and needs this function to run
@@ -105,17 +126,16 @@ loadnavbar();
 
 /* changes index.html greeting if your are logged in or not */
 /* only index.html uses this function */
-function loadgreeting(){
+function loadgreeting() {
     firebase.auth().onAuthStateChanged(function (user) {
-    if (user) {
-        //User is logged in
-        userID = firebase.auth().currentUser.uid;
-        $("#main-greeting").text("Welcome back, " + user.displayName + "!");
-        $("#main-greeting").css("visibility", "visible");
-    } else {
-        console.log("not logged in");
+        if (user) {
+            //User is logged in
+            userID = firebase.auth().currentUser.uid;
+            $("#main-greeting").text("Welcome back, " + user.displayName + "!");
             $("#main-greeting").css("visibility", "visible");
-    }
+        } else {
+            $("#main-greeting").css("visibility", "visible");
+        }
     });
 }
 
@@ -128,7 +148,7 @@ function logout() {
         // An error happened.
     });
     location.href = "index.html"
-    
+
 }
 
 
@@ -140,7 +160,6 @@ function createPost(lsaddress, city, province, length, width, height, descriptio
 
     let newPostKey = firebase.database().ref().push().key;
     /** let userID = firebase.auth().currentUser.uid; **/
-    console.log(newPostKey);
 
     var user = firebase.auth().currentUser;
     var name, email, photoUrl, uid, emailVerified;
@@ -159,7 +178,6 @@ function createPost(lsaddress, city, province, length, width, height, descriptio
 
 
     // throws errors if you're not logged in
-    console.log(uid);
 
     if (imageURL === null) {
         imageURL = "NULL";
@@ -238,7 +256,6 @@ $(function postForm() {
             const height = $('#make_height').val();
             const description = $('textarea#descrip').val();
 
-            console.log(streetAddress, city, province, length, width, height);
             createPost(streetAddress, city, province, length, width, height, description, imageLink);
             handleComplete();
         }
@@ -326,7 +343,7 @@ function createProfile() {
             var updates = {};
             updates['Profiles/' + currentUser.uid] = postData;
             firebase.database().ref().update(updates);
-            console.log("created profile");
+            loadDefaultInfo();
 
         } else {
 
@@ -366,7 +383,6 @@ function changeProfile(name, address, phone, description, email) {
 
             var query = firebase.database().ref('/Profiles/' + currentUser.uid);
 
-            console.log(address, description, email, name, phone);
             query.child('Address').set(address);
             query.child('Description').set(description);
             query.child('Email').set(email);
@@ -382,3 +398,32 @@ function changeProfile(name, address, phone, description, email) {
     });
 }
 
+
+function checkLoggedIn(success, fail) {
+
+    let user = firebase.auth().currentUser;
+    if (user) {
+        success();
+        //The user is logged in, call the success function passed
+
+    } else {
+        fail();
+        //The user is not logged in, call the fail function passed.
+    }
+
+
+}
+
+function requestListing(key) {
+
+    let user = firebase.auth().currentUser;
+    if (user) {
+        var request = db.ref('/Listings/' + key);
+        request.child('RentedOut').set(this.userID);
+        window.location.href = 'succrequest.html';
+        //The user is logged in, call the success function passed
+
+    } else {
+        //The user is not logged in, call the fail function passed.
+    }
+}

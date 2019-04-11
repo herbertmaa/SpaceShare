@@ -1,10 +1,9 @@
-// This sample uses the Autocomplete widget to help the user select a
-// place, then it retrieves the address components associated with that
-// place, and then it populates the form fields with those details.
-// This sample requires the Places library. Include the libraries=places
-// parameter when you first load the API. For example:
-// <script
-// src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&libraries=places">
+/** 
+
+Version 1.0.1
+This javascript file controls the client/server logic related to retrieving and loading Google Autocomplete
+
+**/
 
 var placeSearch, autocomplete, map, infoWindow;
 
@@ -25,32 +24,6 @@ function initMap() {
         },
         zoom: 14
     });
-
-    //infoWindow = new google.maps.InfoWindow;
-
-    // Try HTML5 geolocation.
-
-    /**
-    if (navigator.geolocation) {
-        navigator.geolocation.getCurrentPosition(function (position) {
-            var pos = {
-                lat: position.coords.latitude,
-                lng: position.coords.longitude
-            };
-
-            //infoWindow.setPosition(pos);
-            //infoWindow.setContent('Location found.');
-            //infoWindow.open(map);
-            map.setCenter(pos);
-        }, function () {
-            handleLocationError(true, infoWindow, map.getCenter());
-        });
-    } else {
-        // Browser doesn't support Geolocation
-        handleLocationError(false, infoWindow, map.getCenter());
-    }**/
-
-
 }
 
 function handleLocationError(browserHasGeolocation, infoWindow, pos) {
@@ -76,13 +49,7 @@ function initAutocomplete() {
         document.getElementById('autocomplete'), {
             options
         });
-
-    // Avoid paying for data that you don't need by restricting the set of
-    // place fields that are returned to just the address components.
-    //autocomplete.setFields('address_components');
-
-    // When the user selects an address from the drop-down, populate the
-    // address fields in the form.
+    
     autocomplete.addListener('place_changed', fillInAddress);
 }
 function fillInAddress() {

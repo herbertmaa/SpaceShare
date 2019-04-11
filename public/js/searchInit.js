@@ -1,12 +1,17 @@
+/** 
+
+Version 3.0.1
+
+This javascript file adds an event handler on the address button, and outputs an error if the information within the form is invalid. 
+
+**/
+
+
 
 $('#submit').on('click', event => {
   var address = $('#autocomplete').val();
     address = address.replace(/,/g,"");
     var addressArray = address.split(" ");
-    console.log(addressArray);
-
-    
-    
 
     localStorage.setItem('Length', $('#make_length').val());
     localStorage.setItem("Width", $('#make_width').val());
@@ -18,7 +23,6 @@ $('#submit').on('click', event => {
     var addressIsEmpty = $('#administrative_area_level_1').val() === "";
     var cityIsEmpty = $('#locality').val() === "";
     var loggedIn = localStorage.getItem('uid') != "";
-    console.log(localStorage.getItem('uid'));
     var lengthIsInvalid = $('#make_length').val() === "" || $('#make_length').val() < 0;
     var widthIsInvalid  = $('#make_width').val() === "" || $('#make_width').val() < 0;
     var heightIsInvalid  = $('#make_height').val() === "" || $('#make_height').val() < 0;

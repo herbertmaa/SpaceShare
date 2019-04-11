@@ -1,3 +1,12 @@
+/** 
+
+Version 3.0.1
+
+This javascript file controls all client-sided logic related to editing listings on the my listings page. 
+
+**/
+
+
 $(document).ready(function () {
 
     //Generates the listings

@@ -1,3 +1,12 @@
+/** 
+
+Version 3.0.1
+This function controls the update listings functionality of our website and calls Firebase methods.
+
+**/
+
+
+
 function updateListings(address, city, province, width, height, length, description, myKey) {
     if (myKey != undefined) {
 

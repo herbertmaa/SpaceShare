@@ -84,3 +84,6 @@
     box-shadow: none !important;
 
 }
+.hidden {
+    visibility: hidden;
+}

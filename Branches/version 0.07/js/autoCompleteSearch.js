@@ -1,13 +1,15 @@
-// This sample uses the Autocomplete widget to help the user select a
-// place, then it retrieves the address components associated with that
-// place, and then it populates the form fields with those details.
-// This sample requires the Places library. Include the libraries=places
-// parameter when you first load the API. For example:
-// <script
-// src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&libraries=places">
+/** 
+
+Version 1.0.1
+This javascript file controls the client/server logic related to retrieving and loading Google Places and Google Autocomplete
+
+**/
+
+//Initialize the placeSearch,autocomplete, map, and infoWindow
 
 var placeSearch, autocomplete, map, infoWindow;
 
+/** Options for Google Autocomplete **/
 var options = {
 
     types: ['geocode'],
@@ -17,44 +19,21 @@ var options = {
 
 };
 
+/** This function initializes the map and sets the center point to be Vancouver, B.C. **/
 function initMap() {
     map = new google.maps.Map(document.getElementById('map'), {
         center: {
-            
-            lat: -34.397,
-            lng: 150.644
+
+            lat: 49.2827,
+            lng: 123.1207
         },
         zoom: 14
 
     });
 
-    //infoWindow = new google.maps.InfoWindow;
-
-    // Try HTML5 geolocation.
-
-    /**
-    if (navigator.geolocation) {
-        navigator.geolocation.getCurrentPosition(function (position) {
-            var pos = {
-                lat: position.coords.latitude,
-                lng: position.coords.longitude
-            };
-
-            //infoWindow.setPosition(pos);
-            //infoWindow.setContent('Location found.');
-            //infoWindow.open(map);
-            map.setCenter(pos);
-        }, function () {
-            handleLocationError(true, infoWindow, map.getCenter());
-        });
-    } else {
-        // Browser doesn't support Geolocation
-        handleLocationError(false, infoWindow, map.getCenter());
-    }**/
-
-
 }
 
+/** This function handles location errors on the GoogleMaps generated **/
 function handleLocationError(browserHasGeolocation, infoWindow, pos) {
     infoWindow.setPosition(pos);
     infoWindow.setContent(browserHasGeolocation ?
@@ -62,6 +41,8 @@ function handleLocationError(browserHasGeolocation, infoWindow, pos) {
         'Error: Your browser doesn\'t support geolocation.');
     infoWindow.open(map);
 }
+
+/** The form elements that Google Autocomplete will try filling **/
 
 var componentForm = {
     street_number: 'short_name',
@@ -71,6 +52,8 @@ var componentForm = {
 
 };
 
+/** This function initializes Google Autocomplete with any form specified as "autocomplete" **/
+
 function initAutocomplete() {
     // Create the autocomplete object, restricting the search predictions to
     // geographical location types.
@@ -78,15 +61,11 @@ function initAutocomplete() {
         document.getElementById('autocomplete'), {
             options
         });
-
-    // Avoid paying for data that you don't need by restricting the set of
-    // place fields that are returned to just the address components.
-    //autocomplete.setFields('address_components');
-
-    // When the user selects an address from the drop-down, populate the
-    // address fields in the form.
     autocomplete.addListener('place_changed', fillInAddress);
 }
+
+
+/** This function loads information generated from Google Autocomplete into a form **/
 function fillInAddress() {
     // Get the place details from the autocomplete object.
     var place = autocomplete.getPlace();
@@ -124,20 +103,32 @@ function geolocate() {
     }
 }
 
+/** This function initializes Google Maps and locates the user on the generated map based on his search query **/
+
 function initialize() {
-    
+
     initMap();
     geocode();
     //initAutocomplete();
 }
 
-function initializeMapAutoComplete(){
+/** This function initializes Google Maps, locates the user on the generated map based on his search query, and initiliazes autocomplete on the page **/
+
+function initializeMapAutoComplete() {
     initMap();
-    
     geocode();
-   
     initAutocomplete();
 }
+
+/** This function initializes Google Autocomplete, and biases the results based on the user's location **/
+
+function initializeAutoCompleteGeoLocate() {
+
+    initAutocomplete();
+    geolocate();
+
+}
+/** This function retrieves data stored in local storage and finds the latitude and longitutde based on that location **/
 
 function geocode() {
     //location should be this person's address 
@@ -152,17 +143,19 @@ function geocode() {
     $.ajax({
         dataType: 'json',
         url: url,
-        data: { format: "json-list"},
-        
-        success: function(data){
+        data: {
+            format: "json-list"
+        },
+
+        success: function (data) {
             map.setCenter(data['results'][0].geometry.location);
             var marker = new google.maps.Marker({
-            map: map,
-            position: data['results'][0].geometry.location
+                map: map,
+                position: data['results'][0].geometry.location
 
             });
         }
-        
+
     });
 
 }
