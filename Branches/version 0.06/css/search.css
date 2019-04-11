@@ -153,8 +153,9 @@ span.points:hover {
     position: sticky !important;
     top: 100px;
 }
-#description {
+p.description {
     align-self: center;
+    text-align: center !important;
     font-size: 1.1em;
 }
 #overlay {
