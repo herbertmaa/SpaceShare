@@ -1,3 +1,13 @@
+/** 
+
+Version 2.1.1
+
+This javascript file controls all client-sided logic related to editing your profile on the profile page.
+
+**/
+
+
+
 $(document).ready(function () {
 
     checkProfileExists(loadDefaultInfo, createProfile);
