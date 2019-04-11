@@ -151,26 +151,13 @@ function loadConfirmRequest(key) {
 
     $('#exampleModal').modal('toggle');
     $('#requestListing').on('click', function () {
-        var regex = new RegExp("REQUEST");
-
-        if (($('#request').val().match(regex))) {
-
-
+            
             checkLoggedIn(function () {
                 requestListing(key);
-
             }, function () {
                 console.log("User is not logged in");
             });
 
-
-
-
-
-        } else if (($('#request').val().match(regex))) {
-            alert("Invalid Entry");
-            $('#request').trigger('reset');
-        }
-
     });
+
 }
