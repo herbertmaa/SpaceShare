@@ -11,10 +11,10 @@ This project is hosted using Google's Firebase platform. To get started, sign up
 ### Prerequisites
 
 https://firebase.google.com/docs/web/setup
-In Terminal / Command-line type "npm install -g firebase-tools"
-In Terminal / Command-line type "firebase login" to login
-In Terminal / Command-line type "firebase list" to test that you have loggedin
-In Terminal / Command-line type "firebase init" to initialize your Firebase project
+* In Terminal / Command-line type "npm install -g firebase-tools"
+* In Terminal / Command-line type "firebase login" to login
+* In Terminal / Command-line type "firebase list" to test that you have loggedin
+* In Terminal / Command-line type "firebase init" to initialize your Firebase project
 
 - [X] Select Database
 - [X] Select Functions

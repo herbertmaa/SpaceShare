@@ -34,6 +34,7 @@ $(document).ready(function () {
             var percentage = (snapshot.bytesTransferred / snapshot.totalBytes) * 25;
             
 
+            // Progress Bar
             uploader.val(percentage);
             window.setTimeout(() =>{
 

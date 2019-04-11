@@ -2,7 +2,7 @@
 $(document).ready(function() {
 
     var db = firebase.database();
-    var query = db.ref('/ListingsTest/').orderByChild('City').equalTo(localStorage.getItem('City'));
+    var query = db.ref('/Listings/').orderByChild('City').equalTo(localStorage.getItem('City'));
    // var keys = db.ref('/ListingsTest/' + userUID);
 
    console.log(query)
@@ -21,7 +21,7 @@ $(document).ready(function() {
         });
     });
     $('#heightSort').on('click', function() {
-        var filterQuery = db.ref('/ListingsTest/').orderByChild('City_height').startAt(localStorage.getItem('City'));
+        var filterQuery = db.ref('/Listings/').orderByChild('City_height').startAt(localStorage.getItem('City'));
         filterQuery.on('value', function(snapshot) {
             console.log(snapshot);
             $('#cards-container').empty();
@@ -79,6 +79,10 @@ $(document).ready(function() {
                     $('.card-img-top').attr('src', 'img/black.png');
             });
         }); 
+    });
+    $(document).on('click', '.btn', function(){
+
+        console.log('Clicked');
     });
 });
 
