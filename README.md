@@ -2,6 +2,8 @@
 
 A web application that helps connect people so that they can share their extra storage space and find extra storage space within their city. 
 
+https://spaceshare-b68f7.firebaseapp.com/index.html
+
 ## Getting Started
 
 This project is hosted using Google's Firebase platform. To get started, sign up on Firebase and setup a new project. 
