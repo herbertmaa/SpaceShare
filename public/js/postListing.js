@@ -1,3 +1,12 @@
+/** 
+
+Version 3.02
+This javascript file controls the client logic related to posting a listing on SpaceShare. It calls Firebase whenever creating a listing and controls the logic behind creating a listing picture. 
+
+**/
+
+
+
 $(document).ready(function () {
 
     var fileButton = document.getElementById('image_button');
@@ -60,7 +69,6 @@ function createListingPicture(uid, imageURL, callback) {
 
 
 }
-
 
 /** This function returns the URL of the image photo **/
 function changeListingPhoto() {

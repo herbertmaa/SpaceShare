@@ -1,4 +1,9 @@
+/** 
 
+Version 1.0.1
+This javascript file controls the client/server logic related to retrieving and loading Google Autocomplete
+
+**/
 
 var placeSearch, autocomplete, map, infoWindow;
 

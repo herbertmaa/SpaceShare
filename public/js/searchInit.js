@@ -1,3 +1,12 @@
+/** 
+
+Version 3.0.1
+
+This javascript file adds an event handler on the address button, and outputs an error if the information within the form is invalid. 
+
+**/
+
+
 
 $('#submit').on('click', event => {
   var address = $('#autocomplete').val();

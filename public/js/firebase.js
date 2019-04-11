@@ -1,3 +1,13 @@
+/** 
+
+Version 3.0.1
+
+This javascript file controls all server-sided logic related to retrieving and loading information stored in Firebase.
+Firebase storage is used for storing database information and images. This file also authenticates and verifies users and controls login functionality for our website. 
+
+**/
+
+
 // Initialize Firebase
 var config = {
     apiKey: "AIzaSyCE2lSLszDUyZEyY--btpdoYs7Ln6PHAXY",
