@@ -2,6 +2,8 @@
 
 A web application that helps connect people so that they can share their extra storage space and find extra storage space within their city. 
 
+![Poster of Ocean-Defenders](https://github.com/herbertmaa/SpaceShare/blob/master/screencap.png)
+
 https://spaceshare-b68f7.firebaseapp.com/index.html
 
 ## Getting Started
